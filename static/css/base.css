@@ -1,0 +1,49 @@
+/* General Layout */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #c5cddd;
+    color: #333;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    overflow-x: hidden; /* Prevent horizontal scrollbar on body */
+}
+
+/* Add this to disable the main-content fade in effect on the privacy policy page */
+.privacy-policy-page .main-content {
+    opacity: 1;
+    /* Set initial opacity to 1 to prevent fade in effect on load */
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal scrollbar on container */
+}
+
+.main-content {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.news-item {
+    margin-top: 7vh;
+    margin-bottom: 4vh;
+}
+
+#articles-main-content {
+    margin-top: 1vh;
+}
+
+.section-title {
+    text-align: center;
+    margin-top: 4vh;
+    margin-bottom: 1.9em;
+    font-size: 2rem;
+    color: #333;
+}

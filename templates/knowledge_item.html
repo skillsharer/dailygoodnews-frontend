@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% include 'header.html' %}
+    <title>{{ knowledge.heading }} - Daily Good News</title>
+     <style>
+        /* Prevent FOUC */
+         html, body {
+            margin: 0;
+            padding: 0;
+        }
+       body {
+            opacity: 0; /* Hide body content initially */
+            transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+           
+        }
+    </style>
+         <script>
+           // Inline script to set opacity to 1
+           document.addEventListener("DOMContentLoaded", function() {
+             document.body.style.opacity = '1';
+             });
+        </script>
+</head>
+<body>
+    <main class="container">
+        <section class="knowledge-item-page">
+                <h1>{{ knowledge.heading }}</h1>
+                {% if knowledge.image %}
+                    <div class="image-wrapper">
+                        <img class="knowledge-image" src="{{ url_for('artifacts', filename='knowledge_vault/images/' + knowledge.image) }}">
+                    </div>
+                {% endif %}
+                <div class="knowledge-description">
+                  {{ knowledge.article|sanitize_html|safe }}
+                </div>
+                <div class="knowledge-footer">
+                    <div class="footer-info-wrapper">
+                      <a class="knowledge-source" href="{{ knowledge.link }}" target="_blank" rel="noopener noreferrer">
+                        <p class="knowledge-source">Source</p>
+                      </a>
+                      <p class="knowledge-date">Date: {{ knowledge.date }}</p>
+                     </div>
+                     <a href="/knowledge_vault" class="go-back-btn">Go Back</a>
+                     <div class="social-share-container">
+                        <p class="share-text">Share:</p>
+                        <div class="social-share">
+                          <a href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ knowledge.heading|urlencode }}" target="_blank" rel="noopener noreferrer">
+                             <img src="{{ url_for('static', filename='assets/twitter.svg') }}" alt="Twitter" class="social-icon"/>
+                          </a>
+                          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer">
+                            <img src="{{ url_for('static', filename='assets/facebook.svg') }}" alt="Facebook" class="social-icon"/>
+                          </a>
+                        </div>
+                      </div>
+                  </div>
+        </section>
+    </main>
+    {% include 'footer.html' %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const nav = document.querySelector('.main-nav');
+        const menuToggle = document.querySelector('.menu-toggle');
+        menuToggle.addEventListener('click', function() {
+            menuToggle.classList.toggle('active');
+            nav.classList.toggle('active');
+        });
+    });
+</script>
+</body>
+</html>

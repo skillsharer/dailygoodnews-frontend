@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'header.html' %}
+    <title>Daily Good News</title>
+    <style>
+        /* Prevent FOUC */
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            opacity: 0; /* Hide body content initially */
+             transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+           
+        }
+
+         #loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100%;
+            background: #fff;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+        }
+
+        .loader-spinner {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+     <script>
+        // Inline script to set opacity to 1
+        document.addEventListener("DOMContentLoaded", function() {
+             document.body.style.opacity = '1';
+        });
+     </script>
+</head>
+<body>
+    <div id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+    <div id="hero-section" class="parallax">
+        <div class="hero-overlay">
+            <h1 class="hero-title">Discover the Good in Every Day</h1>
+            <p class="hero-subtitle">Because what you consume really does matter</p>
+            <a href="#main-content" class="cta-button" id="explore-now">Explore Now</a>
+        </div>
+    </div>
+    <div id="main-content">
+        <section class="featured-news">
+            <h2 class="section-title">Top Stories</h2>
+            <div class="news-grid">
+                {% for news in news_list %}
+                <article class="news-card">
+                    <a href="/news/{{ news.slug }}" class="news-card-link">
+                        <div class="image-wrapper">
+                            {% if news.image %}
+                                <img src="{{ news.image }}" alt="{{ news.heading }}" class="news-card-image">
+                            {% endif %}
+                            <div class="news-card-content">
+                                <h3 class="news-card-title">{{ news.heading }}</h3>
+                                {% if news.image %}
+                                    <div class="news-card-description">{{ news.article|sanitize_html|safe|truncate(200) }}</div>
+                                {% else %}
+                                    <div class="news-card-description">{{ news.article|sanitize_html|safe|truncate(400) }}</div>
+                                {% endif %}
+                                <div class="read-more">Read More</div>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        <!--
+        <section class="newsletter-signup">
+            <h2>Stay Updated</h2>
+            <p>Subscribe to our newsletter for the latest uplifting stories</p>
+            <form class="signup-form">
+                <input type="email" placeholder="Enter your email" required class="email-input">
+                <button type="submit" class="subscribe-button">Subscribe</button>
+            </form>
+        </section>
+        -->
+    </div>
+    {% include 'footer.html' %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const loader = document.getElementById('loader');
+            const exploreButton = document.getElementById("explore-now");
+            const targetSection = document.getElementById("main-content");
+            const header = document.querySelector('.site-header');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('.main-nav');
+            const footer = document.querySelector('footer');
+            const heroSection = document.getElementById('hero-section');
+            // Check if the user has visited during the current session
+            const hasVisitedSession = sessionStorage.getItem('hasVisitedSession');
+            if (hasVisitedSession) {
+                        heroSection.classList.add('hidden');
+                        targetSection.classList.add('visible'); //show the main-content on second visit
+                    } else {
+                    sessionStorage.setItem('hasVisitedSession', 'true');
+                    }
+            loader.style.display = 'none';
+
+            function handleScroll() {
+                const sectionPosition = targetSection.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+
+                if(window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                }
+                else {
+                    header.classList.remove('scrolled');
+                }
+
+                if (sectionPosition < windowHeight) {
+                    targetSection.classList.add("visible");
+                    window.removeEventListener("scroll", handleScroll);
+                }
+                if (footer.getBoundingClientRect().top < windowHeight) {
+                    footer.classList.add('visible');
+                }
+            }
+
+            function customSmoothScroll(target, duration) {
+                const startPosition = window.pageYOffset;
+                const targetPosition = target.getBoundingClientRect().top;
+                const distance = targetPosition ;
+                let startTime = null;
+
+                function animation(currentTime) {
+                    if (startTime === null) {
+                        startTime = currentTime;
+                    }
+                    const timeElapsed = currentTime - startTime;
+                    const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                    window.scrollTo(0, run);
+                    if (timeElapsed < duration) {
+                        requestAnimationFrame(animation);
+                    }
+                }
+                requestAnimationFrame(animation);
+            }
+
+            function easeInOutQuad(t, b, c, d) {
+                t /= d/2;
+                if (t < 1) return c/2*t*t + b;
+                t--;
+                return -c/2 * (t*(t-2) - 1) + b;
+            }
+
+            exploreButton.addEventListener("click", function (e) {
+                e.preventDefault();
+                customSmoothScroll(targetSection, 1000);
+                setTimeout(() => {
+                    targetSection.classList.add("visible");
+                    window.removeEventListener("scroll", handleScroll);
+                }, 1000);
+            });
+
+            window.addEventListener("scroll", handleScroll);
+
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'header.html' %}
+    <title>Privacy Policy - Daily Good News</title>
+    <style>
+        /* Prevent FOUC */
+         html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            opacity: 0; /* Hide body content initially */
+            transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+           
+        }
+    </style>
+    <script>
+           // Inline script to set opacity to 1
+           document.addEventListener("DOMContentLoaded", function() {
+             document.body.style.opacity = '1';
+             });
+    </script>
+</head>
+<body class="privacy-policy-page"> <!-- Added class to body -->
+    <main class="container main-content visible"> <!-- Added visible class here -->
+        <section class="privacy-policy-section">
+            <h1 class="section-title">Privacy Policy</h1>
+            <h2>Introduction</h2>
+            <p>Welcome to <strong>Daily Good News</strong>. Our mission is to provide uplifting and positive news stories from reputable sources to brighten your day. We respect your privacy and are committed to transparency about how our website operates.</p>
+
+            <h2>No User Data Collection</h2>
+            <p>We do not collect any personal data from users who visit our website. You can browse our site without providing any personal information such as your name, email address, or contact details.</p>
+
+            <h2>Content Sources</h2>
+            <p>News stories are aggregated and summarized from trusted sources, including:</p>
+            <ul>
+                <li><a href="https://www.bbc.co.uk" target="_blank" rel="noopener noreferrer">BBC UK</a></li>
+                <li><a href="https://news.google.com" target="_blank" rel="noopener noreferrer">Google News</a></li>
+            </ul>
+            <p>Additionally, recent publications are collected and summarized from:</p>
+            <ul>
+                <li><a href="https://arxiv.org" target="_blank" rel="noopener noreferrer">ArXiv</a></li>
+            </ul>
+            Images in the Story Time section are sourced from:
+            <ul>
+                <li><a href="https://objkt.com" target="_blank" rel="noopener noreferrer">Objkt</a></li>
+            </ul>
+            <p>All stories include proper attribution and links to the original sources where applicable.</p>
+
+            <h2>Third-Party Links</h2>
+            <p>Our website contains links to third-party sources where the original news stories are hosted. We are not responsible for the privacy practices or content of these external websites. Please review their respective privacy policies for more information.</p>
+
+            <h2>Data Security</h2>
+            <p>Although we do not collect personal data, we take the necessary steps to ensure the website operates securely and protects against unauthorized access or misuse.</p>
+
+            <h2>Changes to This Policy</h2>
+            <p>We may update this Privacy Policy to reflect changes in our practices or for legal compliance. Any updates will be posted on this page with the "Effective Date" updated accordingly.</p>
+
+            <h2>Contact Us</h2>
+            <p>If you have any questions about this Privacy Policy or how our website operates, please contact us at <a href="mailto:skillsharer@proton.me">skillsharer@proton.me</a>.</p>
+            <p>Effective Date: 02.09.2025.</p>
+        </section>
+    </main>
+    {% include 'footer.html' %}
+</body>
+</html>

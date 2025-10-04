@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'header.html' %}
+    <title>Contact - Daily Good News</title>
+    <style>
+        /* Prevent FOUC */
+         html, body {
+            margin: 0;
+            padding: 0;
+        }
+       body {
+            opacity: 0; /* Hide body content initially */
+             transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+           
+        }
+    </style>
+        <script>
+           // Inline script to set opacity to 1
+           document.addEventListener("DOMContentLoaded", function() {
+             document.body.style.opacity = '1';
+             });
+        </script>
+</head>
+<body>
+    <main class="container">
+        <section class="contact-section">
+            <h2 class="contact-section-title">Get In Touch</h2>
+            <p class="contact-description">Have questions or want to talk? I'd love to hear from you!</p>
+            <div class="contact-details">
+                <ul>
+                    <li>
+                        <b>Email: skillsharer@proton.me</b> 
+                    </li>
+                    <li>
+                        <b>Twitter: </b> 
+                        <a href="https://twitter.com/_skillsharer_" target="_blank" rel="noreferrer" class="contact-link">
+                            Follow me on X!
+                        </a>
+                    </li>
+                    <li>
+                        <b>Discord: </b> 
+                        <a href="https://discord.gg/8Rvjk7K2Wz" class="contact-link">Join me on Discord!</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    {% include 'footer.html' %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nav = document.querySelector('.main-nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>

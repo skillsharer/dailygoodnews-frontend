@@ -1,0 +1,38 @@
+/* Newsletter Section */
+.newsletter-signup {
+    background: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 2.5em 1.25em;
+    margin-top: 2.5em;
+}
+
+.signup-form {
+    display: flex;
+    justify-content: center;
+    gap: 0.6em;
+    margin-top: 1.25em;
+    width: 100%;
+}
+
+.email-input {
+    padding: 0.6em;
+    border: none;
+    border-radius: 0.3em;
+    width: 18.75em;
+    color: #333;
+}
+
+.subscribe-button {
+    background: #fff;
+    color: #3498db;
+    padding: 0.6em 1.25em;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.subscribe-button:hover {
+    background: #ecf0f1;
+}

@@ -1,0 +1,22 @@
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-top">
+            <a href="/" class="footer-logo">Daily Good News</a>
+            <p>Because what you consume really does matter</p>
+        </div>
+        <div class="footer-links">
+            <a href="/about">About Us</a>
+            <a href="/contact">Contact</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+        <div class="footer-social">
+            <a href="https://twitter.com/_skillsharer_" target="_blank" aria-label="Twitter">
+                <img src="{{ url_for('static', filename='assets/twitter.svg') }}" alt="Twitter">
+            </a>
+            <a href="https://discord.gg/8Rvjk7K2Wz" target="_blank" aria-label="Discord">
+                <img src="{{ url_for('static', filename='assets/discord.svg') }}" alt="Discord">
+            </a>
+        </div>
+        <p class="footer-copyright">© {{ now.year }} Daily Good News. All Rights Reserved.</p>
+    </div>
+</footer>

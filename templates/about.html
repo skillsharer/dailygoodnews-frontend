@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'header.html' %}
+    <title>About Daily Good News</title>
+     <style>
+        /* Prevent FOUC */
+         html, body {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            opacity: 0; /* Hide body content initially */
+             transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+           
+        }
+    </style>
+    <script>
+           // Inline script to set opacity to 1
+           document.addEventListener("DOMContentLoaded", function() {
+             document.body.style.opacity = '1';
+             });
+    </script>
+</head>
+<body>
+    <main class="container">
+        <section class="about-section">
+            <h2><b>Welcome</b></h2>
+            <p>Welcome to "Daily Good News" - a sanctuary of hope, kindness, and inspiration in a world that often feels saturated with negativity. In the digital age, news travels fast, and unfortunately, it's often the distressing headlines that dominate our feeds. This can leave us feeling overwhelmed and anxious, with the warmth and positivity of human nature seemingly fading into the background.</p>
+        </section>
+        <section class="about-section">
+            <h2><b>My Mission</b></h2>
+            <p>This is why "Daily Good News" was born. A unique platform dedicated to curating and sharing uplifting news from various sources around the globe. My mission is to counterbalance the negativity, to remind You of the good that exists in the world, and to rekindle that innate sense of hope and optimism we all carry within us.</p>
+            <p>I believe in the power of positivity and its ability to transform perspectives and lives. So, join each day as I celebrate the triumph of the human spirit, the advancements in our societies, and the everyday heroes who make our world a better place. Let's replace that daily dose of anxiety with a daily dose of positivity together. Welcome to your brighter side of the news.</p>
+        </section>
+        <section class="about-section">
+            <h2><b>Navigation</b></h2>
+            <p><b>Daily Good News</b> operates with AI technology. All articles are written by AI based on given sources, which you can find next to each article.</p>
+            <ul>
+                <li><b>Good News:</b> The news section. Currently, AI finds good news from BBC UK and Google sources. I am constantly working on adding additional sources.</li>
+                <li><b>Coffee Break:</b> A collection of articles from around the world that inspire AI to create its own articles and generate new ideas.</li>
+                <li><b>Knowledge Vault:</b> AI-assisted explanations and summaries of recent ArXiv publications.</li>
+                <li><b>Story Time:</b> Enjoy the AI-generated fictional stories inspired by my NFT images, available for purchase on objkt.com.</li>
+                <li><b>About:</b> You're here! This page gives you a glimpse into the mission and workings of this platform.</li>
+                <li><b>Contact:</b> Got questions or suggestions? Don't hesitate to reach out using the provided contact information.</li>
+            </ul>
+        </section>
+        <section class="about-section">
+            <h2><b>Buy me a coffee</b></h2>
+            <p>If my mission resonates with you and you'd like to be a part of this positive change, I would greatly appreciate your support.</p>
+            <div class="address-block">
+                <strong>BTC Address:</strong>
+                <div class="address-wrapper">
+                    <span class="address">3PYbHpA5VfyB3jTwCcbpD2JnxzZkgk8DCs</span>
+                </div>
+            </div>
+            <div class="address-block">
+                <strong>Monero Address:</strong>
+                 <div class="address-wrapper">
+                   <span class="address">8AU5K6H5tARACqnXN4S9qaEBhCZVNHubXQonPsGfaeXd52R7dds8YxyZVQhNhp2dVYiXypsQwPbpZQBZjNGx4M7y3FnLbkw</span>
+                 </div>
+            </div>
+        </section>
+    </main>
+    {% include 'footer.html' %}
+        <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const nav = document.querySelector('.main-nav');
+            const menuToggle = document.querySelector('.menu-toggle');
+            menuToggle.addEventListener('click', function() {
+                menuToggle.classList.toggle('active');
+                nav.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
