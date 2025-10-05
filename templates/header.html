@@ -1,50 +1,26 @@
 <header class="site-header">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="UTF-8">
     <div class="header-content">
         <a href="/" class="logo">Daily Good News</a>
-        <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}"/>
 
-        <!-- Import CSS Files - OPTIMIZED ORDER FOR PERFORMANCE -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">        <!-- Design Tokens, Reset, Typography, Base Layout -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/design-system.css') }}">       <!-- Enhanced Design System -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">  <!-- Reusable UI Components -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">      <!-- Header Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hero.css') }}">        <!-- Hero Section Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/news.css') }}">        <!-- News Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/knowledge.css') }}">   <!-- Knowledge Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/storytime.css') }}">   <!-- Story Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/articles.css') }}">    <!-- Articles Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/newsletter.css') }}">  <!-- Newsletter Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/contact.css') }}">     <!-- Contact Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">       <!-- About Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/privacy.css') }}">     <!-- Privacy Policy Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}">            <!-- Loader Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">           <!-- Footer Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animations.css') }}">       <!-- Advanced Animation System -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enhanced-ux.css') }}">        <!-- Enhanced UX Micro-interactions -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enhanced-responsive.css') }}"> <!-- Enhanced Responsive Design -->
-        
-        <!-- Enhanced JavaScript Modules -->
-        <script src="{{ url_for('static', filename='js/page-manager.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/enhanced-ui-manager.js') }}" defer></script>
-        <script src="{{ url_for('static', filename='js/smooth-transitions.js') }}" defer></script>
-
-        <nav class="main-nav">
-            <ul class="nav-buttons">
-                <li><a class="nav-button" href="/">Good News</a></li>
-                <li><a class="nav-button" href="/articles">Coffee Break</a></li>
-                <li><a class="nav-button" href="/knowledge_vault">Knowledge Vault</a></li>
-                <li><a class="nav-button" href="/story_time">Story Time</a></li>
-                <li><a class="nav-button" href="/about">About</a></li>
-                <li><a class="nav-button" href="/contact">Contact</a></li>
+        <nav class="main-nav" role="navigation" aria-label="Main navigation">
+            <ul class="nav-buttons" role="menubar">
+                <li role="none"><a class="nav-button" href="/" role="menuitem">Good News</a></li>
+                <li role="none"><a class="nav-button" href="/articles" role="menuitem">Coffee Break</a></li>
+                <li role="none"><a class="nav-button" href="/knowledge_vault" role="menuitem">Knowledge Vault</a></li>
+                <li role="none"><a class="nav-button" href="/story_time" role="menuitem">Story Time</a></li>
+                <li role="none"><a class="nav-button" href="/about" role="menuitem">About</a></li>
+                <li role="none"><a class="nav-button" href="/contact" role="menuitem">Contact</a></li>
             </ul>
-            <div class="menu-toggle">
-                <div class="bar"></div>
-                <div class="bar"></div>
-                <div class="bar"></div>
-            </div>
+            <button class="menu-toggle" aria-expanded="false" aria-controls="nav-buttons" aria-label="Toggle navigation menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
         </nav>
     </div>
-    <meta name="google-site-verification" content="{{ google_site_verification }}" />
+    
+    <!-- Enhanced JavaScript Modules -->
+    <script src="{{ url_for('static', filename='js/page-manager.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/enhanced-ui-manager.js') }}" defer></script>
+    <script src="{{ url_for('static', filename='js/smooth-transitions.js') }}" defer></script>
 </header>

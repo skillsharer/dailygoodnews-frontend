@@ -39,24 +39,24 @@
         </div>
     </div>
     <div id="main-content">
-        <section class="featured-news">
-            <h2 class="section-title">Top Stories</h2>
-            <div class="news-grid" id="news-grid">
+        <section class="featured-news" aria-labelledby="top-stories-heading">
+            <h2 id="top-stories-heading" class="section-title">Top Stories</h2>
+            <div class="content-grid news-grid" id="news-grid">
                 {% for news in news_list %}
-                <article class="news-card" data-index="{{ loop.index0 }}">
-                    <a href="/news/{{ news.slug }}" class="news-card-link">
+                <article class="card news-card" data-index="{{ loop.index0 }}" role="article">
+                    <a href="/news/{{ news.slug }}" class="card-link news-card-link" aria-describedby="news-{{ loop.index0 }}-title">
                         <div class="image-wrapper">
                             {% if news.image %}
-                                <img src="{{ news.image }}" alt="{{ news.heading }}" class="news-card-image">
+                                <img src="{{ news.image }}" alt="{{ news.heading }}" class="card-image news-card-image">
                             {% endif %}
-                            <div class="news-card-content">
-                                <h3 class="news-card-title">{{ news.heading }}</h3>
+                            <div class="card-content news-card-content">
+                                <h3 id="news-{{ loop.index0 }}-title" class="card-title news-card-title">{{ news.heading }}</h3>
                                 {% if news.image %}
-                                    <div class="news-card-description">{{ news.article|sanitize_html|safe|truncate(200) }}</div>
+                                    <div class="card-description news-card-description">{{ news.article|sanitize_html|safe|truncate(200) }}</div>
                                 {% else %}
-                                    <div class="news-card-description">{{ news.article|sanitize_html|safe|truncate(400) }}</div>
+                                    <div class="card-description news-card-description">{{ news.article|sanitize_html|safe|truncate(400) }}</div>
                                 {% endif %}
-                                <div class="read-more">Read More</div>
+                                <div class="read-more" aria-label="Read more about {{ news.heading }}">Read More</div>
                             </div>
                         </div>
                     </a>

@@ -1,63 +1,11 @@
-/* knowledge Grid */
+/* Knowledge Vault-specific styles - inherits from components.css */
+
+/* Knowledge grid specific spacing */
 .knowledge-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 3vw;
     padding: 1vw 5vw;
     margin-bottom: 3vh;
-}
-
-.knowledge-card {
-    background: #fff;
-    border-radius: 0.625em;
-    box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    transition: transform 0.3s;
-    display: flex;
-    flex-direction: column;
-    text-align: stretch;
-}
-
-.knowledge-card:hover {
-    transform: scale(1.05);
-}
-
-.knowledge-card-image {
-    width: 100%;
-    height: 12.5em;
-    object-fit: cover;
-}
-
-.knowledge-card-link {
-    text-decoration: none;
-    color: #333;
-}
-
-.knowledge-card-content {
-    padding: 1.25em;
-    flex: 1;
-    min-height: 15.6em;
-    display: inline-block;
-    flex-direction: column;
-}
-
-.knowledge-card-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.6em;
-    color: #000000;
-    transition: color 0.3s;
-    text-decoration: none;
-}
-
-.knowledge-card-title:hover {
-    color: #818080;
-}
-
-.knowledge-card-description {
-    font-size: 0.9rem;
-    color: #000000;
-    flex-grow: 1; /* Take up remaining space */
-    overflow: hidden;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 }
 
 .knowledge-card-description.expanded {

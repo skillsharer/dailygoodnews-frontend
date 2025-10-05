@@ -1,20 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    {% include 'header.html' %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Daily Good News{% endblock %}</title>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}"/>
+    <meta name="google-site-verification" content="{{ google_site_verification }}" />
+    
+    <!-- Import CSS Files - OPTIMIZED ORDER FOR PERFORMANCE -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/design-system.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hero.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/news.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/knowledge.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/storytime.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/articles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/newsletter.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/contact.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/privacy.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animations.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enhanced-ux.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enhanced-responsive.css') }}">
     
     {% block extra_css %}{% endblock %}
 </head>
 <body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
     <!-- Page Loader - Only for initial loads -->
     <div id="loader" class="page-loader">
         <div class="page-loader__spinner"></div>
     </div>
     
+    {% include 'header.html' %}
 
-
-    {% block content %}{% endblock %}
+    <main id="main-content">
+        {% block content %}{% endblock %}
+    </main>
 
     {% include 'footer.html' %}
     

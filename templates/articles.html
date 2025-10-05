@@ -4,18 +4,19 @@
 
 {% block content %}
     <div id="articles-main-content" class="container">
-        <section class="articles-grid" id="articles-grid">
+        <section class="content-grid articles-grid" id="articles-grid" aria-labelledby="coffee-break-heading">
+            <h2 id="coffee-break-heading" class="visually-hidden">Coffee Break Articles</h2>
             {% for article in articles %}
-            <article class="article-card" data-index="{{ loop.index0 }}">
-                <a href="/article/{{ article.slug }}" class="articles-card-link">
+            <article class="card article-card" data-index="{{ loop.index0 }}" role="article">
+                <a href="/article/{{ article.slug }}" class="card-link articles-card-link" aria-describedby="article-{{ loop.index0 }}-title">
                     <div class="image-wrapper">
                          {% if article.image %}
-                             <img class="articles-card-image" src="{{ url_for('artifacts', filename='coffee_break/images/' + article.image) }}">
+                             <img class="card-image articles-card-image" src="{{ url_for('artifacts', filename='coffee_break/images/' + article.image) }}" alt="{{ article.heading }}">
                             {% endif %}
-                        <div class="articles-card-content">
-                            <h3 class="articles-card-title">{{ article.heading }}</h3>
-                            <div class="articles-card-description">{{ article.article|sanitize_html|safe|truncate(200) }}</div>
-                            <div class="read-more">Read More</div>
+                        <div class="card-content articles-card-content">
+                            <h3 id="article-{{ loop.index0 }}-title" class="card-title articles-card-title">{{ article.heading }}</h3>
+                            <div class="card-description articles-card-description">{{ article.article|sanitize_html|safe|truncate(200) }}</div>
+                            <div class="read-more" aria-label="Read more about {{ article.heading }}">Read More</div>
                         </div>
                     </div>
                 </a>

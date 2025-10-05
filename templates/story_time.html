@@ -4,18 +4,19 @@
 
 {% block content %}
     <div id="storytime-main-content" class="container">
-        <section class="storytime-grid">
+        <section class="content-grid story-grid" aria-labelledby="story-time-heading">
+            <h2 id="story-time-heading" class="visually-hidden">Story Time Articles</h2>
             {% for article in story_time_articles %}
-            <article class="storytime-card">
-                <a href="/story_time/{{ article.slug }}" class="storytime-card-link">
+            <article class="card story-card" role="article">
+                <a href="/story_time/{{ article.slug }}" class="card-link story-card-link" aria-describedby="story-{{ loop.index0 }}-title">
                     <div class="image-wrapper">
                          {% if article.image %}
-                             <img class="storytime-card-image" src="{{ article.image }}">
+                             <img class="card-image story-card-image" src="{{ article.image }}" alt="{{ article.heading }}">
                          {% endif %}
-                        <div class="storytime-card-content">
-                            <h3 class="storytime-card-title">{{ article.heading }}</h3>
-                            <p class="storytime-card-description">{{ article.article|sanitize_html|safe|truncate(200) }}</p>
-                            <span class="read-more">Read More</span>
+                        <div class="card-content story-card-content">
+                            <h3 id="story-{{ loop.index0 }}-title" class="card-title story-card-title">{{ article.heading }}</h3>
+                            <div class="card-description story-card-description">{{ article.article|sanitize_html|safe|truncate(200) }}</div>
+                            <div class="read-more" aria-label="Read more about {{ article.heading }}">Read More</div>
                         </div>
                     </div>
                 </a>

@@ -4,22 +4,23 @@
 
 {% block content %}
     <div id="knowledge-main-content" class="container">
-        <section class="knowledge-grid">
+        <section class="content-grid knowledge-grid" aria-labelledby="knowledge-vault-heading">
+            <h2 id="knowledge-vault-heading" class="visually-hidden">Knowledge Vault Articles</h2>
             {% for knowledge in knowledge_vaults %}
-            <article class="knowledge-card">
-                <a href="/knowledge_vault/{{ knowledge.slug }}" class="knowledge-card-link">
+            <article class="card knowledge-card" role="article">
+                <a href="/knowledge_vault/{{ knowledge.slug }}" class="card-link knowledge-card-link" aria-describedby="knowledge-{{ loop.index0 }}-title">
                     <div class="image-wrapper">
                         {% if knowledge.image %}
-                            <img class="knowledge-card-image" src="{{ url_for('artifacts', filename='knowledge_vault/images/' + knowledge.image) }}">
+                            <img class="card-image knowledge-card-image" src="{{ url_for('artifacts', filename='knowledge_vault/images/' + knowledge.image) }}" alt="{{ knowledge.heading }}">
                         {% endif %}
-                        <div class="knowledge-card-content">
-                            <h3 class="knowledge-card-title">{{ knowledge.heading }}</h3>
+                        <div class="card-content knowledge-card-content">
+                            <h3 id="knowledge-{{ loop.index0 }}-title" class="card-title knowledge-card-title">{{ knowledge.heading }}</h3>
                             {% if knowledge.image %}
-                            <article class="knowledge-card-description">{{ knowledge.article|sanitize_html|truncate(200)|safe }}</article>
+                            <div class="card-description knowledge-card-description">{{ knowledge.article|sanitize_html|truncate(200)|safe }}</div>
                             {% else %}
-                            <article class="knowledge-card-description">{{ knowledge.article|sanitize_html|truncate(600)|safe }}</article>
+                            <div class="card-description knowledge-card-description">{{ knowledge.article|sanitize_html|truncate(600)|safe }}</div>
                             {% endif %}
-                            <div class="read-more">Read More</div>
+                            <div class="read-more" aria-label="Read more about {{ knowledge.heading }}">Read More</div>
                         </div>
                     </div>
                 </a>

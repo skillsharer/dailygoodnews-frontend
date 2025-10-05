@@ -62,6 +62,7 @@ class EnhancedUIManager {
 
     toggleMobileMenu(toggle, nav) {
         const isActive = nav.classList.contains('active');
+        const navButtons = nav.querySelector('.nav-buttons');
         
         // Toggle classes with animation timing
         toggle.classList.toggle('active');
@@ -69,7 +70,9 @@ class EnhancedUIManager {
         
         // Accessibility updates
         toggle.setAttribute('aria-expanded', !isActive);
-        nav.setAttribute('aria-hidden', isActive);
+        if (navButtons) {
+            navButtons.setAttribute('aria-hidden', isActive);
+        }
         
         // Prevent body scroll when menu is open (mobile)
         if (this.isMobile) {
