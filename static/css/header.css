@@ -1,14 +1,20 @@
 /* Header */
 .site-header {
-    background: #fff;
-    padding: 0.9375em 0;
-    box-shadow: 0 0.125em 3.125em rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    padding: 1rem 0;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
     width: 100%;
+    position: fixed;
     top: 0;
     z-index: 1000;
     left: 0;
     display: flex;
     justify-content: center;
+    border-bottom: 1px solid rgba(129, 199, 212, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
 }
 
 .site-header .header-content {
@@ -22,11 +28,16 @@
 }
 
 .logo {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #333;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #2d3748;
     text-decoration: none;
     white-space: nowrap;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .main-nav ul {
@@ -42,26 +53,41 @@
 
 .main-nav a {
     text-decoration: none;
-    color: #555;
-    padding: 0.7em 1em;
-    border-radius: 0.3em;
-    transition: background-color 0.3s, color 0.3s;
+    color: #4a5568;
+    padding: 0.75rem 1.25rem;
+    border-radius: 30px;
+    font-weight: 500;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
 }
 
 .main-nav a:hover {
-    background-color: #f0f0f0;
-    color: #3498db;
+    background: linear-gradient(135deg, rgba(129, 199, 212, 0.12), rgba(168, 230, 207, 0.12));
+    color: #2d3748;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(129, 199, 212, 0.15);
 }
 
 .menu-toggle {
     display: none;
     flex-direction: column;
     cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease;
+}
+
+.menu-toggle:hover {
+    background-color: rgba(129, 199, 212, 0.08);
 }
 
 .bar {
-    width: 1.5625em;
-    height: 0.1875em;
-    background-color: #333;
-    margin: 0.1875em 0;
+    width: 1.5rem;
+    height: 0.15rem;
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    margin: 0.15rem 0;
+    border-radius: 3px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }

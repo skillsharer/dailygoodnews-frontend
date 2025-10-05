@@ -28,12 +28,13 @@
             }
 
             .loader-spinner {
-                border: 8px solid #f3f3f3;
-                border-top: 8px solid #3498db;
+                border: 6px solid rgba(129, 199, 212, 0.1);
+                border-top: 6px solid #81c7d4;
                 border-radius: 50%;
-                width: 60px;
-                height: 60px;
-                animation: spin 1s linear infinite;
+                width: 50px;
+                height: 50px;
+                animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                box-shadow: 0 4px 15px rgba(129, 199, 212, 0.2);
             }
 
             @keyframes spin {

@@ -29,12 +29,13 @@
         }
 
         .loader-spinner {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
+            border: 6px solid rgba(129, 199, 212, 0.1);
+            border-top: 6px solid #81c7d4;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
+            width: 50px;
+            height: 50px;
+            animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+            box-shadow: 0 4px 15px rgba(129, 199, 212, 0.2);
         }
 
         @keyframes spin {
@@ -48,10 +49,15 @@
         }
     </style>
      <script>
-        // Inline script to set opacity to 1
+        // Inline script to set opacity to 1 and handle hero section
         document.addEventListener("DOMContentLoaded", function() {
              document.body.style.opacity = '1';
         });
+        
+        // Immediately hide hero if user has seen it before
+        if (sessionStorage.getItem('hasVisitedSession')) {
+            document.write('<style>#hero-section{height:0 !important;opacity:0 !important;overflow:hidden !important;} #main-content{opacity:1 !important;transform:translateY(0) !important;}</style>');
+        }
      </script>
 </head>
 <body>
@@ -68,9 +74,9 @@
     <div id="main-content">
         <section class="featured-news">
             <h2 class="section-title">Top Stories</h2>
-            <div class="news-grid">
+            <div class="news-grid" id="news-grid">
                 {% for news in news_list %}
-                <article class="news-card">
+                <article class="news-card" data-index="{{ loop.index0 }}" style="{% if loop.index0 >= 5 %}display: none;{% endif %}">
                     <a href="/news/{{ news.slug }}" class="news-card-link">
                         <div class="image-wrapper">
                             {% if news.image %}
@@ -90,6 +96,14 @@
                 </article>
                 {% endfor %}
             </div>
+            {% if news_list|length > 5 %}
+            <div class="view-more-container">
+                <button id="view-more-btn" class="view-more-btn">
+                    View More Stories
+                    <span class="view-more-icon">↓</span>
+                </button>
+            </div>
+            {% endif %}
         </section>
         <!--
         <section class="newsletter-signup">
@@ -116,37 +130,70 @@
             // Check if the user has visited during the current session
             const hasVisitedSession = sessionStorage.getItem('hasVisitedSession');
             if (hasVisitedSession) {
-                        heroSection.classList.add('hidden');
-                        targetSection.classList.add('visible'); //show the main-content on second visit
-                    } else {
-                    sessionStorage.setItem('hasVisitedSession', 'true');
+                // Already handled by inline styles, just ensure classes are set
+                heroSection.classList.add('hidden');
+                targetSection.classList.add('visible');
+                
+                // Position at the Top Stories section for return visitors
+                setTimeout(() => {
+                    const sectionTitle = document.querySelector('.section-title');
+                    if (sectionTitle) {
+                        const titlePosition = sectionTitle.getBoundingClientRect().top + window.pageYOffset - 120;
+                        window.scrollTo({
+                            top: titlePosition,
+                            behavior: 'smooth'
+                        });
                     }
+                }, 300);
+                
+                // Don't add scroll listener since hero is already hidden
+                window.removeEventListener("scroll", handleScroll);
+            } else {
+                // Mark as visited when they interact with the page
+                sessionStorage.setItem('hasVisitedSession', 'true');
+                // Only add scroll listener for first-time visitors
+                window.addEventListener("scroll", handleScroll);
+            }
             loader.style.display = 'none';
 
             function handleScroll() {
                 const sectionPosition = targetSection.getBoundingClientRect().top;
                 const windowHeight = window.innerHeight;
+                const scrollY = window.scrollY;
 
-                if(window.scrollY > 50) {
+                // Header scroll effect
+                if(scrollY > 50) {
                     header.classList.add('scrolled');
-                }
-                else {
+                } else {
                     header.classList.remove('scrolled');
                 }
 
+                // Only handle hero hiding if hero is still visible
+                if (!heroSection.classList.contains('hidden')) {
+                    if (scrollY > windowHeight * 0.3) {
+                        heroSection.classList.add('hidden');
+                        // Remove this scroll listener once hero is hidden
+                        window.removeEventListener("scroll", handleScroll);
+                    }
+                }
+
+                // Show main content when it comes into view
                 if (sectionPosition < windowHeight) {
                     targetSection.classList.add("visible");
-                    window.removeEventListener("scroll", handleScroll);
                 }
-                if (footer.getBoundingClientRect().top < windowHeight) {
+                
+                // Footer visibility
+                if (footer && footer.getBoundingClientRect().top < windowHeight) {
                     footer.classList.add('visible');
                 }
             }
 
             function customSmoothScroll(target, duration) {
                 const startPosition = window.pageYOffset;
-                const targetPosition = target.getBoundingClientRect().top;
-                const distance = targetPosition ;
+                // Better positioning for the highlighted news card
+                const offset = target.classList.contains('news-card') ? 150 : 100;
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                const distance = targetPosition - startPosition;
                 let startTime = null;
 
                 function animation(currentTime) {
@@ -172,19 +219,58 @@
 
             exploreButton.addEventListener("click", function (e) {
                 e.preventDefault();
-                customSmoothScroll(targetSection, 1000);
+                
+                // Start the transition
+                heroSection.classList.add("hidden");
+                targetSection.classList.add("visible");
+                
+                // Wait for hero to hide, then position at the highlighted story
                 setTimeout(() => {
-                    targetSection.classList.add("visible");
+                    const sectionTitle = document.querySelector('.section-title');
+                    if (sectionTitle) {
+                        // Position to show the "Top Stories" title and the highlighted first card
+                        const titlePosition = sectionTitle.getBoundingClientRect().top + window.pageYOffset - 120;
+                        window.scrollTo({
+                            top: titlePosition,
+                            behavior: 'smooth'
+                        });
+                    }
                     window.removeEventListener("scroll", handleScroll);
-                }, 1000);
+                }, 500);
             });
-
-            window.addEventListener("scroll", handleScroll);
 
             menuToggle.addEventListener('click', function() {
                 menuToggle.classList.toggle('active');
                 nav.classList.toggle('active');
             });
+
+            // View More functionality
+            const viewMoreBtn = document.getElementById('view-more-btn');
+            if (viewMoreBtn) {
+                let currentVisible = 5;
+                const newsCards = document.querySelectorAll('.news-card');
+                const totalCards = newsCards.length;
+
+                viewMoreBtn.addEventListener('click', function() {
+                    // Show next 5 items
+                    const nextVisible = Math.min(currentVisible + 5, totalCards);
+                    
+                    for (let i = currentVisible; i < nextVisible; i++) {
+                        if (newsCards[i]) {
+                            newsCards[i].style.display = 'block';
+                            newsCards[i].style.animation = 'fadeInUp 0.6s ease forwards';
+                            newsCards[i].style.animationDelay = `${(i - currentVisible) * 0.1}s`;
+                        }
+                    }
+                    
+                    currentVisible = nextVisible;
+                    
+                    // Hide button if no more items
+                    if (currentVisible >= totalCards) {
+                        viewMoreBtn.style.display = 'none';
+                    }
+                });
+            }
         });
     </script>
 </body>

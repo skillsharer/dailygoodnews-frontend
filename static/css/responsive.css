@@ -63,14 +63,42 @@
 
     .news-card {
         border-radius: 1.625em;
+        margin-bottom: 1rem;
     }
 
     .news-grid {
         display: grid;
-        grid-template-columns: 1fr; /* Forces a single column */
-        gap: 5vw;
-        padding: 0 5vw;
-        margin-bottom: 3vh;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    /* Featured news item on mobile */
+    .news-card:first-child {
+        grid-column: 1;
+        max-width: 100%;
+        margin-bottom: 1.5rem;
+    }
+
+    .news-card:first-child::before {
+        top: 12px;
+        right: 12px;
+        font-size: 0.7rem;
+        padding: 6px 10px;
+        border-radius: 20px;
+    }
+
+    /* Adjust section title for mobile */
+    .section-title {
+        font-size: 1.8rem;
+        margin-top: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-title::after {
+        width: 60px;
+        height: 3px;
     }
 
     .news-card-content {
@@ -90,14 +118,54 @@
         justify-content: flex-end;
     }
 
+    .site-header {
+        padding: 0.8rem 0;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+    }
+
+    /* Mobile container padding */
+    .container {
+        padding-top: 80px;
+    }
+
+    /* When hero is hidden on mobile, add proper spacing to main content */
+    #hero-section.hidden ~ #main-content,
+    #hero-section.hidden + #main-content {
+        padding-top: 80px;
+    }
+
+    /* Mobile: Extra top margin for Top Stories when hero is hidden */
+    #hero-section.hidden ~ #main-content .featured-news {
+        margin-top: 100px;
+    }
+
+    /* Mobile subpage containers */
+    #articles-main-content,
+    .knowledge-main-content,
+    .storytime-main-content,
+    .news-item-page,
+    .articles-item-page,
+    .knowledge-item-page,
+    .storytime-item-page {
+        padding-top: 80px;
+    }
+
     .main-nav ul {
         display: none;
         flex-direction: column;
         position: absolute;
         top: 100%;
-        left: 0;
-        width: 100%;
-        background-color: #fff;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 0 0 20px 20px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
         text-align: center;
         box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1);
         z-index: 1001;
@@ -172,5 +240,80 @@
 @media (min-width: 768px){
     .address-wrapper{
         padding: 12px;
+    }
+}
+
+/* Additional mobile enhancements */
+@media (max-width: 768px) {
+    /* Better mobile navigation styling */
+    .main-nav a {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    }
+
+    .main-nav li:last-child a {
+        border-bottom: none;
+    }
+
+    /* Hero section mobile optimization */
+    .hero-title {
+        font-size: 2.2rem;
+        padding: 0 1rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        padding: 0 1rem;
+    }
+
+    .cta-button {
+        padding: 0.8rem 1.8rem;
+        font-size: 1rem;
+        margin: 0 1rem;
+    }
+
+    /* Better mobile card content */
+    .news-card-content {
+        padding: 1.2rem;
+        min-height: auto;
+    }
+
+    .news-card-image {
+        height: 200px;
+    }
+
+    /* Touch-friendly read more buttons */
+    .read-more {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        margin-top: 1rem;
+    }
+
+    /* Mobile View More button */
+    .view-more-btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+        margin: 0 1rem;
+    }
+
+    .view-more-container {
+        margin: 1.5rem 0 3rem 0;
+        padding: 0 1rem;
+    }
+
+    /* Mobile Go Back button */
+    .go-back-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+        margin: 1rem 0;
+    }
+
+    /* Better mobile spacing for section titles */
+    .section-title {
+        font-size: 1.8rem;
+        margin-top: 2vh;
+        padding: 0 1rem;
     }
 }

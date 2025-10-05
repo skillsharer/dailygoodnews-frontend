@@ -1,14 +1,15 @@
 /* General Layout */
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #c5cddd;
-    color: #333;
-    line-height: 1.6;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #2d3748;
+    line-height: 1.7;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    overflow-x: hidden; /* Prevent horizontal scrollbar on body */
+    overflow-x: hidden;
+    letter-spacing: 0.01em;
 }
 
 /* Add this to disable the main-content fade in effect on the privacy policy page */
@@ -21,14 +22,91 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 100px 15px 0 15px;
     box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal scrollbar on container */
+    overflow-x: hidden;
 }
 
 .main-content {
     opacity: 0;
-    transition: opacity 0.6s ease;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(20px);
+    margin-top: 0;
+    padding-top: 100px;
+}
+
+.main-content.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Home page specific - no top padding when hero is visible, but add spacing when hidden */
+#main-content {
+    padding-top: 0;
+    transition: padding-top 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* When hero is hidden, add proper spacing to main content */
+#hero-section.hidden ~ #main-content,
+#hero-section.hidden + #main-content {
+    padding-top: 100px;
+}
+
+/* Ensure Top Stories section has proper clearance from header */
+.featured-news {
+    margin-top: 2rem;
+}
+
+/* When hero is hidden, add extra top margin to Top Stories section */
+#hero-section.hidden ~ #main-content .featured-news {
+    margin-top: 120px;
+}
+
+/* Subpage containers - ensure proper header clearance */
+#articles-main-content,
+.knowledge-main-content,
+.storytime-main-content,
+.news-item-page,
+.articles-item-page,
+.knowledge-item-page,
+.storytime-item-page {
+    padding-top: 100px;
+}
+
+/* Add proper spacing when hero is hidden */
+#hero-section.hidden ~ .main-content,
+#hero-section.hidden + #main-content {
+    padding-top: 2rem;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Add subtle fade-in animation for all elements */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Fade in animation for news cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Subtle pulse animation for featured elements */
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(129, 199, 212, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(129, 199, 212, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(129, 199, 212, 0); }
 }
 
 .news-item {
@@ -42,8 +120,25 @@ body {
 
 .section-title {
     text-align: center;
-    margin-top: 4vh;
-    margin-bottom: 1.9em;
-    font-size: 2rem;
-    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 2.5rem;
+    font-size: 2.2rem;
+    color: #2d3748;
+    font-weight: 700;
+    position: relative;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, #81c7d4, #a8e6cf);
+    border-radius: 3px;
+    box-shadow: 0 2px 8px rgba(129, 199, 212, 0.2);
 }
