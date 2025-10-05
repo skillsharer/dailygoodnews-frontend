@@ -38,6 +38,12 @@
     --gray-800: #1f2937;
     --gray-900: #111827;
     
+    /* Warm Accent Colors */
+    --accent-warm: #ff6b6b;
+    --accent-gold: #ffd93d;
+    --accent-purple: #a78bfa;
+    --accent-coral: #ff8a65;
+    
     /* Semantic Colors */
     --color-primary: var(--primary-500);
     --color-primary-dark: var(--primary-700);
@@ -51,10 +57,11 @@
     --color-text-light: var(--gray-400);
     
     --color-bg-primary: #ffffff;
-    --color-bg-secondary: var(--gray-50);
+    --color-bg-secondary: #fafbfc;
     --color-bg-tertiary: var(--primary-50);
-    --color-bg-gradient: linear-gradient(135deg, #ffffff 0%, var(--primary-50) 100%);
+    --color-bg-gradient: linear-gradient(135deg, #ffffff 0%, #f0f9ff 100%);
     --color-bg-gradient-vibrant: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 100%);
+    --color-bg-warm: linear-gradient(135deg, #fff5f5 0%, #fffbf0 100%);
     
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -185,10 +192,47 @@ body {
 body {
     margin: 0;
     padding-top: 80px;
+    background: linear-gradient(to bottom, #ffffff 0%, #fafbfc 50%, #f8f9fb 100%);
+    background-attachment: fixed;
+    position: relative;
+}
+
+/* Subtle decorative elements for warmth */
+body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    right: -20%;
+    width: 60%;
+    height: 60%;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.03) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -30%;
+    left: -10%;
+    width: 50%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.02) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 html {
     scroll-behavior: smooth;
+}
+
+/* Ensure content is above decorative elements */
+.container,
+.site-header,
+#hero-section,
+#main-content {
+    position: relative;
+    z-index: 1;
 }
 
 .news-item {
