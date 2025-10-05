@@ -17,6 +17,15 @@ uv run ./src/app.py
 
 # PRODUCTION:
 
+## Start and stop nginx:
+```bash
+sudo systemctl start nginx
+sudo systemctl stop nginx
+```
+
+### Setup nginx:
+Edit and copy the `<repo_root>/nginx/default` to `/etc/nginx/sites-available/default`
+
 ## Run the application on the prod server
 ```bash
 pm2 start ecosystem.config.js 
