@@ -28,4 +28,4 @@ sudo certbot --nginx -d www.dailygoodnews.co.uk
 ```
 
 ## GOOGLE Search Console
-To collect statistics and get indexed by Google, visit this [site](GOOGLE Search console: https://search.google.com/search-console?resource_id=https://www.dailygoodnews.co.uk/).
+To collect statistics and get indexed by Google, visit this [site](https://search.google.com/search-console?resource_id=https://www.dailygoodnews.co.uk/).
