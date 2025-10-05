@@ -4,6 +4,9 @@ import json
 import re
 import datetime
 import os
+from dotenv import load_dotenv, find_dotenv
+
+load_dotenv(find_dotenv())
 
 ROOT=os.path.dirname(os.path.dirname(__file__))
 NEWS_SOURCE=f'{ROOT}/artifacts/news/news.json'
@@ -11,7 +14,7 @@ COFFEE_BREAK_SOURCE=f'{ROOT}/artifacts/coffee_break/coffee_break.json'
 KNOWLEDGE_VAULT_SOURCE=f'{ROOT}/artifacts/knowledge_vault/knowledge_vault.json'
 STORY_TIME_SOURCE=f'{ROOT}/artifacts/story_time/story_time.json'
 app = Flask(__name__, template_folder=f'{ROOT}/templates', static_folder=f'{ROOT}/static')
-
+GOOGLE_SITE_VERIFICATION=os.getenv('GOOGLE_SITE_VERIFICATION')
 
 def slugify(text):
     slug = re.sub(r'[^a-zA-Z0-9-]', '', text.replace(' ', '-'))
@@ -47,6 +50,12 @@ def sanitize_html(value):
     return bleach.clean(value, tags=allowed_tags, attributes=allowed_attributes, protocols=allowed_protocols, strip=True)
 
 app.jinja_env.filters['sanitize_html'] = sanitize_html
+@app.context_processor
+def inject_global_vars():
+    return {
+        'google_site_verification': GOOGLE_SITE_VERIFICATION,
+        'now': datetime.datetime.now()
+    }
 
 @app.route('/')
 def home():
@@ -54,7 +63,7 @@ def home():
         news_list = json.load(jsonfile)
         for news in news_list:
             news['slug'] = slugify(news['heading'])
-    return render_template('home.html', news_list=news_list, now=datetime.datetime.now())
+    return render_template('home.html', news_list=news_list)
 
 @app.route('/articles')
 def blog_posts():
@@ -62,7 +71,7 @@ def blog_posts():
         articles = json.load(jsonfile)
         for article in articles:
             article['slug'] = slugify(article['heading'])
-    return render_template('articles.html', articles=articles, now=datetime.datetime.now())
+    return render_template('articles.html', articles=articles)
 
 @app.route('/knowledge_vault')
 def knowledge_vault():
@@ -70,7 +79,7 @@ def knowledge_vault():
         knowledge_vaults = json.load(jsonfile)
         for knowledge_vault in knowledge_vaults:
             knowledge_vault['slug'] = sanitize_html(slugify(knowledge_vault['heading']))
-    return render_template('knowledge_vault.html', knowledge_vaults=knowledge_vaults, now=datetime.datetime.now())
+    return render_template('knowledge_vault.html', knowledge_vaults=knowledge_vaults)
 
 @app.route('/story_time')
 def story_time():
@@ -79,7 +88,7 @@ def story_time():
         for article in story_time_articles:
             article['slug'] = slugify(article['heading'])
             article['image'] = extract_first_image(article['article']) # Extract Image
-    return render_template('story_time.html', story_time_articles=story_time_articles, now=datetime.datetime.now())
+    return render_template('story_time.html', story_time_articles=story_time_articles)
 
 @app.route('/story_time/<story_id>')
 def story_item_page(story_id):
@@ -89,7 +98,7 @@ def story_item_page(story_id):
 
     for article in story_articles:
         if slugify(article['heading']) == story_id:
-            return render_template('story_item.html', article=article, now=datetime.datetime.now())
+            return render_template('story_item.html', article=article)
     return "Story not found", 404
 
 @app.route('/article/<article_id>')
@@ -100,7 +109,7 @@ def article_item_page(article_id):
 
     for article in articles:
         if slugify(article['heading']) == article_id:
-            return render_template('article_item.html', article=article, now=datetime.datetime.now())
+            return render_template('article_item.html', article=article)
     return "Article not found", 404
 
 @app.route('/knowledge_vault/<knowledge_id>')
@@ -111,16 +120,16 @@ def knowledge_item_page(knowledge_id):
 
     for knowledge_article in knowledge_vaults:
         if slugify(knowledge_article['heading']) == knowledge_id:
-            return render_template('knowledge_item.html', knowledge=knowledge_article, now=datetime.datetime.now())
+            return render_template('knowledge_item.html', knowledge=knowledge_article)
     return "Article not found", 404
 
 @app.route('/about')
 def about():
-    return render_template('about.html', now=datetime.datetime.now())
+    return render_template('about.html')
 
 @app.route('/contact')
 def contact():
-    return render_template('contact.html', now=datetime.datetime.now())
+    return render_template('contact.html')
 
 @app.route('/news/<news_id>')
 def news_item_page(news_id):
@@ -130,12 +139,12 @@ def news_item_page(news_id):
 
     for news in news_list:
         if slugify(news['heading']) == news_id:
-            return render_template('news_item.html', news=news, now=datetime.datetime.now())
+            return render_template('news_item.html', news=news)
     return "News item not found", 404
 
 @app.route('/privacy-policy')
 def privacy_policy():
-    return render_template('privacy_policy.html', now=datetime.datetime.now())
+    return render_template('privacy_policy.html')
 
 @app.route('/artifacts/<path:filename>')
 def artifacts(filename):
