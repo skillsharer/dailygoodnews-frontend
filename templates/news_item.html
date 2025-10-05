@@ -1,27 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include 'header.html' %}
-    <title>{{ news.heading }} - Daily Good News</title>
-      <style>
-        /* Prevent FOUC */
-         html, body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-           opacity: 0; /* Hide body content initially */
-            transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
-        }
-    </style>
-     <script>
-           // Inline script to set opacity to 1
-           document.addEventListener("DOMContentLoaded", function() {
-             document.body.style.opacity = '1';
-             });
-     </script>
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}{{ news.heading }} - Daily Good News{% endblock %}
+
+{% block content %}
     <main class="container">
          <section class="news-item-page">
                 <h1>{{ news.heading }}</h1>
@@ -56,16 +37,4 @@
                 </div>
         </section>
     </main>
-    {% include 'footer.html' %}
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          const nav = document.querySelector('.main-nav');
-          const menuToggle = document.querySelector('.menu-toggle');
-          menuToggle.addEventListener('click', function() {
-              menuToggle.classList.toggle('active');
-              nav.classList.toggle('active');
-          });
-      });
-  </script>
-  </body>
-</html>
+{% endblock %}

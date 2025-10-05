@@ -1,74 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include 'header.html' %}
-    <title>Daily Good News</title>
-    <style>
-        /* Prevent FOUC */
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            opacity: 0; /* Hide body content initially */
-             transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
-           
-        }
+{% extends "base.html" %}
 
-         #loader {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100%;
-            background: #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-        }
+{% block title %}Daily Good News{% endblock %}
 
-        .loader-spinner {
-            border: 6px solid rgba(129, 199, 212, 0.1);
-            border-top: 6px solid #81c7d4;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-            box-shadow: 0 4px 15px rgba(129, 199, 212, 0.2);
-        }
+{% block extra_css %}
+<style>
+    /* Home-specific hero section styles - prevent layout shift */
+    #hero-section.hidden {
+        display: none !important;
+        transition: opacity 0.3s ease;
+    }
+    
+    #main-content.visible {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+        padding-top: 100px !important;
+    }
+    
+    .featured-news.shifted {
+        margin-top: 120px !important;
+    }
+    
+    /* Smooth highlight effect for first news card */
+    .news-card:first-child {
+        position: relative;
+        z-index: 1;
+    }
+    
+    /* Remove conflicting smooth scroll behavior */
+</style>
+{% endblock %}
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-     <script>
-        // Inline script to set opacity to 1 and handle hero section
-        document.addEventListener("DOMContentLoaded", function() {
-             document.body.style.opacity = '1';
-        });
-        
-        // Immediately hide hero if user has seen it before - prevent layout shift
-        if (sessionStorage.getItem('hasVisitedSession')) {
-            document.write('<style>#hero-section{display:none !important;} #main-content{opacity:1 !important;transform:translateY(0) !important; padding-top:100px !important;} .featured-news{margin-top:120px !important;}</style>');
-        }
-     </script>
-</head>
-<body>
-    <div id="loader">
-        <div class="loader-spinner"></div>
-    </div>
+{% block content %}
     <div id="hero-section" class="parallax">
         <div class="hero-overlay">
             <h1 class="hero-title">Discover the Good in Every Day</h1>
             <p class="hero-subtitle">Because what you consume really does matter</p>
-            <a href="#main-content" class="cta-button" id="explore-now">Explore Now</a>
+            <a href="#" class="cta-button" id="explore-now">Explore Now</a>
         </div>
     </div>
     <div id="main-content">
@@ -116,8 +83,11 @@
         </section>
         -->
     </div>
-    {% include 'footer.html' %}
-    <script>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
         document.addEventListener("DOMContentLoaded", function () {
             const loader = document.getElementById('loader');
             const exploreButton = document.getElementById("explore-now");
@@ -170,17 +140,29 @@
                     targetSection.classList.add("visible");
                 }
                 
-                // Footer visibility
-                if (footer && footer.getBoundingClientRect().top < windowHeight) {
-                    footer.classList.add('visible');
-                }
+                // Footer visibility handling removed to prevent color bugs
             }
 
-            function customSmoothScroll(target, duration) {
+            // Very smooth easing function for gentle deceleration
+            function easeOutQuart(t) {
+                return 1 - Math.pow(1 - t, 4);
+            }
+
+            function customSmoothScroll(target, duration = 1200) {
                 const startPosition = window.pageYOffset;
-                // Better positioning for the highlighted news card
-                const offset = target.classList.contains('news-card') ? 150 : 100;
-                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                let targetPosition;
+                
+                // Handle both element targets and position objects
+                if (typeof target === 'object' && target.getBoundingClientRect) {
+                    const rect = target.getBoundingClientRect();
+                    targetPosition = rect.top + window.pageYOffset;
+                } else if (typeof target === 'number') {
+                    targetPosition = target;
+                } else {
+                    const offset = target.classList && target.classList.contains('news-card') ? 150 : 100;
+                    targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                }
+                
                 const distance = targetPosition - startPosition;
                 let startTime = null;
 
@@ -189,7 +171,7 @@
                         startTime = currentTime;
                     }
                     const timeElapsed = currentTime - startTime;
-                    const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                    const run = easeInOutCubic(timeElapsed, startPosition, distance, duration);
                     window.scrollTo(0, run);
                     if (timeElapsed < duration) {
                         requestAnimationFrame(animation);
@@ -198,33 +180,75 @@
                 requestAnimationFrame(animation);
             }
 
-            function easeInOutQuad(t, b, c, d) {
+            // Smoother easing function for more natural scroll
+            function easeInOutCubic(t, b, c, d) {
                 t /= d/2;
-                if (t < 1) return c/2*t*t + b;
-                t--;
-                return -c/2 * (t*(t-2) - 1) + b;
+                if (t < 1) return c/2*t*t*t + b;
+                t -= 2;
+                return c/2*(t*t*t + 2) + b;
             }
 
             exploreButton.addEventListener("click", function (e) {
                 e.preventDefault();
                 
-                // Start the transition
-                heroSection.classList.add("hidden");
+                // Mark as visited for session
+                sessionStorage.setItem('hasVisitedSession', 'true');
+                
+                // First, immediately hide hero and show content to finalize layout
+                heroSection.style.transition = 'opacity 1.2s ease-out, transform 1.2s ease-out';
+                heroSection.style.opacity = '0';
+                heroSection.style.transform = 'translateY(-50px) scale(0.95)';
+                
+                // Show main content immediately
                 targetSection.classList.add("visible");
                 
-                // Wait for hero to hide, then position at the highlighted story
+                // Fully hide hero quickly to stabilize layout before scrolling
                 setTimeout(() => {
-                    const sectionTitle = document.querySelector('.section-title');
-                    if (sectionTitle) {
-                        // Position to show the "Top Stories" title and the highlighted first card
-                        const titlePosition = sectionTitle.getBoundingClientRect().top + window.pageYOffset - 120;
-                        window.scrollTo({
-                            top: titlePosition,
-                            behavior: 'smooth'
-                        });
+                    heroSection.classList.add("hidden");
+                    
+                    // Ensure footer maintains proper styling
+                    if (footer) {
+                        footer.style.background = 'linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%)';
+                        footer.style.color = 'rgba(255, 255, 255, 0.95)';
                     }
-                    window.removeEventListener("scroll", handleScroll);
-                }, 500);
+                    
+                    // Now that layout is stable, calculate and scroll to correct position
+                    setTimeout(() => {
+                        const firstNewsCard = document.querySelector('.news-card:first-child');
+                        const sectionTitle = document.querySelector('.section-title');
+                        
+                        if (firstNewsCard && sectionTitle) {
+                            // Calculate position based on final layout (hero is now gone)
+                            const titleRect = sectionTitle.getBoundingClientRect();
+                            const scrollTarget = window.pageYOffset + titleRect.top - 120;
+                            
+                            window.scrollTo({
+                                top: scrollTarget,
+                                behavior: 'smooth'
+                            });
+                            
+                            // Highlight first news card after scroll settles
+                            setTimeout(() => {
+                                firstNewsCard.style.transform = 'translateY(-4px) scale(1.02)';
+                                firstNewsCard.style.boxShadow = '0 12px 40px rgba(129, 199, 212, 0.25)';
+                                firstNewsCard.style.transition = 'all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                                
+                                setTimeout(() => {
+                                    firstNewsCard.style.transform = '';
+                                    firstNewsCard.style.boxShadow = '';
+                                    
+                                    // Ensure footer styling is still correct after all animations
+                                    if (footer) {
+                                        footer.style.background = 'linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%)';
+                                        footer.style.color = 'rgba(255, 255, 255, 0.95)';
+                                    }
+                                }, 3000);
+                            }, 600);
+                        }
+                    }, 50);
+                }, 300);
+                
+                window.removeEventListener("scroll", handleScroll);
             });
 
             menuToggle.addEventListener('click', function() {
@@ -234,9 +258,15 @@
 
             // Pagination is handled by external pagination.js file
         });
+        
+        // Home-specific hero section behavior
+        if (sessionStorage.getItem('hasVisitedSession')) {
+            document.documentElement.style.setProperty('--hero-display', 'none');
+            document.documentElement.style.setProperty('--main-content-opacity', '1');
+            document.documentElement.style.setProperty('--main-content-transform', 'translateY(0)');
+            document.documentElement.style.setProperty('--main-content-padding', '100px');
+            document.documentElement.style.setProperty('--featured-news-margin', '120px');
+        }
     </script>
-    
-    <!-- Dynamic Pagination System -->
-    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
-</body>
-</html>
+
+{% endblock %}

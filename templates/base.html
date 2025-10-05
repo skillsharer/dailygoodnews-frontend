@@ -4,16 +4,30 @@
     {% include 'header.html' %}
     <title>{% block title %}Daily Good News{% endblock %}</title>
     
-    <!-- Reusable Components CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">
-    
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <!-- Page Loader - Consistent across all pages -->
+    <!-- Page Loader - Only for initial loads -->
     <div id="loader" class="page-loader">
         <div class="page-loader__spinner"></div>
     </div>
+    
+    <!-- Immediate loader hide for internal navigation -->
+    <script>
+        // Hide loader immediately if this is internal navigation
+        (function() {
+            var isInternalNav = sessionStorage.getItem('isInternalNavigation') === 'true';
+            var isBackForward = performance.navigation && performance.navigation.type === 2;
+            var isSameSite = document.referrer && document.referrer.indexOf(window.location.hostname) !== -1;
+            
+            if (isInternalNav || isBackForward || isSameSite) {
+                var loader = document.getElementById('loader');
+                if (loader) {
+                    loader.style.display = 'none';
+                }
+            }
+        })();
+    </script>
 
     {% block content %}{% endblock %}
 
@@ -21,6 +35,9 @@
     
     <!-- Core UI Manager - Handles navigation, accessibility, animations -->
     <script src="{{ url_for('static', filename='js/ui-manager.js') }}"></script>
+    
+    <!-- Advanced Animation Engine - Eye-catching micro-interactions -->
+    <script src="{{ url_for('static', filename='js/animation-engine.js') }}"></script>
     
     <!-- Dynamic Pagination System -->
     <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>

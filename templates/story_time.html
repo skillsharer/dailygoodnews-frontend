@@ -1,62 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include 'header.html' %}
-    <title>Story Time - Daily Good News</title>
-    <style>
-        /* Prevent FOUC */
-        html, body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            opacity: 0; /* Hide body content initially */
-            transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+{% extends "base.html" %}
 
-        }
-         #loader {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100%;
-            background: #fff;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 9999;
-        }
+{% block title %}Story Time - Daily Good News{% endblock %}
 
-        .loader-spinner {
-            border: 8px solid #f3f3f3;
-            border-top: 8px solid #3498db;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-    <script>
-        // Inline script to set opacity to 1
-        document.addEventListener("DOMContentLoaded", function() {
-        document.body.style.opacity = '1';
-       });
-    </script>
-</head>
-<body>
-    <div id="loader">
-        <div class="loader-spinner"></div>
-    </div>
+{% block content %}
     <div id="storytime-main-content" class="container">
         <section class="storytime-grid">
             {% for article in story_time_articles %}
@@ -85,20 +31,4 @@
         </div>
         {% endif %}
     </div>
-    {% include 'footer.html' %}
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const nav = document.querySelector('.main-nav');
-        const menuToggle = document.querySelector('.menu-toggle');
-         document.getElementById('loader').style.display = 'none';
-        menuToggle.addEventListener('click', function() {
-            menuToggle.classList.toggle('active');
-            nav.classList.toggle('active');
-        });
-    });
-    </script>
-    
-    <!-- Dynamic Pagination System -->
-    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,28 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    {% include 'header.html' %}
-    <title>Privacy Policy - Daily Good News</title>
-    <style>
-        /* Prevent FOUC */
-         html, body {
-            margin: 0;
-            padding: 0;
-        }
-        body {
-            opacity: 0; /* Hide body content initially */
-            transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
-           
-        }
-    </style>
-    <script>
-           // Inline script to set opacity to 1
-           document.addEventListener("DOMContentLoaded", function() {
-             document.body.style.opacity = '1';
-             });
-    </script>
-</head>
-<body class="privacy-policy-page"> <!-- Added class to body -->
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy - Daily Good News{% endblock %}
+
+
+
+{% block content %}
     <main class="container main-content visible"> <!-- Added visible class here -->
         <section class="privacy-policy-section">
             <h1 class="section-title">Privacy Policy</h1>
@@ -62,6 +44,4 @@
             <p>Effective Date: 02.09.2025.</p>
         </section>
     </main>
-    {% include 'footer.html' %}
-</body>
-</html>
+{% endblock %}

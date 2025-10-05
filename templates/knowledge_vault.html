@@ -1,63 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    {% include 'header.html' %}
-    <title>Knowledge Vault - Daily Good News</title>
-        <style>
-            /* Prevent FOUC */
-            html, body {
-                margin: 0;
-                padding: 0;
-            }
-            body {
-                opacity: 0; /* Hide body content initially */
-                transition: opacity 0.2s ease; /* Add transition for smoother fade in*/
+{% extends "base.html" %}
 
-            }
-             #loader {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                height: 100vh;
-                width: 100%;
-                background: #fff;
-                position: fixed;
-                top: 0;
-                left: 0;
-                z-index: 9999;
-            }
+{% block title %}Knowledge Vault - Daily Good News{% endblock %}
 
-            .loader-spinner {
-                border: 6px solid rgba(129, 199, 212, 0.1);
-                border-top: 6px solid #81c7d4;
-                border-radius: 50%;
-                width: 50px;
-                height: 50px;
-                animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-                box-shadow: 0 4px 15px rgba(129, 199, 212, 0.2);
-            }
-
-            @keyframes spin {
-                0% {
-                    transform: rotate(0deg);
-                }
-
-                100% {
-                    transform: rotate(360deg);
-                }
-            }
-        </style>
-        <script>
-            // Inline script to set opacity to 1
-            document.addEventListener("DOMContentLoaded", function() {
-            document.body.style.opacity = '1';
-           });
-        </script>
-</head>
-<body>
-    <div id="loader">
-        <div class="loader-spinner"></div>
-    </div>
+{% block content %}
     <div id="knowledge-main-content" class="container">
         <section class="knowledge-grid">
             {% for knowledge in knowledge_vaults %}
@@ -90,20 +35,4 @@
         </div>
         {% endif %}
     </div>
-    {% include 'footer.html' %}
-    <script>
-          document.addEventListener("DOMContentLoaded", function() {
-            const nav = document.querySelector('.main-nav');
-            const menuToggle = document.querySelector('.menu-toggle');
-             document.getElementById('loader').style.display = 'none';
-            menuToggle.addEventListener('click', function() {
-                menuToggle.classList.toggle('active');
-                nav.classList.toggle('active');
-            });
-        });
-    </script>
-    
-    <!-- Dynamic Pagination System -->
-    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
-</body>
-</html>
+{% endblock %}
