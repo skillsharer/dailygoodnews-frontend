@@ -54,9 +54,9 @@
              document.body.style.opacity = '1';
         });
         
-        // Immediately hide hero if user has seen it before
+        // Immediately hide hero if user has seen it before - prevent layout shift
         if (sessionStorage.getItem('hasVisitedSession')) {
-            document.write('<style>#hero-section{height:0 !important;opacity:0 !important;overflow:hidden !important;} #main-content{opacity:1 !important;transform:translateY(0) !important;}</style>');
+            document.write('<style>#hero-section{display:none !important;} #main-content{opacity:1 !important;transform:translateY(0) !important; padding-top:100px !important;} .featured-news{margin-top:120px !important;}</style>');
         }
      </script>
 </head>
@@ -130,24 +130,12 @@
             // Check if the user has visited during the current session
             const hasVisitedSession = sessionStorage.getItem('hasVisitedSession');
             if (hasVisitedSession) {
-                // Already handled by inline styles, just ensure classes are set
+                // For return visitors, hero is already hidden via inline CSS
                 heroSection.classList.add('hidden');
                 targetSection.classList.add('visible');
                 
-                // Position at the Top Stories section for return visitors
-                setTimeout(() => {
-                    const sectionTitle = document.querySelector('.section-title');
-                    if (sectionTitle) {
-                        const titlePosition = sectionTitle.getBoundingClientRect().top + window.pageYOffset - 120;
-                        window.scrollTo({
-                            top: titlePosition,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 300);
-                
-                // Don't add scroll listener since hero is already hidden
-                window.removeEventListener("scroll", handleScroll);
+                // No scrolling or positioning - prevent navigation jumps
+                // Content is properly positioned via CSS
             } else {
                 // Mark as visited when they interact with the page
                 sessionStorage.setItem('hasVisitedSession', 'true');

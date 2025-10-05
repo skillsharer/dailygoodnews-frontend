@@ -1,15 +1,105 @@
-/* General Layout */
+/* ==========================================================================
+   DESIGN TOKENS & CSS CUSTOM PROPERTIES
+   ========================================================================== */
+
+:root {
+    /* Color System */
+    --color-primary: #81c7d4;
+    --color-primary-dark: #6bb6c7;
+    --color-secondary: #a8e6cf;
+    --color-secondary-dark: #95d9bc;
+    
+    --color-text-primary: #1a202c;
+    --color-text-secondary: #2c3e50;
+    --color-text-muted: #4a5568;
+    --color-text-light: #718096;
+    
+    --color-bg-primary: #ffffff;
+    --color-bg-secondary: #f8fafc;
+    --color-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    
+    /* Spacing Scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 1.5rem;
+    --space-xl: 2rem;
+    --space-2xl: 3rem;
+    --space-3xl: 4rem;
+    
+    /* Typography Scale */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    --font-size-3xl: 1.875rem;
+    --font-size-4xl: 2.25rem;
+    
+    /* Font Weights */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    
+    /* Line Heights */
+    --line-height-tight: 1.25;
+    --line-height-snug: 1.375;
+    --line-height-normal: 1.5;
+    --line-height-relaxed: 1.625;
+    --line-height-loose: 2;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+    --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+    
+    /* Border Radius */
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-bounce: 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    
+    /* Z-Index Scale */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal-backdrop: 1040;
+    --z-modal: 1050;
+    --z-popover: 1060;
+    --z-tooltip: 1070;
+    --z-toast: 1080;
+}
+
+/* Enhanced Typography & Layout */
 body {
-    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    color: #2d3748;
-    line-height: 1.7;
+    font-family: 'Inter', 'SF Pro Display', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--color-bg-gradient);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
     overflow-x: hidden;
-    letter-spacing: 0.01em;
+    letter-spacing: -0.01em;
+    font-size: var(--font-size-base);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
 }
 
 /* Add this to disable the main-content fade in effect on the privacy policy page */
@@ -118,27 +208,180 @@ html {
     margin-top: 1vh;
 }
 
+/* Enhanced Section Titles */
 .section-title {
     text-align: center;
-    margin-top: 2rem;
-    margin-bottom: 2.5rem;
-    font-size: 2.2rem;
-    color: #2d3748;
-    font-weight: 700;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    color: #1a202c;
+    font-weight: 800;
     position: relative;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.03em;
     line-height: 1.2;
+    font-family: 'Inter', sans-serif;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: -12px;
+    bottom: -16px;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
+    width: 100px;
     height: 4px;
-    background: linear-gradient(90deg, #81c7d4, #a8e6cf);
-    border-radius: 3px;
-    box-shadow: 0 2px 8px rgba(129, 199, 212, 0.2);
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    border-radius: 2px;
 }
+
+/* ==========================================================================
+   ENHANCED TYPOGRAPHY & SPACING SYSTEM
+   ========================================================================== */
+
+/* Improved Heading Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    font-weight: 700;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    color: #1a202c;
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+    font-weight: 800;
+}
+
+h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    margin-bottom: 1.25rem;
+}
+
+h3 {
+    font-size: clamp(1.25rem, 3vw, 1.875rem);
+    margin-bottom: 1rem;
+}
+
+h4 {
+    font-size: 1.375rem;
+    margin-bottom: 0.875rem;
+}
+
+h5 {
+    font-size: 1.125rem;
+    margin-bottom: 0.75rem;
+}
+
+h6 {
+    font-size: 1rem;
+    margin-bottom: 0.625rem;
+    font-weight: 600;
+}
+
+/* Enhanced Paragraphs */
+p {
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #4a5568;
+    max-width: 70ch;
+}
+
+/* Content readability improvements */
+.content p,
+.article-content p,
+.news-description p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.75rem;
+}
+
+/* Text Utilities */
+.text-muted {
+    color: #718096 !important;
+}
+
+.text-small {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+}
+
+.text-large {
+    font-size: 1.25rem !important;
+    line-height: 1.6 !important;
+}
+
+.text-center {
+    text-align: center !important;
+}
+
+.text-left {
+    text-align: left !important;
+}
+
+.text-right {
+    text-align: right !important;
+}
+
+/* Font Weight Utilities */
+.font-light {
+    font-weight: 300 !important;
+}
+
+.font-normal {
+    font-weight: 400 !important;
+}
+
+.font-medium {
+    font-weight: 500 !important;
+}
+
+.font-semibold {
+    font-weight: 600 !important;
+}
+
+.font-bold {
+    font-weight: 700 !important;
+}
+
+.font-extrabold {
+    font-weight: 800 !important;
+}
+
+/* Spacing Utilities */
+.m-0 { margin: 0 !important; }
+.m-1 { margin: 0.5rem !important; }
+.m-2 { margin: 1rem !important; }
+.m-3 { margin: 1.5rem !important; }
+.m-4 { margin: 2rem !important; }
+.m-5 { margin: 3rem !important; }
+
+.mt-0 { margin-top: 0 !important; }
+.mt-1 { margin-top: 0.5rem !important; }
+.mt-2 { margin-top: 1rem !important; }
+.mt-3 { margin-top: 1.5rem !important; }
+.mt-4 { margin-top: 2rem !important; }
+.mt-5 { margin-top: 3rem !important; }
+
+.mb-0 { margin-bottom: 0 !important; }
+.mb-1 { margin-bottom: 0.5rem !important; }
+.mb-2 { margin-bottom: 1rem !important; }
+.mb-3 { margin-bottom: 1.5rem !important; }
+.mb-4 { margin-bottom: 2rem !important; }
+.mb-5 { margin-bottom: 3rem !important; }
+
+.p-0 { padding: 0 !important; }
+.p-1 { padding: 0.5rem !important; }
+.p-2 { padding: 1rem !important; }
+.p-3 { padding: 1.5rem !important; }
+.p-4 { padding: 2rem !important; }
+.p-5 { padding: 3rem !important; }
+
+/* Enhanced Line Heights for Better Readability */
+.leading-tight { line-height: 1.25 !important; }
+.leading-snug { line-height: 1.375 !important; }
+.leading-normal { line-height: 1.5 !important; }
+.leading-relaxed { line-height: 1.625 !important; }
+.leading-loose { line-height: 2 !important; }

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'header.html' %}
+    <title>{% block title %}Daily Good News{% endblock %}</title>
+    
+    <!-- Reusable Components CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Page Loader - Consistent across all pages -->
+    <div id="loader" class="page-loader">
+        <div class="page-loader__spinner"></div>
+    </div>
+
+    {% block content %}{% endblock %}
+
+    {% include 'footer.html' %}
+    
+    <!-- Core UI Manager - Handles navigation, accessibility, animations -->
+    <script src="{{ url_for('static', filename='js/ui-manager.js') }}"></script>
+    
+    <!-- Dynamic Pagination System -->
+    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

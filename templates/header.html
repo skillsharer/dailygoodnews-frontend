@@ -5,21 +5,22 @@
         <a href="/" class="logo">Daily Good News</a>
         <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='assets/favicon.png') }}"/>
 
-        <!-- Import CSS Files - ORDER MATTERS! -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">       <!-- Reset, Typography, Base Layout -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">     <!-- Header Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hero.css') }}">       <!-- Hero Section Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/news.css') }}">       <!-- News Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/knowledge.css') }}">  <!-- Knowledge Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/storytime.css') }}">      <!-- Story Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/articles.css') }}">   <!-- Articles Grid, Card, Item Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/newsletter.css') }}"> <!-- Newsletter Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/contact.css') }}">    <!-- Contact Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">      <!-- About Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/privacy.css') }}">    <!-- Privacy Policy Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}">      <!-- Loader Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">     <!-- Footer Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css') }}"> <!-- Media Queries - MUST BE LAST -->
+        <!-- Import CSS Files - OPTIMIZED ORDER FOR PERFORMANCE -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">        <!-- Design Tokens, Reset, Typography, Base Layout -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">  <!-- Reusable UI Components -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">      <!-- Header Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hero.css') }}">        <!-- Hero Section Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/news.css') }}">        <!-- News Grid, Card, Item Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/knowledge.css') }}">   <!-- Knowledge Grid, Card, Item Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/storytime.css') }}">   <!-- Story Grid, Card, Item Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/articles.css') }}">    <!-- Articles Grid, Card, Item Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/newsletter.css') }}">  <!-- Newsletter Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/contact.css') }}">     <!-- Contact Page Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">       <!-- About Page Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/privacy.css') }}">     <!-- Privacy Policy Page Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}">       <!-- Loader Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">      <!-- Footer Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css') }}">  <!-- Media Queries - MUST BE LAST -->
 
         <nav class="main-nav">
             <ul class="nav-buttons">

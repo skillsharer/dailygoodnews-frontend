@@ -1,0 +1,609 @@
+/* ==========================================================================
+   REUSABLE COMPONENT SYSTEM - COMMON UI PATTERNS
+   ========================================================================== */
+
+/* Skip Link for Accessibility */
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #000;
+    color: #fff;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 10000;
+    transform: translateY(-100%);
+    transition: transform 0.3s ease;
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* Keyboard Navigation Focus States */
+.keyboard-navigation *:focus {
+    outline: 2px solid #81c7d4 !important;
+    outline-offset: 2px;
+}
+
+/* ==========================================================================
+   LOADING SYSTEM - CONSISTENT ACROSS ALL PAGES
+   ========================================================================== */
+
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.page-loader__spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid rgba(129, 199, 212, 0.1);
+    border-top: 6px solid #81c7d4;
+    border-radius: 50%;
+    animation: spin 1.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+    box-shadow: 0 4px 20px rgba(129, 199, 212, 0.3);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ==========================================================================
+   CARD SYSTEM - UNIFIED DESIGN ACROSS ALL CONTENT TYPES
+   ========================================================================== */
+
+.card {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    transform-origin: center center;
+    will-change: transform, box-shadow;
+}
+
+.card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+    border-color: rgba(129, 199, 212, 0.3);
+}
+
+/* Touch-friendly hover states */
+.card.touch-active {
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Keyboard focus states */
+.keyboard-navigation .card:focus {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.card__link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    height: 100%;
+}
+
+.card__image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+}
+
+.card__image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.card:hover .card__image {
+    transform: scale(1.05);
+}
+
+.card__content {
+    padding: 1.5rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card__title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
+    transition: color 0.3s ease;
+    line-height: 1.4;
+}
+
+.card:hover .card__title {
+    color: #34495e;
+}
+
+.card__description {
+    font-size: 0.95rem;
+    color: #5a6c7d;
+    line-height: 1.6;
+    flex-grow: 1;
+    margin-bottom: 1rem;
+}
+
+.card__meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.card__read-more {
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card__read-more:hover {
+    background: linear-gradient(135deg, #6bb6c7, #95d9bc);
+    transform: translateX(2px);
+}
+
+/* Featured/First Card Styling */
+.card--featured {
+    background: linear-gradient(135deg, rgba(129, 199, 212, 0.08), rgba(168, 230, 207, 0.08));
+    border: 1px solid rgba(129, 199, 212, 0.25);
+    position: relative;
+}
+
+.card--featured::before {
+    content: '✨ Latest';
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    z-index: 2;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ==========================================================================
+   GRID SYSTEMS - RESPONSIVE & CONSISTENT
+   ========================================================================== */
+
+.grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    padding: 0 2rem;
+}
+
+.grid--news {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.grid--articles,
+.grid--knowledge,
+.grid--stories {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Featured item spans full width */
+.grid--news .card--featured {
+    grid-column: 1 / -1;
+    max-width: 800px;
+    margin: 0 auto 1rem auto;
+}
+
+/* ==========================================================================
+   BUTTON SYSTEM - CONSISTENT INTERACTIVE ELEMENTS
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn--primary {
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    color: white;
+    box-shadow: 0 4px 15px rgba(129, 199, 212, 0.4);
+}
+
+.btn--primary:hover {
+    background: linear-gradient(135deg, #6bb6c7, #95d9bc);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(129, 199, 212, 0.5);
+}
+
+.btn--secondary {
+    background: rgba(255, 255, 255, 0.9);
+    color: #2c3e50;
+    border: 2px solid rgba(129, 199, 212, 0.3);
+    backdrop-filter: blur(20px);
+}
+
+.btn--secondary:hover {
+    background: rgba(255, 255, 255, 1);
+    border-color: rgba(129, 199, 212, 0.5);
+    transform: translateY(-2px);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: #81c7d4;
+    border: 2px solid #81c7d4;
+}
+
+.btn--ghost:hover {
+    background: #81c7d4;
+    color: white;
+}
+
+/* View More Button Specific */
+.view-more-btn {
+    /* Inherit from .btn and .btn--primary */
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 2rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    font-size: 1.1rem;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
+    color: white;
+    box-shadow: 0 4px 15px rgba(129, 199, 212, 0.4);
+    margin: 2rem auto;
+}
+
+.view-more-icon {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.view-more-btn:hover .view-more-icon {
+    transform: translateY(2px);
+}
+
+/* ==========================================================================
+   TOAST NOTIFICATION SYSTEM
+   ========================================================================== */
+
+.toast {
+    position: fixed;
+    top: 100px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(129, 199, 212, 0.3);
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transform: translateX(100%);
+    opacity: 0;
+    animation: slideInToast 0.3s ease forwards;
+    min-width: 250px;
+    max-width: 400px;
+}
+
+.toast--removing {
+    animation: slideOutToast 0.3s ease forwards;
+}
+
+.toast--success {
+    border-left: 4px solid #27ae60;
+}
+
+.toast--error {
+    border-left: 4px solid #e74c3c;
+}
+
+.toast--info {
+    border-left: 4px solid #81c7d4;
+}
+
+.toast__close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #7f8c8d;
+    margin-left: auto;
+}
+
+@keyframes slideInToast {
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutToast {
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+
+/* ==========================================================================
+   SCROLL-TRIGGERED ANIMATIONS
+   ========================================================================== */
+
+.animate-on-scroll {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s ease;
+}
+
+.animate-on-scroll.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger animations for multiple elements */
+.animate-on-scroll:nth-child(1) { transition-delay: 0.1s; }
+.animate-on-scroll:nth-child(2) { transition-delay: 0.2s; }
+.animate-on-scroll:nth-child(3) { transition-delay: 0.3s; }
+.animate-on-scroll:nth-child(4) { transition-delay: 0.4s; }
+.animate-on-scroll:nth-child(5) { transition-delay: 0.5s; }
+
+/* ==========================================================================
+   RESPONSIVE DESIGN TOKENS
+   ========================================================================== */
+
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+    
+    .card {
+        border-radius: 16px;
+    }
+    
+    .card:hover {
+        transform: translateY(-4px) scale(1.01);
+    }
+    
+    .btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.95rem;
+    }
+    
+    .toast {
+        right: 10px;
+        left: 10px;
+        min-width: auto;
+    }
+}
+
+/* ==========================================================================
+   ACCESSIBILITY & REDUCED MOTION
+   ========================================================================== */
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    .card {
+        border: 2px solid #000;
+        background: #fff;
+    }
+    
+    .btn--primary {
+        background: #000;
+        color: #fff;
+        border: 2px solid #000;
+    }
+    
+    .btn--secondary {
+        background: #fff;
+        color: #000;
+        border: 2px solid #000;
+    }
+}
+
+/* Reduced Motion Preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    
+    .card:hover {
+        transform: none;
+    }
+    
+    .animate-on-scroll {
+        opacity: 1;
+        transform: none;
+    }
+    
+    .page-loader__spinner {
+        animation: none;
+    }
+}
+
+/* Focus Management */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.sr-only-focusable:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+}
+
+/* Enhanced Focus Indicators */
+*:focus {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+*:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+.card:focus-visible,
+.btn:focus-visible,
+[tabindex]:focus-visible {
+    outline: 3px solid var(--color-primary);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 6px rgba(129, 199, 212, 0.2);
+}
+
+/* Keyboard Navigation Enhancements */
+.keyboard-navigation .card:focus {
+    transform: translateY(-4px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    z-index: 10;
+}
+
+/* Color Contrast Improvements */
+.card__title {
+    color: #1a202c; /* Improved contrast ratio */
+}
+
+.card__description {
+    color: #2d3748; /* Better than light gray for accessibility */
+}
+
+/* Touch Target Sizes (44px minimum) */
+.btn,
+.card__read-more,
+.menu-toggle,
+.toast__close {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Error States */
+.error {
+    color: #e53e3e;
+    border-color: #e53e3e;
+}
+
+.success {
+    color: #38a169;
+    border-color: #38a169;
+}
+
+.warning {
+    color: #d69e2e;
+    border-color: #d69e2e;
+}
+
+/* Print Styles */
+@media print {
+    .page-loader,
+    .menu-toggle,
+    .btn,
+    .toast {
+        display: none !important;
+    }
+    
+    .card {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+    
+    * {
+        background: transparent !important;
+        color: black !important;
+    }
+}
