@@ -1,11 +1,12 @@
 /**
  * Smooth Transitions & Animations
- * Professional, calm, and eye-catching interactions
+ * Professional, eye-catching, and seamless interactions
  */
 
 class SmoothTransitions {
     constructor() {
         this.isAnimating = false;
+        this.scrollThreshold = 100;
         this.init();
     }
 
@@ -13,6 +14,61 @@ class SmoothTransitions {
         this.setupHeroTransition();
         this.setupSmoothScrolling();
         this.setupMicroInteractions();
+        this.setupScrollAnimations();
+        this.setupHeaderScroll();
+    }
+
+    // Dynamic header on scroll
+    setupHeaderScroll() {
+        const header = document.querySelector('.site-header');
+        if (!header) return;
+
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > this.scrollThreshold) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        }, { passive: true });
+    }
+
+    // Scroll-based card animations
+    setupScrollAnimations() {
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const animateOnScroll = (entries, observer) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 100);
+                    observer.unobserve(entry.target);
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(animateOnScroll, observerOptions);
+
+        // Observe cards
+        const cards = document.querySelectorAll('.card, .news-card, .article-card, .story-card, .knowledge-card');
+        cards.forEach((card, index) => {
+            if (index > 0) { // Skip first card
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+                observer.observe(card);
+            }
+        });
     }
 
     // Enhanced Hero Section Transition for Home Page

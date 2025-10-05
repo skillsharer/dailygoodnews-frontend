@@ -3,20 +3,58 @@
    ========================================================================== */
 
 :root {
-    /* Color System */
-    --color-primary: #81c7d4;
-    --color-primary-dark: #6bb6c7;
-    --color-secondary: #a8e6cf;
-    --color-secondary-dark: #95d9bc;
+    /* Modern Color Palette - Ocean Breeze Theme */
+    --primary-50: #ecfeff;
+    --primary-100: #cffafe;
+    --primary-200: #a5f3fc;
+    --primary-300: #67e8f9;
+    --primary-400: #22d3ee;
+    --primary-500: #06b6d4;
+    --primary-600: #0891b2;
+    --primary-700: #0e7490;
+    --primary-800: #155e75;
+    --primary-900: #164e63;
     
-    --color-text-primary: #1a202c;
-    --color-text-secondary: #2c3e50;
-    --color-text-muted: #4a5568;
-    --color-text-light: #718096;
+    --secondary-50: #f0fdf4;
+    --secondary-100: #dcfce7;
+    --secondary-200: #bbf7d0;
+    --secondary-300: #86efac;
+    --secondary-400: #4ade80;
+    --secondary-500: #22c55e;
+    --secondary-600: #16a34a;
+    --secondary-700: #15803d;
+    --secondary-800: #166534;
+    --secondary-900: #14532d;
+    
+    /* Neutral Palette */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    /* Semantic Colors */
+    --color-primary: var(--primary-500);
+    --color-primary-dark: var(--primary-700);
+    --color-primary-light: var(--primary-300);
+    --color-secondary: var(--secondary-500);
+    --color-secondary-dark: var(--secondary-700);
+    
+    --color-text-primary: var(--gray-900);
+    --color-text-secondary: var(--gray-700);
+    --color-text-muted: var(--gray-500);
+    --color-text-light: var(--gray-400);
     
     --color-bg-primary: #ffffff;
-    --color-bg-secondary: #f8fafc;
-    --color-bg-gradient: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    --color-bg-secondary: var(--gray-50);
+    --color-bg-tertiary: var(--primary-50);
+    --color-bg-gradient: linear-gradient(135deg, #ffffff 0%, var(--primary-50) 100%);
+    --color-bg-gradient-vibrant: linear-gradient(135deg, var(--primary-500) 0%, var(--secondary-500) 100%);
     
     /* Spacing Scale */
     --space-xs: 0.25rem;
@@ -84,10 +122,14 @@
     --z-toast: 1080;
 }
 
-/* Enhanced Typography & Layout */
+/* Enhanced Typography & Layout with Subtle Background Pattern */
 body {
     font-family: 'Inter', 'SF Pro Display', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--color-bg-gradient);
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(129, 199, 212, 0.04) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(168, 230, 207, 0.04) 0%, transparent 50%);
+    background-attachment: fixed;
     color: var(--color-text-secondary);
     line-height: var(--line-height-relaxed);
     display: flex;
@@ -102,93 +144,51 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Add this to disable the main-content fade in effect on the privacy policy page */
-.privacy-policy-page .main-content {
-    opacity: 1;
-    /* Set initial opacity to 1 to prevent fade in effect on load */
-}
-
 .container {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px; /* No top padding - body margin handles header clearance */
+    padding: 0 15px;
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
 .main-content {
-    opacity: 1; /* Always visible - no animation */
-    transform: none; /* Remove transform that causes sliding */
+    opacity: 1;
+    transform: none;
     margin-top: 0;
-    padding-top: 0; /* No padding needed - body margin handles clearance */
+    padding-top: 0;
 }
 
-/* Remove .visible class - no longer needed */
-.main-content.visible {
-    opacity: 1; /* Redundant but safe fallback */
-}
-
-/* Home page specific - no top padding when hero is visible, but add spacing when hidden */
 #main-content {
     padding-top: 0;
-    /* Removed transition to prevent header jumping during navigation */
 }
 
-/* When hero is hidden, add proper spacing to main content */
 #hero-section.hidden ~ #main-content,
 #hero-section.hidden + #main-content {
-    padding-top: 120px; /* Increased for better header clearance */
+    padding-top: 120px;
 }
 
-/* Ensure Top Stories section has proper clearance and visibility */
 .featured-news {
     margin-top: 1rem;
 }
 
-/* Higher specificity to override any h2 rules */
-.featured-news h2.section-title,
 .featured-news .section-title {
     margin-bottom: 2rem;
-    opacity: 1 !important; /* Ensure title is always visible */
-    transform: none !important;
-    text-align: center !important; /* Force center alignment for Top Stories */
+    text-align: center;
 }
 
-/* When hero is hidden, reduce excessive margin */
 #hero-section.hidden ~ #main-content .featured-news {
-    margin-top: 0; /* Remove excessive margin when hero is hidden */
+    margin-top: 0;
 }
 
-/* Subpage containers - ensure proper header clearance */
-/* Body margin handles all header clearance - sections can have natural spacing */
-
-/* Container handles all header clearance - no section-specific overrides needed */
-
-/* Push all content below fixed header */
 body {
     margin: 0;
-    padding-top: 80px; /* Content clearance for fixed header */
+    padding-top: 80px;
 }
 
-/* Smooth scrolling for the entire page */
 html {
     scroll-behavior: smooth;
-}
-
-/* Add subtle fade-in animation for all elements */
-* {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-/* Removed fadeInUp animation - keeping content static for better UX */
-
-/* Subtle pulse animation for featured elements */
-@keyframes pulse {
-    0% { box-shadow: 0 0 0 0 rgba(129, 199, 212, 0.4); }
-    70% { box-shadow: 0 0 0 10px rgba(129, 199, 212, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(129, 199, 212, 0); }
 }
 
 .news-item {
@@ -199,8 +199,6 @@ html {
 #articles-main-content {
     margin-top: 1vh;
 }
-
-/* Section title styles moved to design-system.css to avoid conflicts */
 
 /* ==========================================================================
    ENHANCED TYPOGRAPHY & SPACING SYSTEM

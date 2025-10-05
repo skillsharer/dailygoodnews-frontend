@@ -1,10 +1,9 @@
-/* Hero Section */
+/* Modern Minimalist Hero Section */
 #hero-section {
     height: 100vh;
-    background-image: url('/static/assets/dailygoodnews.webp');
-    background-size: cover;
-    background-attachment: fixed;
-    background-position: center;
+    background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-700) 50%, var(--secondary-600) 100%);
+    background-size: 200% 200%;
+    animation: gradientMove 20s ease infinite;
     position: relative;
     text-align: center;
     display: flex;
@@ -16,8 +15,12 @@
     margin-top: 0;
     transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
                 margin 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-    /* Ensure hero doesn't interfere with header positioning */
     z-index: 1 !important;
+}
+
+@keyframes gradientMove {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
 }
 
 #hero-section.hidden {
@@ -27,6 +30,7 @@
     display: none;
 }
 
+/* Subtle Pattern Overlay */
 #hero-section::before {
     content: '';
     position: absolute;
@@ -34,9 +38,11 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(129, 199, 212, 0.3) 0%, rgba(168, 230, 207, 0.4) 100%);
-    backdrop-filter: blur(1px);
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
     z-index: 1;
+    pointer-events: none;
 }
 
 .hero-overlay {
@@ -45,54 +51,70 @@
     color: #fff;
     text-align: center;
     padding: 1.25em;
+    animation: fadeInUp 1s ease-out;
 }
 
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Clean Modern Typography */
 .hero-title {
-    font-size: 3rem;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
     margin-bottom: 0.5em;
-    font-weight: 700;
-    text-shadow: 2px 4px 8px rgba(0, 0, 0, 0.3);
-    letter-spacing: -0.02em;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    text-shadow: 0 2px 30px rgba(0, 0, 0, 0.3);
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
-    margin-bottom: 1em;
-    font-weight: 300;
-    text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
-    opacity: 0.95;
+    font-size: clamp(1.1rem, 3vw, 1.75rem);
+    margin-bottom: 2.5em;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    line-height: 1.6;
+    animation: fadeInUp 1s ease-out 0.3s both;
 }
 
 .share-text {
     font-size: 0.85rem;
 }
 
+/* Modern CTA Button */
 .cta-button {
-    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
-    color: #fff;
-    padding: 1rem 2.5rem;
-    font-size: 1.1rem;
+    background: white;
+    color: var(--primary-600);
+    padding: 1.25rem 3.5rem;
+    font-size: 1.125rem;
     font-weight: 700;
     text-decoration: none;
-    border-radius: 50px;
-    box-shadow: 0 6px 25px rgba(129, 199, 212, 0.3);
-    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-block;
-    text-shadow: none;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.5px;
     position: relative;
-    overflow: hidden;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    animation: fadeInUp 1s ease-out 0.6s both;
+    cursor: pointer;
+    z-index: 10;
 }
 
 .cta-button:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 10px 40px rgba(129, 199, 212, 0.45);
-    background: linear-gradient(135deg, #6bb6c7, #95d5b2);
-    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .cta-button:active {
-    transform: translateY(-1px) scale(1.01);
-    box-shadow: 0 6px 25px rgba(129, 199, 212, 0.3);
+    transform: translateY(-1px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
 }

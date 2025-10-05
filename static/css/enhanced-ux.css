@@ -7,16 +7,7 @@
    PAGE ENTER ANIMATIONS
    ========================================== */
 
-@keyframes pageEnter {
-    from {
-        opacity: 0.95;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+/* Animations moved to components.css to avoid duplication */
 
 @keyframes slideInFromLeft {
     from {
@@ -26,39 +17,6 @@
     to {
         opacity: 1;
         transform: translateX(0);
-    }
-}
-
-@keyframes slideInFromRight {
-    from {
-        opacity: 0;
-        transform: translateX(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes scaleIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
     }
 }
 
@@ -267,35 +225,7 @@
     animation: shimmer 1.5s infinite;
 }
 
-@keyframes shimmer {
-    0% { background-position: -200% 0; }
-    100% { background-position: 200% 0; }
-}
-
-.page-loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: var(--z-toast);
-    transition: all 0.4s ease;
-}
-
-.page-loader__spinner {
-    width: 50px;
-    height: 50px;
-    border: 3px solid var(--neutral-200);
-    border-top: 3px solid var(--primary-500);
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.2);
-}
+/* Shimmer animation is defined in hero.css */
 
 /* ==========================================
    ENHANCED FORM INTERACTIONS
