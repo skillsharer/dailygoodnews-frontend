@@ -420,10 +420,7 @@ body.page-enter {
     border-radius: var(--radius);
 }
 
-/* Skip link enhancement */
-.skip-link:focus {
-    animation: slideInFromLeft 0.3s ease;
-}
+/* Skip link styles are defined in components.css - no duplication needed */
 
 /* Reduced motion preferences */
 @media (prefers-reduced-motion: reduce) {

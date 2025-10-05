@@ -41,13 +41,20 @@ class EnhancedUIManager {
             });
         });
 
-        // Close menu when clicking outside (mobile)
+        // Close menu when clicking outside (mobile) - with improved focus management
         document.addEventListener('click', (e) => {
             if (this.isMobile && 
                 nav.classList.contains('active') && 
                 !nav.contains(e.target) && 
                 !menuToggle.contains(e.target)) {
-                this.toggleMobileMenu(menuToggle, nav);
+                // Menu is being closed by outside click
+                // Don't auto-focus toggle since user clicked elsewhere
+                const activeElement = document.activeElement;
+                this.toggleMobileMenu(menuToggle, nav, false); // false = skip auto-focus
+                // Restore focus to clicked element if it's focusable
+                if (activeElement && activeElement !== document.body) {
+                    activeElement.focus();
+                }
             }
         });
 
@@ -60,7 +67,7 @@ class EnhancedUIManager {
         });
     }
 
-    toggleMobileMenu(toggle, nav) {
+    toggleMobileMenu(toggle, nav, shouldFocus = true) {
         const isActive = nav.classList.contains('active');
         const navButtons = nav.querySelector('.nav-buttons');
         
@@ -79,24 +86,30 @@ class EnhancedUIManager {
             document.body.style.overflow = isActive ? '' : 'hidden';
         }
 
-        // Focus management
-        if (!isActive) {
-            // Menu opened - focus first nav item
-            const firstNavItem = nav.querySelector('.nav-button');
-            if (firstNavItem) {
-                setTimeout(() => firstNavItem.focus(), 300);
+        // Focus management - only if requested
+        if (shouldFocus) {
+            if (!isActive) {
+                // Menu opened - focus first nav item
+                const firstNavItem = nav.querySelector('.nav-button');
+                if (firstNavItem) {
+                    setTimeout(() => firstNavItem.focus(), 300);
+                }
+            } else {
+                // Menu closed - return focus to toggle
+                toggle.focus();
+                document.body.style.overflow = '';
             }
         } else {
-            // Menu closed - return focus to toggle
-            toggle.focus();
-            document.body.style.overflow = '';
+            // Still ensure body overflow is reset when menu closes
+            if (isActive) {
+                document.body.style.overflow = '';
+            }
         }
     }
 
     // Enhanced accessibility features
     setupAccessibility() {
-        // Add skip links for keyboard navigation
-        this.addSkipLinks();
+        // Skip link is already in base.html template - no need to create it here
         
         // Enhanced focus management
         this.setupFocusManagement();
@@ -106,39 +119,6 @@ class EnhancedUIManager {
 
         // Screen reader enhancements
         this.setupScreenReaderSupport();
-    }
-
-    addSkipLinks() {
-        const skipLink = document.createElement('a');
-        skipLink.href = '#main-content';
-        skipLink.textContent = 'Skip to main content';
-        skipLink.className = 'skip-link';
-        
-        // Skip link styles
-        Object.assign(skipLink.style, {
-            position: 'absolute',
-            top: '-40px',
-            left: '6px',
-            background: '#000',
-            color: '#fff',
-            padding: '8px',
-            textDecoration: 'none',
-            borderRadius: '4px',
-            fontSize: '14px',
-            fontWeight: '600',
-            zIndex: '10001',
-            transition: 'top 0.3s'
-        });
-
-        skipLink.addEventListener('focus', () => {
-            skipLink.style.top = '6px';
-        });
-
-        skipLink.addEventListener('blur', () => {
-            skipLink.style.top = '-40px';
-        });
-
-        document.body.insertBefore(skipLink, document.body.firstChild);
     }
 
     setupFocusManagement() {
@@ -225,7 +205,7 @@ class EnhancedUIManager {
         const liveRegion = document.createElement('div');
         liveRegion.setAttribute('aria-live', 'polite');
         liveRegion.setAttribute('aria-atomic', 'true');
-        liveRegion.className = 'sr-only';
+        liveRegion.className = 'visually-hidden';
         liveRegion.id = 'live-region';
         document.body.appendChild(liveRegion);
     }

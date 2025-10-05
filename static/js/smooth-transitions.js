@@ -133,22 +133,9 @@ class SmoothTransitions {
 
     // Subtle micro-interactions for better UX
     setupMicroInteractions() {
-        // Enhanced card hover effects
-        document.addEventListener('mouseover', (e) => {
-            const card = e.target.closest('.news-card, .articles-card, .knowledge-card, .storytime-card');
-            if (card && !this.isAnimating) {
-                card.style.transform = 'translateY(-2px)';
-                card.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
-            }
-        });
-
-        document.addEventListener('mouseout', (e) => {
-            const card = e.target.closest('.news-card, .articles-card, .knowledge-card, .storytime-card');
-            if (card && !this.isAnimating) {
-                card.style.transform = '';
-            }
-        });
-
+        // Card hover effects are handled by CSS - no JS duplication needed
+        // This provides better performance and smoother animations
+        
         // Button press feedback
         document.addEventListener('mousedown', (e) => {
             const button = e.target.closest('.cta-button, .nav-button, .subscribe-button, .go-back-btn');

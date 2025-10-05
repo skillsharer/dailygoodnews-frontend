@@ -135,26 +135,7 @@ class PageManager {
 
     // Initialize dynamic page elements
     initializeDynamicElements() {
-        // Mobile menu functionality
-        const menuToggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('.main-nav');
-        
-        if (menuToggle && nav) {
-            // Remove existing listeners to prevent duplicates
-            const newMenuToggle = menuToggle.cloneNode(true);
-            menuToggle.parentNode.replaceChild(newMenuToggle, menuToggle);
-            
-            newMenuToggle.addEventListener('click', () => {
-                newMenuToggle.classList.toggle('active');
-                nav.classList.toggle('active');
-                
-                // Accessibility
-                const isExpanded = nav.classList.contains('active');
-                newMenuToggle.setAttribute('aria-expanded', isExpanded);
-                nav.setAttribute('aria-hidden', !isExpanded);
-            });
-        }
-
+        // Mobile menu is handled by enhanced-ui-manager.js - no duplication needed
         // Header stays in original position - no scroll effects
     }
 

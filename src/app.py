@@ -27,6 +27,17 @@ def extract_first_image(html_string):
         return match.group(1)
     return None
 
+def load_json_data(source_file):
+    """Load JSON data from a file"""
+    with open(source_file, "r") as jsonfile:
+        return json.load(jsonfile)
+
+def add_slugs_to_articles(articles):
+    """Add slug field to each article for URL generation"""
+    for article in articles:
+        article['slug'] = slugify(article['heading'])
+    return articles
+
 #Bleach Sanitizer
 def sanitize_html(value):
     allowed_tags = ['p', 'br', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'div', 'img', 'span']  # Added <span>
@@ -59,43 +70,30 @@ def inject_global_vars():
 
 @app.route('/')
 def home():
-    with open(NEWS_SOURCE, "r") as jsonfile:
-        news_list = json.load(jsonfile)
-        for news in news_list:
-            news['slug'] = slugify(news['heading'])
+    news_list = add_slugs_to_articles(load_json_data(NEWS_SOURCE))
     return render_template('home.html', news_list=news_list)
 
 @app.route('/articles')
 def blog_posts():
-    with open(COFFEE_BREAK_SOURCE, "r") as jsonfile:
-        articles = json.load(jsonfile)
-        for article in articles:
-            article['slug'] = slugify(article['heading'])
+    articles = add_slugs_to_articles(load_json_data(COFFEE_BREAK_SOURCE))
     return render_template('articles.html', articles=articles)
 
 @app.route('/knowledge_vault')
 def knowledge_vault():
-    with open(KNOWLEDGE_VAULT_SOURCE, "r") as jsonfile:
-        knowledge_vaults = json.load(jsonfile)
-        for knowledge_vault in knowledge_vaults:
-            knowledge_vault['slug'] = sanitize_html(slugify(knowledge_vault['heading']))
+    knowledge_vaults = add_slugs_to_articles(load_json_data(KNOWLEDGE_VAULT_SOURCE))
     return render_template('knowledge_vault.html', knowledge_vaults=knowledge_vaults)
 
 @app.route('/story_time')
 def story_time():
-    with open(STORY_TIME_SOURCE, "r") as jsonfile:
-        story_time_articles = json.load(jsonfile)
-        for article in story_time_articles:
-            article['slug'] = slugify(article['heading'])
-            article['image'] = extract_first_image(article['article']) # Extract Image
+    story_time_articles = add_slugs_to_articles(load_json_data(STORY_TIME_SOURCE))
+    for article in story_time_articles:
+        article['image'] = extract_first_image(article['article'])
     return render_template('story_time.html', story_time_articles=story_time_articles)
 
 @app.route('/story_time/<story_id>')
 def story_item_page(story_id):
     story_id = story_id.lower()
-    with open(STORY_TIME_SOURCE, "r") as jsonfile:
-        story_articles = json.load(jsonfile)
-
+    story_articles = load_json_data(STORY_TIME_SOURCE)
     for article in story_articles:
         if slugify(article['heading']) == story_id:
             return render_template('story_item.html', article=article)
@@ -104,9 +102,7 @@ def story_item_page(story_id):
 @app.route('/article/<article_id>')
 def article_item_page(article_id):
     article_id = article_id.lower()
-    with open(COFFEE_BREAK_SOURCE, "r") as jsonfile:
-        articles = json.load(jsonfile)
-
+    articles = load_json_data(COFFEE_BREAK_SOURCE)
     for article in articles:
         if slugify(article['heading']) == article_id:
             return render_template('article_item.html', article=article)
@@ -115,9 +111,7 @@ def article_item_page(article_id):
 @app.route('/knowledge_vault/<knowledge_id>')
 def knowledge_item_page(knowledge_id):
     knowledge_id = knowledge_id.lower()
-    with open(KNOWLEDGE_VAULT_SOURCE, "r") as jsonfile:
-        knowledge_vaults = json.load(jsonfile)
-
+    knowledge_vaults = load_json_data(KNOWLEDGE_VAULT_SOURCE)
     for knowledge_article in knowledge_vaults:
         if slugify(knowledge_article['heading']) == knowledge_id:
             return render_template('knowledge_item.html', knowledge=knowledge_article)
@@ -134,9 +128,7 @@ def contact():
 @app.route('/news/<news_id>')
 def news_item_page(news_id):
     news_id = news_id.lower()
-    with open(NEWS_SOURCE, "r") as jsonfile:
-        news_list = json.load(jsonfile)
-
+    news_list = load_json_data(NEWS_SOURCE)
     for news in news_list:
         if slugify(news['heading']) == news_id:
             return render_template('news_item.html', news=news)

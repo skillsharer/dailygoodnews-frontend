@@ -4,7 +4,7 @@
 
 {% block content %}
     <div id="storytime-main-content" class="container">
-        <section class="content-grid story-grid" aria-labelledby="story-time-heading">
+        <section class="content-grid storytime-grid" aria-labelledby="story-time-heading">
             <h2 id="story-time-heading" class="visually-hidden">Story Time Articles</h2>
             {% for article in story_time_articles %}
             <article class="card story-card" role="article">
@@ -23,7 +23,7 @@
             </article>
             {% endfor %}
         </section>
-        {% if articles|length > 2 %}
+        {% if story_time_articles|length > 2 %}
         <div class="view-more-container">
             <button id="view-more-stories-btn" class="view-more-btn">
                 View More Stories
