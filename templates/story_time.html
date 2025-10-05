@@ -76,6 +76,14 @@
             </article>
             {% endfor %}
         </section>
+        {% if articles|length > 2 %}
+        <div class="view-more-container">
+            <button id="view-more-stories-btn" class="view-more-btn">
+                View More Stories
+                <span class="view-more-icon">↓</span>
+            </button>
+        </div>
+        {% endif %}
     </div>
     {% include 'footer.html' %}
     <script>
@@ -89,5 +97,8 @@
         });
     });
     </script>
+    
+    <!-- Dynamic Pagination System -->
+    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 </body>
 </html>

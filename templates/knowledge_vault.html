@@ -81,6 +81,14 @@
             </article>
             {% endfor %}
         </section>
+        {% if knowledge_vaults|length > 2 %}
+        <div class="view-more-container">
+            <button id="view-more-knowledge-btn" class="view-more-btn">
+                View More Stories
+                <span class="view-more-icon">↓</span>
+            </button>
+        </div>
+        {% endif %}
     </div>
     {% include 'footer.html' %}
     <script>
@@ -94,5 +102,8 @@
             });
         });
     </script>
+    
+    <!-- Dynamic Pagination System -->
+    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 </body>
 </html>

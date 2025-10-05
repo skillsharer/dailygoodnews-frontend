@@ -61,7 +61,7 @@
     <div id="articles-main-content" class="container">
         <section class="articles-grid" id="articles-grid">
             {% for article in articles %}
-            <article class="articles-card" data-index="{{ loop.index0 }}" style="{% if loop.index0 >= 5 %}display: none;{% endif %}">
+            <article class="article-card" data-index="{{ loop.index0 }}">
                 <a href="/article/{{ article.slug }}" class="articles-card-link">
                     <div class="image-wrapper">
                          {% if article.image %}
@@ -79,8 +79,8 @@
         </section>
         {% if articles|length > 5 %}
         <div class="view-more-container">
-            <button id="articles-view-more-btn" class="view-more-btn">
-                View More Articles
+            <button id="view-more-articles-btn" class="view-more-btn">
+                View More Stories
                 <span class="view-more-icon">↓</span>
             </button>
         </div>
@@ -97,34 +97,11 @@
                 nav.classList.toggle('active');
             });
 
-            // Articles View More functionality
-            const viewMoreBtn = document.getElementById('articles-view-more-btn');
-            if (viewMoreBtn) {
-                let currentVisible = 5;
-                const articleCards = document.querySelectorAll('.articles-card');
-                const totalCards = articleCards.length;
-
-                viewMoreBtn.addEventListener('click', function() {
-                    // Show next 5 items
-                    const nextVisible = Math.min(currentVisible + 5, totalCards);
-                    
-                    for (let i = currentVisible; i < nextVisible; i++) {
-                        if (articleCards[i]) {
-                            articleCards[i].style.display = 'block';
-                            articleCards[i].style.animation = 'fadeInUp 0.6s ease forwards';
-                            articleCards[i].style.animationDelay = `${(i - currentVisible) * 0.1}s`;
-                        }
-                    }
-                    
-                    currentVisible = nextVisible;
-                    
-                    // Hide button if no more items
-                    if (currentVisible >= totalCards) {
-                        viewMoreBtn.style.display = 'none';
-                    }
-                });
-            }
+            // Pagination is handled by external pagination.js file
         });
     </script>
+    
+    <!-- Dynamic Pagination System -->
+    <script src="{{ url_for('static', filename='js/pagination.js') }}"></script>
 </body>
 </html>
