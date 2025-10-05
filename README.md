@@ -17,13 +17,16 @@ uv run ./src/app.py
 
 # PRODUCTION:
 
-## Start and stop nginx:
+## Website analytics
+Found a useful website analyser tool, check [here](https://pagespeed.web.dev).
+
+## Start and stop nginx
 ```bash
 sudo systemctl start nginx
 sudo systemctl stop nginx
 ```
 
-### Setup nginx:
+### Setup nginx
 Edit and copy the `<repo_root>/nginx/default` to `/etc/nginx/sites-available/default`
 
 ## Run the application on the prod server
