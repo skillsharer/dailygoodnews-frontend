@@ -7,6 +7,7 @@
 
         <!-- Import CSS Files - OPTIMIZED ORDER FOR PERFORMANCE -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">        <!-- Design Tokens, Reset, Typography, Base Layout -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/design-system.css') }}">       <!-- Enhanced Design System -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/components.css') }}">  <!-- Reusable UI Components -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css') }}">      <!-- Header Styles -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hero.css') }}">        <!-- Hero Section Styles -->
@@ -18,10 +19,16 @@
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/contact.css') }}">     <!-- Contact Page Styles -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/about.css') }}">       <!-- About Page Styles -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/privacy.css') }}">     <!-- Privacy Policy Page Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}">       <!-- Loader Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">      <!-- Footer Styles -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animations.css') }}">  <!-- Advanced Animation System -->
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/responsive.css') }}">  <!-- Media Queries - MUST BE LAST -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/loader.css') }}">            <!-- Loader Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">           <!-- Footer Styles -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/animations.css') }}">       <!-- Advanced Animation System -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enhanced-ux.css') }}">        <!-- Enhanced UX Micro-interactions -->
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/enhanced-responsive.css') }}"> <!-- Enhanced Responsive Design -->
+        
+        <!-- Enhanced JavaScript Modules -->
+        <script src="{{ url_for('static', filename='js/page-manager.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/enhanced-ui-manager.js') }}" defer></script>
+        <script src="{{ url_for('static', filename='js/smooth-transitions.js') }}" defer></script>
 
         <nav class="main-nav">
             <ul class="nav-buttons">

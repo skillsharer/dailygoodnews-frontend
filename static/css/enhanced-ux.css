@@ -1,0 +1,522 @@
+/**
+ * Enhanced UX Micro-interactions - Calm, eye-catching, professional
+ * Subtle animations that guide users and provide delightful feedback
+ */
+
+/* ==========================================
+   PAGE ENTER ANIMATIONS
+   ========================================== */
+
+@keyframes pageEnter {
+    from {
+        opacity: 0.95;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInFromLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ==========================================
+   ENHANCED BUTTON INTERACTIONS
+   ========================================== */
+
+.btn {
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0); /* Hardware acceleration */
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.btn:hover::before {
+    left: 100%;
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+/* CTA Button Enhancement */
+.cta-button {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-500), var(--primary-600));
+    box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, var(--primary-400), var(--primary-500));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: inherit;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(14, 165, 233, 0.4);
+}
+
+.cta-button:hover::after {
+    opacity: 1;
+}
+
+.cta-button span,
+.cta-button .btn-text {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================
+   ENHANCED CARD INTERACTIONS
+   ========================================== */
+
+.card {
+    position: relative;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateZ(0);
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(129, 199, 212, 0.05), rgba(168, 230, 207, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Card image parallax effect */
+.card__image,
+.news-card-image,
+.articles-card-image,
+.knowledge-card-image,
+.storytime-card-image {
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .card__image,
+.news-card:hover .news-card-image,
+.articles-card:hover .articles-card-image,
+.knowledge-card:hover .knowledge-card-image,
+.storytime-card:hover .storytime-card-image {
+    transform: scale(1.05);
+}
+
+/* ==========================================
+   ENHANCED NAVIGATION INTERACTIONS
+   ========================================== */
+
+.nav-button {
+    position: relative;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-button::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--primary-500), var(--accent-teal));
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: translateX(-50%);
+}
+
+.nav-button:hover::before,
+.nav-button.active::before {
+    width: 100%;
+}
+
+.nav-button:hover {
+    color: var(--primary-600);
+    transform: translateY(-1px);
+}
+
+/* Mobile menu animation */
+@media (max-width: 767px) {
+    .nav-buttons li {
+        transform: translateX(-20px);
+        opacity: 0;
+        animation: slideInFromLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    }
+    
+    .nav-buttons li:nth-child(1) { animation-delay: 0.1s; }
+    .nav-buttons li:nth-child(2) { animation-delay: 0.15s; }
+    .nav-buttons li:nth-child(3) { animation-delay: 0.2s; }
+    .nav-buttons li:nth-child(4) { animation-delay: 0.25s; }
+    .nav-buttons li:nth-child(5) { animation-delay: 0.3s; }
+    .nav-buttons li:nth-child(6) { animation-delay: 0.35s; }
+}
+
+/* ==========================================
+   SCROLL REVEAL ANIMATIONS
+   ========================================== */
+
+.fade-in-element {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.fade-in-element.in-view {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Staggered animations for grid items */
+.news-card,
+.articles-card,
+.knowledge-card,
+.storytime-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.news-card.animate-in,
+.articles-card.animate-in,
+.knowledge-card.animate-in,
+.storytime-card.animate-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ==========================================
+   ENHANCED LOADING STATES
+   ========================================== */
+
+.loading-skeleton {
+    background: linear-gradient(90deg, var(--neutral-200) 25%, var(--neutral-100) 50%, var(--neutral-200) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.page-loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-toast);
+    transition: all 0.4s ease;
+}
+
+.page-loader__spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--neutral-200);
+    border-top: 3px solid var(--primary-500);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.2);
+}
+
+/* ==========================================
+   ENHANCED FORM INTERACTIONS
+   ========================================== */
+
+.form-input,
+.email-input {
+    position: relative;
+    background: white;
+    border: 2px solid var(--neutral-200);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4) var(--space-5);
+    font-size: var(--text-base);
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    outline: none;
+}
+
+.form-input:focus,
+.email-input:focus {
+    border-color: var(--primary-500);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.1);
+    transform: translateY(-1px);
+}
+
+.form-input::placeholder,
+.email-input::placeholder {
+    color: var(--neutral-400);
+    transition: color 0.3s ease;
+}
+
+.form-input:focus::placeholder,
+.email-input:focus::placeholder {
+    color: var(--neutral-300);
+}
+
+/* ==========================================
+   ENHANCED SECTION TITLES - MOVED TO DESIGN-SYSTEM.CSS
+   ========================================== */
+
+/* Section title styles consolidated in design-system.css to prevent conflicts */
+
+/* ==========================================
+   ENHANCED SOCIAL ICONS
+   ========================================== */
+
+.social-icon {
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: grayscale(0.3);
+}
+
+.social-icon:hover {
+    filter: grayscale(0);
+    transform: translateY(-2px) rotate(5deg) scale(1.1);
+}
+
+/* ==========================================
+   ENHANCED READ MORE BUTTONS
+   ========================================== */
+
+.read-more {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--primary-600);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.read-more::after {
+    content: '→';
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.read-more:hover {
+    color: var(--primary-700);
+    transform: translateX(2px);
+}
+
+.read-more:hover::after {
+    transform: translateX(4px);
+}
+
+/* ==========================================
+   ENHANCED HERO SECTION
+   ========================================== */
+
+.hero-title {
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.2s both;
+}
+
+.hero-subtitle {
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.4s both;
+}
+
+.cta-button {
+    animation: fadeInUp 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.6s both;
+}
+
+/* ==========================================
+   ENHANCED PAGE TRANSITIONS
+   ========================================== */
+
+body.page-enter {
+    /* Reduced animation to prevent header jumping */
+    animation: pageEnter 0.3s ease-out;
+}
+
+.main-content.visible {
+    animation: fadeInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ==========================================
+   ENHANCED ACCESSIBILITY
+   ========================================== */
+
+/* Focus indicators */
+*:focus-visible {
+    outline: 3px solid var(--primary-500);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+}
+
+/* Skip link enhancement */
+.skip-link:focus {
+    animation: slideInFromLeft 0.3s ease;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .card:hover {
+        transform: none;
+    }
+    
+    .btn:hover {
+        transform: none;
+    }
+}
+
+/* ==========================================
+   ENHANCED TOAST NOTIFICATIONS
+   ========================================== */
+
+.toast {
+    position: fixed;
+    top: var(--space-6);
+    right: var(--space-6);
+    background: var(--neutral-900);
+    color: white;
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    z-index: var(--z-toast);
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    max-width: 320px;
+}
+
+.toast.show {
+    transform: translateX(0);
+}
+
+.toast--success {
+    background: var(--success);
+}
+
+.toast--error {
+    background: var(--error);
+}
+
+.toast--info {
+    background: var(--info);
+}
+
+/* ==========================================
+   ENHANCED FOOTER
+   ========================================== */
+
+.footer {
+    position: relative;
+    overflow: hidden;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-500), var(--accent-teal), var(--accent-emerald));
+    animation: shimmer 3s infinite;
+}
+
+/* ==========================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* Hardware acceleration for smooth animations */
+.card,
+.btn,
+.nav-button,
+.cta-button {
+    will-change: transform;
+    transform: translateZ(0);
+}
+
+/* Optimize repaints */
+.card:hover,
+.btn:hover,
+.nav-button:hover {
+    will-change: transform, box-shadow;
+}

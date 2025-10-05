@@ -1,4 +1,8 @@
 /* Contact Page Styles */
+.contact-section {
+    padding-top: 0; /* Let container handle top padding */
+}
+
 #main-content.visible {
     opacity: 1;
 }

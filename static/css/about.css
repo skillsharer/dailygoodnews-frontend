@@ -1,8 +1,9 @@
 /* About Page Styles */
 .about-section {
     padding: 6vw;
+    padding-top: 0; /* Let container handle top padding */
     background-color: #fff;
-    margin-top: 2vh;
+    margin-top: 0; /* Remove margin-top to prevent header overlap */
     margin-bottom: 2vh;
     border-radius: 0.625em;
     box-shadow: 0 0.125em 0.3125em rgba(0, 0, 0, 0.1);

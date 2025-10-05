@@ -67,13 +67,20 @@
 /* Article Item Page Styles */
 .knowledge-item-page {
     padding: 6vw;
-    margin-top: 2vh;
+    margin-top: 0; /* Remove top margin to prevent header overlap */
     margin-bottom: 2vh;
     background-color: #fff;
     box-shadow: 0 0.25em 0.625em rgba(0, 0, 0, 0.1);
     border-radius: 0.625em;
     max-width: 100%; /* Prevent horizontal overflow */
     box-sizing: border-box;
+}
+
+.knowledge-item-page h1 {
+    text-align: center;
+    color: #2d3748;
+    margin-bottom: 2rem;
+    font-weight: 700;
 }
 
 .knowledge-item-page .knowledge-image {

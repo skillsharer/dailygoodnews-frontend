@@ -14,24 +14,17 @@
     transform: translateY(0);
     overflow: hidden;
     margin-top: 0;
-    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                margin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                margin 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Ensure hero doesn't interfere with header positioning */
+    z-index: 1 !important;
 }
 
 #hero-section.hidden {
-    height: 0;
     opacity: 0;
     transform: translateY(-30px);
     pointer-events: none;
-    margin: 0;
-    padding: 0;
-    min-height: 0;
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
-                transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-                height 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-                margin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    display: none;
 }
 
 #hero-section::before {

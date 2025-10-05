@@ -112,61 +112,63 @@ body {
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 100px 15px 0 15px;
+    padding: 0 15px; /* No top padding - body margin handles header clearance */
     box-sizing: border-box;
     overflow-x: hidden;
 }
 
 .main-content {
-    opacity: 0;
-    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateY(20px);
+    opacity: 1; /* Always visible - no animation */
+    transform: none; /* Remove transform that causes sliding */
     margin-top: 0;
-    padding-top: 100px;
+    padding-top: 0; /* No padding needed - body margin handles clearance */
 }
 
+/* Remove .visible class - no longer needed */
 .main-content.visible {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 1; /* Redundant but safe fallback */
 }
 
 /* Home page specific - no top padding when hero is visible, but add spacing when hidden */
 #main-content {
     padding-top: 0;
-    transition: padding-top 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Removed transition to prevent header jumping during navigation */
 }
 
 /* When hero is hidden, add proper spacing to main content */
 #hero-section.hidden ~ #main-content,
 #hero-section.hidden + #main-content {
-    padding-top: 100px;
+    padding-top: 120px; /* Increased for better header clearance */
 }
 
-/* Ensure Top Stories section has proper clearance from header */
+/* Ensure Top Stories section has proper clearance and visibility */
 .featured-news {
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
-/* When hero is hidden, add extra top margin to Top Stories section */
+/* Higher specificity to override any h2 rules */
+.featured-news h2.section-title,
+.featured-news .section-title {
+    margin-bottom: 2rem;
+    opacity: 1 !important; /* Ensure title is always visible */
+    transform: none !important;
+    text-align: center !important; /* Force center alignment for Top Stories */
+}
+
+/* When hero is hidden, reduce excessive margin */
 #hero-section.hidden ~ #main-content .featured-news {
-    margin-top: 120px;
+    margin-top: 0; /* Remove excessive margin when hero is hidden */
 }
 
 /* Subpage containers - ensure proper header clearance */
-#articles-main-content,
-.knowledge-main-content,
-.storytime-main-content,
-.news-item-page,
-.articles-item-page,
-.knowledge-item-page,
-.storytime-item-page {
-    padding-top: 100px;
-}
+/* Body margin handles all header clearance - sections can have natural spacing */
 
-/* Add proper spacing when hero is hidden */
-#hero-section.hidden ~ .main-content,
-#hero-section.hidden + #main-content {
-    padding-top: 2rem;
+/* Container handles all header clearance - no section-specific overrides needed */
+
+/* Push all content below fixed header */
+body {
+    margin: 0 !important; /* Remove margin to prevent header positioning issues */
+    padding: 80px 0 0 0 !important; /* Use padding instead for content clearance */
 }
 
 /* Smooth scrolling for the entire page */
@@ -180,17 +182,7 @@ html {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Fade in animation for news cards */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-}
+/* Removed fadeInUp animation - keeping content static for better UX */
 
 /* Subtle pulse animation for featured elements */
 @keyframes pulse {
@@ -208,31 +200,7 @@ html {
     margin-top: 1vh;
 }
 
-/* Enhanced Section Titles */
-.section-title {
-    text-align: center;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    color: #1a202c;
-    font-weight: 800;
-    position: relative;
-    letter-spacing: -0.03em;
-    line-height: 1.2;
-    font-family: 'Inter', sans-serif;
-}
-
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -16px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 4px;
-    background: linear-gradient(135deg, #81c7d4, #a8e6cf);
-    border-radius: 2px;
-}
+/* Section title styles moved to design-system.css to avoid conflicts */
 
 /* ==========================================================================
    ENHANCED TYPOGRAPHY & SPACING SYSTEM

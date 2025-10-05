@@ -4,21 +4,24 @@
 
 /* Skip Link for Accessibility */
 .skip-link {
-    position: absolute;
-    top: -40px;
+    position: fixed;
+    top: -100px;
     left: 6px;
     background: #000;
     color: #fff;
     padding: 8px;
     text-decoration: none;
     border-radius: 4px;
-    z-index: 10000;
-    transform: translateY(-100%);
-    transition: transform 0.3s ease;
+    z-index: 10001;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
 }
 
 .skip-link:focus {
-    transform: translateY(0);
+    top: 6px;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* Keyboard Navigation Focus States */
