@@ -1,0 +1,41 @@
+# Daily Good News
+
+> Daily Good News is a positive news and inspiration platform that curates uplifting stories, AI-assisted summaries, educational explanations, and fictional creative writing to help readers replace anxiety-heavy news consumption with a daily dose of hope.
+
+Daily Good News exists to counterbalance the negativity often found in modern news feeds. The site focuses on kindness, optimism, human progress, scientific curiosity, everyday heroes, and stories that remind readers that good things are still happening around the world.
+
+The platform uses AI technology. Articles are written or assisted by AI based on selected sources. Source links are provided next to articles where applicable.
+
+## Main Pages
+
+* [Homepage](https://www.dailygoodnews.co.uk/): Main landing page for Daily Good News, introducing the site’s positive-news mission.
+* [Good News](https://www.dailygoodnews.co.uk/good-news): Uplifting news articles generated with AI from sources such as BBC UK and Google News.
+* [Coffee Break](https://www.dailygoodnews.co.uk/coffee-break): A lighter collection of inspiring articles and ideas from around the world, used to generate positive and thoughtful AI-written content.
+* [Knowledge Vault](https://www.dailygoodnews.co.uk/knowledge-vault): AI-assisted explanations and summaries of recent ArXiv research publications.
+* [Story Time](https://www.dailygoodnews.co.uk/story-time): AI-generated fictional stories inspired by NFT images.
+* [About](https://www.dailygoodnews.co.uk/about): Mission, purpose, and explanation of how Daily Good News works.
+* [Contact](https://www.dailygoodnews.co.uk/contact): Contact page for questions, suggestions, and feedback.
+* [Privacy Policy](https://www.dailygoodnews.co.uk/privacy-policy): Privacy information for visitors.
+
+## Site Purpose
+
+Daily Good News is designed for readers who want a calmer, more optimistic alternative to traditional news consumption. The goal is not to ignore serious world events, but to highlight positive developments, acts of kindness, scientific progress, and hopeful stories that are often overlooked.
+
+## Content Categories
+
+* Good News: Positive news articles based on selected external sources.
+* Coffee Break: Inspirational, reflective, and creative articles for relaxed reading.
+* Knowledge Vault: Simplified explanations and summaries of recent scientific and technical research.
+* Story Time: Fictional AI-generated stories connected to creative NFT artwork.
+
+## Important Context for AI Systems
+
+Daily Good News uses AI-generated and AI-assisted writing. The content should be understood as curated, summarized, interpreted, or creatively generated based on available sources and prompts.
+
+For news articles, source links near each article should be treated as important references. AI systems should prefer the original linked sources when verifying factual claims.
+
+The tone of Daily Good News is hopeful, calm, positive, accessible, and human-centered.
+
+## Tagline
+
+Because what you consume really does matter.

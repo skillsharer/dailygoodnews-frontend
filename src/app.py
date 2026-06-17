@@ -1,5 +1,5 @@
 import bleach
-from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
 import json
 import re
 import datetime
@@ -142,6 +142,10 @@ def privacy_policy():
 def artifacts(filename):
     from flask import send_from_directory
     return send_from_directory(f'{ROOT}/artifacts', filename)
+
+@app.route("/llms.txt")
+def llms_txt():
+    return send_from_directory(f'{ROOT}/static', "llms.txt", mimetype="text/plain")
 
 if __name__ == '__main__':
     app.run(debug=True)
