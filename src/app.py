@@ -65,30 +65,21 @@ def load_json_data(source_file):
     return []
 
 
-def add_slugs_to_articles(articles, url_prefix, section):
+def add_slugs_to_articles(articles, url_prefix, section=None):
     """
     Adds:
     - slug
     - url
 
-    Uses DB slug when available, so duplicate slugs remain correct.
-    Falls back to heading slug when DB is not imported yet.
+    Important:
+    The importer should write the final unique DB slug back into the JSON.
+    This function should not query SQLite by UUID, because reused UUIDs can
+    accidentally point new preview cards to old archived articles.
     """
     for article in articles:
-        fallback_slug = slugify(article.get("heading", "article"))
-
-        db_article = None
-
-        if "uuid" in article:
-            db_article = archive_db.get_article_by_uuid(
-                section,
-                str(article["uuid"]),
-            )
-
-        if db_article:
-            article["slug"] = db_article["slug"]
-        else:
-            article["slug"] = fallback_slug
+        article["slug"] = article.get("slug") or slugify(
+            article.get("heading", "article")
+        )
 
         article["url"] = f"{url_prefix}/{article['slug']}"
 

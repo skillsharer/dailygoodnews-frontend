@@ -288,8 +288,15 @@ class NewsArchiveDB:
             conn.commit()
 
     def archive_articles(self, items: list[dict[str, Any]], section: str):
+        archived = []
+
         for item in items:
-            self.archive_article(item, section)
+            archived_article = self.archive_article(item, section)
+
+            if archived_article:
+                archived.append(archived_article)
+
+        return archived
 
     def get_article_by_slug(self, section: str, slug: str):
         section = self.normalize_section(section)

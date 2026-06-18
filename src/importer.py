@@ -1,4 +1,4 @@
-# import_all_news_jsons.py
+# src/importer.py
 
 import json
 import os
@@ -22,7 +22,6 @@ db = NewsArchiveDB(
     public_image_prefix="/news-images",
 )
 
-
 SECTION_FILES = {
     "news": NEWS_SOURCE,
     "coffee-break": COFFEE_BREAK_SOURCE,
@@ -44,6 +43,15 @@ def load_json_data(source_file):
     return []
 
 
+def save_json_data(source_file, articles):
+    tmp_file = f"{source_file}.tmp"
+
+    with open(tmp_file, "w", encoding="utf-8") as f:
+        json.dump(articles, f, ensure_ascii=False, indent=4)
+
+    os.replace(tmp_file, source_file)
+
+
 def main():
     total = 0
 
@@ -54,10 +62,31 @@ def main():
 
         articles = load_json_data(source_file)
 
-        db.archive_articles(
+        archived_articles = db.archive_articles(
             articles,
             section=section,
         )
+
+        archived_by_uuid = {
+            str(item["uuid"]): item
+            for item in archived_articles
+            if item and item.get("uuid")
+        }
+
+        updated_articles = []
+
+        for article in articles:
+            article = dict(article)
+            uuid = str(article.get("uuid", ""))
+
+            db_article = archived_by_uuid.get(uuid)
+
+            if db_article:
+                article["slug"] = db_article["slug"]
+
+            updated_articles.append(article)
+
+        save_json_data(source_file, updated_articles)
 
         print(f"Imported {len(articles)} articles from section: {section}")
         total += len(articles)
