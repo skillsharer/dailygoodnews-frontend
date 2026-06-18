@@ -4,7 +4,7 @@ import json
 import os
 from pathlib import Path
 
-from db import NewsArchiveDB
+from .db import NewsArchiveDB
 
 
 ROOT = os.path.dirname(os.path.dirname(__file__))

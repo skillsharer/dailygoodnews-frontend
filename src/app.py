@@ -7,7 +7,7 @@ import os
 import html
 from dotenv import load_dotenv, find_dotenv
 
-from db import NewsArchiveDB
+from .db import NewsArchiveDB
 
 
 load_dotenv(find_dotenv())
