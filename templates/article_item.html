@@ -6,9 +6,13 @@
     <main class="container">
         <section class="articles-item-page">
                 <h1>{{ article.heading }}</h1>
-                {% if article.image %}
+                {% if article.image_local_path %}
                     <div class="image-wrapper">
-                        <img class="articles-image" src="{{ url_for('artifacts', filename='coffee_break/images/' + article.image) }}">
+                        <img class="articles-image" src="{{ article.image_local_path }}" alt="{{ article.heading }}">
+                    </div>
+                {% elif article.image %}
+                    <div class="image-wrapper">
+                        <img class="articles-image" src="{{ url_for('artifacts', filename='coffee_break/images/' + article.image) }}" alt="{{ article.heading }}">
                     </div>
                 {% endif %}
                 <div class="articles-description">

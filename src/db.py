@@ -225,9 +225,10 @@ class NewsArchiveDB:
                 image_local_path = None
 
             if not image_local_path:
-                image_local_path = self.download_image(
+                image_local_path = self.resolve_image_path(
                     image_original_url,
-                    article_id.replace(":", "-"),
+                    section,
+                    article_id,
                 )
 
             conn.execute(
@@ -307,8 +308,24 @@ class NewsArchiveDB:
             return None
 
         article = dict(row)
-        article["tags"] = json.loads(article.get("tags_json") or "[]")
-        article["raw"] = json.loads(article.get("raw_json") or "{}")
+
+        try:
+            raw = json.loads(article.get("raw_json") or "{}")
+        except Exception:
+            raw = {}
+
+        try:
+            tags = json.loads(article.get("tags_json") or "[]")
+        except Exception:
+            tags = []
+
+        # Keep original JSON keys available for your existing templates.
+        for key, value in raw.items():
+            if key not in article:
+                article[key] = value
+
+        article["raw"] = raw
+        article["tags"] = tags
 
         return article
 
@@ -329,8 +346,23 @@ class NewsArchiveDB:
             return None
 
         article = dict(row)
-        article["tags"] = json.loads(article.get("tags_json") or "[]")
-        article["raw"] = json.loads(article.get("raw_json") or "{}")
+
+        try:
+            raw = json.loads(article.get("raw_json") or "{}")
+        except Exception:
+            raw = {}
+
+        try:
+            tags = json.loads(article.get("tags_json") or "[]")
+        except Exception:
+            tags = []
+
+        for key, value in raw.items():
+            if key not in article:
+                article[key] = value
+
+        article["raw"] = raw
+        article["tags"] = tags
 
         return article
 
@@ -347,3 +379,49 @@ class NewsArchiveDB:
             ).fetchall()
 
         return [dict(row) for row in rows]
+    
+    def resolve_image_path(self, image_value, section, article_id):
+        """
+        Handles both:
+        - remote image URLs
+        - local artifact image filenames
+        """
+
+        if not image_value:
+            return None
+
+        image_value = str(image_value).strip()
+
+        # Already a public local path
+        if image_value.startswith("/"):
+            return image_value
+
+        # Remote image URL
+        if image_value.startswith("http://") or image_value.startswith("https://"):
+            return self.download_image(
+                image_value,
+                article_id.replace(":", "-"),
+            )
+
+        # Data image, do not download
+        if image_value.startswith("data:"):
+            return None
+
+        # Local filename from your artifacts folders
+        section_image_folders = {
+            "news": "news/images",
+            "coffee-break": "coffee_break/images",
+            "knowledge-vault": "knowledge_vault/images",
+            "story-time": "story_time/images",
+        }
+
+        folder = section_image_folders.get(section)
+
+        if not folder:
+            return None
+
+        # If the image already contains a subpath, avoid duplicating folders
+        if "/" in image_value:
+            return f"/artifacts/{image_value}"
+
+        return f"/artifacts/{folder}/{image_value}"
