@@ -5,11 +5,12 @@ document.addEventListener('DOMContentLoaded', () => {
     copyButtons.forEach((button) => {
         button.addEventListener('click', async () => {
             const url = button.dataset.shareUrl || window.location.href;
-            const originalText = button.textContent;
+            const label = button.querySelector('span') || button;
+            const originalText = label.textContent;
 
             try {
                 await navigator.clipboard.writeText(url);
-                button.textContent = 'Copied';
+                label.textContent = 'Copied';
                 button.classList.add('is-copied');
             } catch (error) {
                 const fallback = document.createElement('textarea');
@@ -21,12 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 fallback.select();
                 document.execCommand('copy');
                 fallback.remove();
-                button.textContent = 'Copied';
+                label.textContent = 'Copied';
                 button.classList.add('is-copied');
             }
 
             window.setTimeout(() => {
-                button.textContent = originalText;
+                label.textContent = originalText;
                 button.classList.remove('is-copied');
             }, 1800);
         });
@@ -46,6 +47,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             } catch (error) {
                 // User cancellation should not surface as an error.
+            }
+        });
+    });
+
+    document.addEventListener('click', (event) => {
+        document.querySelectorAll('.social-share[open]').forEach((menu) => {
+            if (!menu.contains(event.target)) {
+                menu.removeAttribute('open');
             }
         });
     });

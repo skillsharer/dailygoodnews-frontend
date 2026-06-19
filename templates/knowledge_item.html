@@ -23,20 +23,42 @@
                      </div>
                      <a href="/knowledge_vault" class="go-back-btn">Go Back</a>
                      <div class="social-share-container">
-                        <p class="share-text">Share:</p>
-                        <div class="social-share">
-                          <a href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ knowledge.heading|urlencode }}" target="_blank" rel="noopener noreferrer">
-                             <img src="{{ url_for('static', filename='assets/twitter.svg') }}" alt="Twitter" class="social-icon"/>
-                          </a>
-                          <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer">
-                            <img src="{{ url_for('static', filename='assets/facebook.svg') }}" alt="Facebook" class="social-icon"/>
-                          </a>
-                          <a class="share-chip" href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                          <a class="share-chip" href="https://api.whatsapp.com/send?text={{ (knowledge.heading ~ ' ' ~ request.url)|urlencode }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-                          <a class="share-chip" href="mailto:?subject={{ knowledge.heading|urlencode }}&body={{ request.url|urlencode }}">Email</a>
-                          <button class="share-chip share-chip--button" type="button" data-share-native data-share-title="{{ knowledge.heading }}" data-share-url="{{ request.url }}">Share</button>
-                          <button class="share-chip share-chip--button" type="button" data-share-copy data-share-url="{{ request.url }}">Copy Link</button>
-                        </div>
+                        <details class="social-share">
+                          <summary class="share-menu-toggle">
+                            <img src="{{ url_for('static', filename='assets/share.svg') }}" alt="" class="share-menu-toggle-icon"/>
+                            <span class="visually-hidden">Share</span>
+                          </summary>
+                          <div class="share-menu" role="menu">
+                            <a class="share-menu-item" href="https://twitter.com/intent/tweet?url={{ request.url|urlencode }}&text={{ knowledge.heading|urlencode }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/twitter.svg') }}" alt="" class="social-icon"/>
+                              <span>Twitter</span>
+                            </a>
+                            <a class="share-menu-item" href="https://www.facebook.com/sharer/sharer.php?u={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/facebook.svg') }}" alt="" class="social-icon"/>
+                              <span>Facebook</span>
+                            </a>
+                            <a class="share-menu-item" href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/linkedin.svg') }}" alt="" class="social-icon"/>
+                              <span>LinkedIn</span>
+                            </a>
+                            <a class="share-menu-item" href="https://api.whatsapp.com/send?text={{ (knowledge.heading ~ ' ' ~ request.url)|urlencode }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/whatsapp.svg') }}" alt="" class="social-icon"/>
+                              <span>WhatsApp</span>
+                            </a>
+                            <a class="share-menu-item" href="mailto:?subject={{ knowledge.heading|urlencode }}&body={{ request.url|urlencode }}" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/mail.svg') }}" alt="" class="social-icon"/>
+                              <span>Email</span>
+                            </a>
+                            <button class="share-menu-item share-menu-button" type="button" data-share-native data-share-title="{{ knowledge.heading }}" data-share-url="{{ request.url }}" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/share.svg') }}" alt="" class="social-icon"/>
+                              <span>System Share</span>
+                            </button>
+                            <button class="share-menu-item share-menu-button" type="button" data-share-copy data-share-url="{{ request.url }}" role="menuitem">
+                              <img src="{{ url_for('static', filename='assets/copy.svg') }}" alt="" class="social-icon"/>
+                              <span>Copy Link</span>
+                            </button>
+                          </div>
+                        </details>
                       </div>
                   </div>
         </section>

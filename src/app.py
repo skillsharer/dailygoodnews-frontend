@@ -69,6 +69,25 @@ def resolve_story_time_image(image_value):
     return f"/artifacts/story_time/images/{image_value}"
 
 
+def resolve_story_time_article_images(article_html):
+    """Normalize Story Time body image sources to local artifact URLs."""
+    def replace_image_src(match):
+        quote = match.group(1)
+        image_src = match.group(2)
+        resolved_src = resolve_story_time_image(
+            os.path.basename(image_src) if "objkt.com" in image_src else image_src
+        )
+
+        return f"src={quote}{resolved_src or image_src}{quote}"
+
+    return re.sub(
+        r"src=(['\"])([^'\"]+?\.webp)\1",
+        replace_image_src,
+        article_html or "",
+        flags=re.IGNORECASE,
+    )
+
+
 def load_json_data(source_file):
     """Load JSON data from a file."""
     with open(source_file, "r", encoding="utf-8") as jsonfile:
@@ -258,6 +277,7 @@ def story_item_page(slug):
     article["image"] = article.get("image_local_path") or extract_first_image(
         article.get("article", "")
     )
+    article["article"] = resolve_story_time_article_images(article.get("article", ""))
 
     return render_template("story_item.html", article=article)
 
