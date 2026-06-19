@@ -171,6 +171,10 @@
     box-shadow: var(--shadow-panel);
 }
 
+.storytime-item-page .storytime-description div:has(img) p {
+    text-align: center;
+}
+
 .storytime-item-page .storytime-footer {
     border-top-color: var(--glass-panel-border);
 }
