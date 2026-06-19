@@ -14,6 +14,8 @@ class DynamicPagination {
         this.rowsPerClick = options.rowsPerClick || 2;
         this.hasFeaturedItem = options.hasFeaturedItem !== false; // default true
         this.initialVisibleCount = options.initialVisibleCount || null;
+        this.pageType = options.pageType || 'home';
+        this.storageKey = `dailygoodnews:${this.pageType}:pagination`;
         
         this.itemsPerRow = 1;
         this.currentVisible = 0;
@@ -53,16 +55,18 @@ class DynamicPagination {
     setupPagination() {
         this.itemsPerRow = this.calculateItemsPerRow();
         
-        // Calculate initial visible items
+        const defaultVisible = this.calculateDefaultVisibleCount();
+        const restoredState = this.getStoredState();
+
         if (this.initialVisibleCount) {
             this.currentVisible = Math.min(this.initialVisibleCount, this.totalCards);
-        } else if (this.hasFeaturedItem && this.totalCards > 1) {
-            // First item is featured and spans full width, so start counting from second item
-            // Show first item (featured) + first row of regular items
-            this.currentVisible = Math.min(1 + this.itemsPerRow, this.totalCards);
+        } else if (restoredState && restoredState.visibleCount) {
+            this.currentVisible = Math.min(
+                Math.max(restoredState.visibleCount, defaultVisible),
+                this.totalCards,
+            );
         } else {
-            // Show first complete row
-            this.currentVisible = Math.min(this.itemsPerRow, this.totalCards);
+            this.currentVisible = defaultVisible;
         }
 
         this.cards.forEach((card, index) => {
@@ -81,6 +85,45 @@ class DynamicPagination {
         
         // Hide button if all items are visible
         this.updateButtonVisibility();
+
+        if (restoredState && Number.isFinite(restoredState.scrollY)) {
+            requestAnimationFrame(() => {
+                window.scrollTo({
+                    top: restoredState.scrollY,
+                    behavior: 'auto',
+                });
+            });
+        }
+    }
+
+    calculateDefaultVisibleCount() {
+        if (this.hasFeaturedItem && this.totalCards > 1) {
+            return Math.min(1 + this.itemsPerRow, this.totalCards);
+        }
+
+        return Math.min(this.itemsPerRow, this.totalCards);
+    }
+
+    getStoredState() {
+        try {
+            return JSON.parse(sessionStorage.getItem(this.storageKey) || 'null');
+        } catch (error) {
+            return null;
+        }
+    }
+
+    storeState() {
+        try {
+            sessionStorage.setItem(
+                this.storageKey,
+                JSON.stringify({
+                    visibleCount: this.currentVisible,
+                    scrollY: window.scrollY,
+                }),
+            );
+        } catch (error) {
+            // Session storage can be unavailable in private modes.
+        }
     }
 
     updateButtonVisibility() {
@@ -120,12 +163,21 @@ class DynamicPagination {
         
         // Hide button if no more items
         this.updateButtonVisibility();
+        this.storeState();
     }
     
     bindEvents() {
         // View More button click
         this.button.addEventListener('click', () => {
             this.showMoreItems();
+        });
+
+        this.grid.addEventListener('click', (event) => {
+            const cardLink = event.target.closest('a');
+
+            if (cardLink) {
+                this.storeState();
+            }
         });
         
         // Handle window resize
@@ -153,6 +205,7 @@ class DynamicPagination {
 function initializePagination(pageType = 'home') {
     const configs = {
         home: {
+            pageType: 'home',
             gridSelector: '#news-grid',
             cardSelector: '.news-card',
             buttonSelector: '#view-more-btn',
@@ -161,6 +214,7 @@ function initializePagination(pageType = 'home') {
             rowsPerClick: 2
         },
         articles: {
+            pageType: 'articles',
             gridSelector: '.articles-grid',
             cardSelector: '.article-card',
             buttonSelector: '#view-more-articles-btn',
@@ -168,6 +222,7 @@ function initializePagination(pageType = 'home') {
             rowsPerClick: 2
         },
         knowledge: {
+            pageType: 'knowledge',
             gridSelector: '.knowledge-grid',
             cardSelector: '.knowledge-card',
             buttonSelector: '#view-more-knowledge-btn',
@@ -175,6 +230,7 @@ function initializePagination(pageType = 'home') {
             rowsPerClick: 2
         },
         storytime: {
+            pageType: 'storytime',
             gridSelector: '.storytime-grid',
             cardSelector: '.story-card',
             buttonSelector: '#view-more-stories-btn',
@@ -204,3 +260,30 @@ document.addEventListener('DOMContentLoaded', function() {
 // Export for manual initialization if needed
 window.DynamicPagination = DynamicPagination;
 window.initializePagination = initializePagination;
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('[data-go-back]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+            const fallbackUrl = link.getAttribute('href') || '/';
+            let referrerUrl = null;
+
+            try {
+                referrerUrl = document.referrer ? new URL(document.referrer) : null;
+            } catch (error) {
+                referrerUrl = null;
+            }
+
+            if (
+                referrerUrl &&
+                referrerUrl.origin === window.location.origin &&
+                window.history.length > 1
+            ) {
+                event.preventDefault();
+                window.history.back();
+                return;
+            }
+
+            window.location.href = fallbackUrl;
+        });
+    });
+});
