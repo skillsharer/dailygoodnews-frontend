@@ -15,7 +15,7 @@
     right: 0;
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid var(--glass-panel-border);
+    border-bottom: 0;
     min-height: 70px;
     max-height: 70px;
     box-sizing: border-box;
@@ -31,7 +31,7 @@
         var(--reflection-top),
         rgba(12, 17, 32, 0.72);
     box-shadow: var(--shadow-float);
-    border-bottom-color: var(--glass-panel-border);
+    border-bottom-color: transparent;
 }
 
 .site-header .header-content {
@@ -151,11 +151,11 @@
         height: 100vh;
         background:
             var(--reflection-top),
-            var(--glass-panel-strong);
+            linear-gradient(135deg, rgba(18, 24, 46, 0.94), rgba(12, 17, 32, 0.9));
         -webkit-backdrop-filter: var(--blur-lg) saturate(160%);
         backdrop-filter: var(--blur-lg) saturate(160%);
         box-shadow: var(--shadow-float);
-        border-left: 1px solid var(--glass-panel-border);
+        border-left: 1px solid rgba(255, 255, 255, 0.22);
         padding: 5rem 1.5rem 2rem;
         transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1000;

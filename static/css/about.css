@@ -1,7 +1,7 @@
 /* About Page Styles */
 .about-section {
     padding: 6vw;
-    padding-top: 0; /* Let container handle top padding */
+    padding-top: clamp(1.5rem, 4vw, 2.75rem);
     background-color: rgba(255, 255, 255, 0.07);
     margin-top: 0; /* Remove margin-top to prevent header overlap */
     margin-bottom: 2vh;
@@ -11,6 +11,7 @@
 
 .about-section h2 {
     font-size: 1.8rem;
+    margin-top: 0;
     margin-bottom: 0.9375em;
     color: #333;
 }

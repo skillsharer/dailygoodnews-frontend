@@ -175,7 +175,7 @@ body {
 
 body {
     margin: 0;
-    padding-top: 80px;
+    padding-top: 70px;
     background: var(--color-bg-gradient);
     background-attachment: fixed;
     position: relative;

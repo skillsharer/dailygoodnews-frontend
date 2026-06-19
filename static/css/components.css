@@ -1359,7 +1359,15 @@ h2.section-title::after {
 .card__link {
     position: absolute;
     inset: 0;
-    height: auto;
+    height: 100%;
+    z-index: 4;
+}
+
+.news-card:first-child .card-link,
+.news-card:first-child .news-card-link {
+    position: absolute;
+    inset: 0;
+    height: 100%;
     z-index: 4;
 }
 
@@ -1497,7 +1505,19 @@ h2.section-title::after {
 .article-card:hover,
 .articles-card:hover,
 .story-card:hover,
-.knowledge-card:hover {
+.knowledge-card:hover,
+.card:focus-within,
+.news-card:focus-within,
+.article-card:focus-within,
+.articles-card:focus-within,
+.story-card:focus-within,
+.knowledge-card:focus-within,
+.card:active,
+.news-card:active,
+.article-card:active,
+.articles-card:active,
+.story-card:active,
+.knowledge-card:active {
     transform: translateY(-6px);
 }
 
@@ -1506,7 +1526,19 @@ h2.section-title::after {
 .articles-card:hover .articles-card-image,
 .story-card:hover .story-card-image,
 .knowledge-card:hover .knowledge-card-image,
-.card:hover .card__image {
+.card:hover .card__image,
+.card:focus-within .card-image,
+.news-card:focus-within .news-card-image,
+.articles-card:focus-within .articles-card-image,
+.story-card:focus-within .story-card-image,
+.knowledge-card:focus-within .knowledge-card-image,
+.card:focus-within .card__image,
+.card:active .card-image,
+.news-card:active .news-card-image,
+.articles-card:active .articles-card-image,
+.story-card:active .story-card-image,
+.knowledge-card:active .knowledge-card-image,
+.card:active .card__image {
     transform: scale(1.14);
     filter: saturate(1.1) contrast(1.08) brightness(0.82);
 }
@@ -1516,7 +1548,19 @@ h2.section-title::after {
 .articles-card:hover .articles-card-content,
 .story-card:hover .story-card-content,
 .knowledge-card:hover .knowledge-card-content,
-.card:hover .card__content {
+.card:hover .card__content,
+.card:focus-within .card-content,
+.news-card:focus-within .news-card-content,
+.articles-card:focus-within .articles-card-content,
+.story-card:focus-within .story-card-content,
+.knowledge-card:focus-within .knowledge-card-content,
+.card:focus-within .card__content,
+.card:active .card-content,
+.news-card:active .news-card-content,
+.articles-card:active .articles-card-content,
+.story-card:active .story-card-content,
+.knowledge-card:active .knowledge-card-content,
+.card:active .card__content {
     background-color: rgba(0, 0, 0, 0.7);
 }
 
@@ -1525,7 +1569,19 @@ h2.section-title::after {
 .articles-card:hover .articles-card-title,
 .story-card:hover .story-card-title,
 .knowledge-card:hover .knowledge-card-title,
-.card:hover .card__title {
+.card:hover .card__title,
+.card:focus-within .card-title,
+.news-card:focus-within .news-card-title,
+.articles-card:focus-within .articles-card-title,
+.story-card:focus-within .story-card-title,
+.knowledge-card:focus-within .knowledge-card-title,
+.card:focus-within .card__title,
+.card:active .card-title,
+.news-card:active .news-card-title,
+.articles-card:active .articles-card-title,
+.story-card:active .story-card-title,
+.knowledge-card:active .knowledge-card-title,
+.card:active .card__title {
     color: var(--accent-amber);
 }
 
@@ -1534,7 +1590,19 @@ h2.section-title::after {
 .articles-card:hover .articles-card-description,
 .story-card:hover .story-card-description,
 .knowledge-card:hover .knowledge-card-description,
-.card:hover .card__description {
+.card:hover .card__description,
+.card:focus-within .card-description,
+.news-card:focus-within .news-card-description,
+.articles-card:focus-within .articles-card-description,
+.story-card:focus-within .story-card-description,
+.knowledge-card:focus-within .knowledge-card-description,
+.card:focus-within .card__description,
+.card:active .card-description,
+.news-card:active .news-card-description,
+.articles-card:active .articles-card-description,
+.story-card:active .story-card-description,
+.knowledge-card:active .knowledge-card-description,
+.card:active .card__description {
     max-height: 8rem;
     opacity: 1;
     margin-bottom: 1rem;
@@ -1546,7 +1614,21 @@ h2.section-title::after {
 .articles-card:hover .read-more,
 .story-card:hover .read-more,
 .knowledge-card:hover .read-more,
-.card:hover .card__read-more {
+.card:hover .card__read-more,
+.card:focus-within .read-more,
+.news-card:focus-within .read-more,
+.article-card:focus-within .read-more,
+.articles-card:focus-within .read-more,
+.story-card:focus-within .read-more,
+.knowledge-card:focus-within .read-more,
+.card:focus-within .card__read-more,
+.card:active .read-more,
+.news-card:active .read-more,
+.article-card:active .read-more,
+.articles-card:active .read-more,
+.story-card:active .read-more,
+.knowledge-card:active .read-more,
+.card:active .card__read-more {
     max-height: 3rem;
     opacity: 1;
     margin-top: 0.75rem;
@@ -1590,21 +1672,14 @@ h2.section-title::after {
     .article-card,
     .articles-card,
     .story-card,
-    .knowledge-card,
-    .news-card:first-child {
-        height: 14rem;
-        min-height: 14rem;
+    .knowledge-card {
+        height: 20rem;
+        min-height: 20rem;
     }
 
-    .card-description,
-    .news-card-description,
-    .articles-card-description,
-    .story-card-description,
-    .knowledge-card-description,
-    .card__description,
-    .read-more,
-    .card__read-more {
-        display: none;
+    .news-card:first-child {
+        height: 22rem;
+        min-height: 22rem;
     }
 
     .card-content,
@@ -1613,8 +1688,15 @@ h2.section-title::after {
     .story-card-content,
     .knowledge-card-content,
     .card__content {
+        position: absolute;
+        inset: auto 0 0 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
         padding: 0.875rem;
-        background-color: rgba(0, 0, 0, 0.46);
+        max-height: 72%;
+        overflow: hidden;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.78), rgba(0, 0, 0, 0.38) 70%, transparent);
     }
 
     .card-title,
@@ -1623,6 +1705,61 @@ h2.section-title::after {
     .story-card-title,
     .knowledge-card-title,
     .card__title {
+        color: #ffffff;
         font-size: 1.15rem;
+        line-height: 1.22;
+        margin-bottom: 0.4rem;
+    }
+
+    .card-description,
+    .news-card-description,
+    .articles-card-description,
+    .story-card-description,
+    .knowledge-card-description,
+    .card__description {
+        font-size: 0.88rem;
+        line-height: 1.42;
+    }
+
+    .card:hover,
+    .news-card:hover,
+    .article-card:hover,
+    .articles-card:hover,
+    .story-card:hover,
+    .knowledge-card:hover,
+    .card:focus-within,
+    .news-card:focus-within,
+    .article-card:focus-within,
+    .articles-card:focus-within,
+    .story-card:focus-within,
+    .knowledge-card:focus-within,
+    .card:active,
+    .news-card:active,
+    .article-card:active,
+    .articles-card:active,
+    .story-card:active,
+    .knowledge-card:active {
+        transform: none;
+    }
+
+    .card:hover .card-description,
+    .news-card:hover .news-card-description,
+    .articles-card:hover .articles-card-description,
+    .story-card:hover .story-card-description,
+    .knowledge-card:hover .knowledge-card-description,
+    .card:hover .card__description,
+    .card:focus-within .card-description,
+    .news-card:focus-within .news-card-description,
+    .articles-card:focus-within .articles-card-description,
+    .story-card:focus-within .story-card-description,
+    .knowledge-card:focus-within .knowledge-card-description,
+    .card:focus-within .card__description,
+    .card:active .card-description,
+    .news-card:active .news-card-description,
+    .articles-card:active .articles-card-description,
+    .story-card:active .story-card-description,
+    .knowledge-card:active .knowledge-card-description,
+    .card:active .card__description {
+        max-height: 5.8rem;
     }
 }

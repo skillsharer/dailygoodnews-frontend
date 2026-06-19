@@ -1,10 +1,54 @@
 /* News-specific styles - inherits from components.css */
 
+.home-main-content {
+    position: relative;
+    overflow: hidden;
+    margin-top: 0;
+    padding: clamp(2rem, 4vw, 3rem) 0 1rem;
+    background:
+        radial-gradient(circle at 18% 22%, rgba(94, 231, 223, 0.34), transparent 28rem),
+        radial-gradient(circle at 86% 36%, rgba(180, 144, 245, 0.34), transparent 30rem),
+        radial-gradient(circle at 52% 82%, rgba(255, 210, 127, 0.16), transparent 24rem),
+        radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.08), transparent 32%),
+        #0b0e1a;
+}
+
+.home-main-content::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        radial-gradient(circle at 25% 30%, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 65%, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px);
+    background-size: 42px 42px, 58px 58px;
+    opacity: 0.12;
+    pointer-events: none;
+}
+
+.home-main-content > * {
+    position: relative;
+    z-index: 1;
+}
+
 .image-wrapper {
     overflow: hidden;
     border-radius: var(--radius-md);
     position: relative;
     box-shadow: var(--shadow-md);
+}
+
+.card .image-wrapper,
+.news-card .image-wrapper,
+.article-card .image-wrapper,
+.articles-card .image-wrapper,
+.story-card .image-wrapper,
+.knowledge-card .image-wrapper {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    margin: 0;
+    border: 0;
+    box-shadow: none;
 }
 
 .news-card-link {
@@ -14,9 +58,8 @@
 }
 
 .news-card-content {
-    padding: 1.5em;
-    flex: 1;
-    min-height: 15.6em;
+    padding: 1rem;
+    min-height: auto;
     display: flex;
     flex-direction: column;
 }
@@ -24,11 +67,11 @@
 .news-card-title {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 0.8em;
-    color: var(--color-text);
+    margin-bottom: 0.5rem;
+    color: #ffffff;
     transition: color 0.3s ease;
     text-decoration: none;
-    line-height: 1.4;
+    line-height: 1.18;
 }
 
 .news-card-title:hover {
@@ -37,11 +80,11 @@
 
 .news-card-description {
     font-size: 0.95rem;
-    color: var(--color-text-muted);
-    flex-grow: 1;
+    color: rgba(255, 255, 255, 0.96);
+    flex-grow: 0;
     overflow: hidden;
     line-height: 1.6;
-    margin-bottom: 1em;
+    margin-bottom: 0;
 }
 
 .news-card-description.expanded {
@@ -270,7 +313,9 @@
 }
 
 #news-grid .news-card-title:hover,
-#news-grid .news-card:hover .news-card-title {
+#news-grid .news-card:hover .news-card-title,
+#news-grid .news-card:focus-within .news-card-title,
+#news-grid .news-card:active .news-card-title {
     color: var(--accent-amber);
 }
 
@@ -296,7 +341,9 @@
     margin-bottom: 1rem;
 }
 
-#news-grid .news-card:hover .news-card-description {
+#news-grid .news-card:hover .news-card-description,
+#news-grid .news-card:focus-within .news-card-description,
+#news-grid .news-card:active .news-card-description {
     max-height: 8rem;
     opacity: 1;
     margin-bottom: 1rem;
@@ -304,4 +351,50 @@
 
 #news-grid .news-card-link {
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    #news-grid .news-card:first-child {
+        height: 22rem;
+        min-height: 22rem;
+    }
+
+    #news-grid .news-card:first-child .news-card-title,
+    #news-grid .news-card-title {
+        color: #ffffff;
+        font-size: 1.15rem;
+        line-height: 1.22;
+        margin-bottom: 0.4rem;
+    }
+
+    #news-grid .news-card:first-child .news-card-content {
+        align-items: stretch;
+        justify-content: flex-end;
+        padding: 0.875rem;
+        max-height: 72%;
+    }
+
+    #news-grid .news-card-content {
+        min-height: auto;
+        justify-content: flex-end;
+        padding: 0.875rem;
+        max-height: 72%;
+    }
+
+    #news-grid .news-card:first-child .news-card-description {
+        max-height: 0;
+        opacity: 0;
+        margin-bottom: 0;
+    }
+
+    #news-grid .news-card:first-child:hover .news-card-description,
+    #news-grid .news-card:first-child:focus-within .news-card-description,
+    #news-grid .news-card:first-child:active .news-card-description,
+    #news-grid .news-card:hover .news-card-description,
+    #news-grid .news-card:focus-within .news-card-description,
+    #news-grid .news-card:active .news-card-description {
+        max-height: 5.8rem;
+        opacity: 1;
+        margin-bottom: 1rem;
+    }
 }

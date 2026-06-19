@@ -114,7 +114,7 @@
             var(--reflection-top),
             rgba(12, 17, 32, 0.72);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--glass-panel-border);
+        border-bottom: 0;
     }
     
     /* Show hamburger menu on mobile */
@@ -128,7 +128,12 @@
         right: -100%;
         width: 280px;
         height: 100vh;
-        background: white;
+        background:
+            var(--reflection-top),
+            linear-gradient(135deg, rgba(18, 24, 46, 0.94), rgba(12, 17, 32, 0.9));
+        -webkit-backdrop-filter: var(--blur-lg) saturate(160%);
+        backdrop-filter: var(--blur-lg) saturate(160%);
+        border-left: 1px solid rgba(255, 255, 255, 0.22);
         box-shadow: var(--shadow-2xl);
         padding: var(--space-20) var(--space-6) var(--space-6);
         transition: right var(--transition-smooth);
@@ -153,7 +158,7 @@
         width: 100%;
         padding: var(--space-4);
         text-align: left;
-        color: var(--neutral-700);
+        color: var(--color-text-secondary);
         text-decoration: none;
         border-radius: var(--radius-lg);
         transition: all var(--transition-base);
@@ -162,8 +167,8 @@
     
     .nav-button:hover,
     .nav-button:focus {
-        background: var(--neutral-100);
-        color: var(--primary-600);
+        background: rgba(94, 231, 223, 0.14);
+        color: var(--color-text);
         transform: translateX(4px);
     }
     
