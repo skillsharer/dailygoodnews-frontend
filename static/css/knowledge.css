@@ -156,6 +156,17 @@
     color: var(--color-text-secondary);
 }
 
+.knowledge-item-page .knowledge-description {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: left;
+}
+
+.knowledge-item-page .knowledge-description p,
+.knowledge-item-page .knowledge-description li {
+    line-height: 1.85;
+}
+
 .knowledge-item-page .knowledge-footer {
     border-top-color: var(--glass-panel-border);
 }

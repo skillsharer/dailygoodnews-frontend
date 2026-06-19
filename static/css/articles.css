@@ -151,6 +151,17 @@
     color: var(--color-text-secondary);
 }
 
+.articles-item-page .articles-description {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: left;
+}
+
+.articles-item-page .articles-description p,
+.articles-item-page .articles-description li {
+    line-height: 1.85;
+}
+
 .articles-item-page .articles-footer {
     border-top-color: var(--glass-panel-border);
 }

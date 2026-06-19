@@ -31,10 +31,14 @@
                             <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer">
                             <img src="{{ url_for('static', filename='assets/facebook.svg') }}" alt="Facebook" class="social-icon"/>
                             </a>
+                            <a class="share-chip" href="https://www.linkedin.com/sharing/share-offsite/?url={{ request.url|urlencode }}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+                            <a class="share-chip" href="https://api.whatsapp.com/send?text={{ (news.heading ~ ' ' ~ request.url)|urlencode }}" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+                            <a class="share-chip" href="mailto:?subject={{ news.heading|urlencode }}&body={{ request.url|urlencode }}">Email</a>
+                            <button class="share-chip share-chip--button" type="button" data-share-native data-share-title="{{ news.heading }}" data-share-url="{{ request.url }}">Share</button>
+                            <button class="share-chip share-chip--button" type="button" data-share-copy data-share-url="{{ request.url }}">Copy Link</button>
                         </div>
                         </div>
                     </div>
-                </div>
         </section>
     </main>
 {% endblock %}

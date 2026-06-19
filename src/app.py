@@ -50,6 +50,25 @@ def extract_first_image(html_string):
     return None
 
 
+def resolve_story_time_image(image_value):
+    """Convert Story Time JSON image filenames into served artifact URLs."""
+    image_value = str(image_value or "").strip()
+
+    if not image_value:
+        return None
+
+    if image_value.startswith(("/", "http://", "https://", "data:")):
+        return image_value
+
+    if image_value.startswith("artifacts/"):
+        return f"/{image_value}"
+
+    if image_value.startswith("story_time/"):
+        return f"/artifacts/{image_value}"
+
+    return f"/artifacts/story_time/images/{image_value}"
+
+
 def load_json_data(source_file):
     """Load JSON data from a file."""
     with open(source_file, "r", encoding="utf-8") as jsonfile:
@@ -189,8 +208,8 @@ def story_time():
     )
 
     for article in story_time_articles:
-        article["image"] = article.get("image") or extract_first_image(
-            article.get("article", "")
+        article["image"] = resolve_story_time_image(
+            article.get("image") or extract_first_image(article.get("article", ""))
         )
 
     return render_template(

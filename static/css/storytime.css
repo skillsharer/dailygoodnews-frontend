@@ -161,6 +161,17 @@
     color: var(--color-text-secondary);
 }
 
+.storytime-item-page .storytime-description {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: left;
+}
+
+.storytime-item-page .storytime-description p,
+.storytime-item-page .storytime-description li {
+    line-height: 1.85;
+}
+
 .storytime-item-page .storytime-description img,
 .storytime-item-page .image-wrapper {
     border: 1px solid var(--glass-panel-border);

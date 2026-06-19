@@ -13,6 +13,7 @@ class DynamicPagination {
         this.padding = options.padding || 64; // 2rem on each side
         this.rowsPerClick = options.rowsPerClick || 2;
         this.hasFeaturedItem = options.hasFeaturedItem !== false; // default true
+        this.initialVisibleCount = options.initialVisibleCount || null;
         
         this.itemsPerRow = 1;
         this.currentVisible = 0;
@@ -24,6 +25,7 @@ class DynamicPagination {
         this.grid = document.querySelector(this.gridSelector);
         this.cards = document.querySelectorAll(this.cardSelector);
         this.button = document.querySelector(this.buttonSelector);
+        this.buttonContainer = this.button ? this.button.closest('.view-more-container') : null;
         
         if (!this.grid || !this.cards.length || !this.button) {
             return;
@@ -52,7 +54,9 @@ class DynamicPagination {
         this.itemsPerRow = this.calculateItemsPerRow();
         
         // Calculate initial visible items
-        if (this.hasFeaturedItem && this.totalCards > 1) {
+        if (this.initialVisibleCount) {
+            this.currentVisible = Math.min(this.initialVisibleCount, this.totalCards);
+        } else if (this.hasFeaturedItem && this.totalCards > 1) {
             // First item is featured and spans full width, so start counting from second item
             // Show first item (featured) + first row of regular items
             this.currentVisible = Math.min(1 + this.itemsPerRow, this.totalCards);
@@ -60,6 +64,15 @@ class DynamicPagination {
             // Show first complete row
             this.currentVisible = Math.min(this.itemsPerRow, this.totalCards);
         }
+
+        this.cards.forEach((card, index) => {
+            card.style.display = index < this.currentVisible ? '' : 'none';
+            card.style.opacity = '';
+            card.style.transform = '';
+            card.style.transition = '';
+            card.style.animation = '';
+            card.style.animationDelay = '';
+        });
         
         // Hide all cards beyond the initial visible count
         for (let i = this.currentVisible; i < this.totalCards; i++) {
@@ -67,10 +80,17 @@ class DynamicPagination {
         }
         
         // Hide button if all items are visible
-        if (this.currentVisible >= this.totalCards) {
-            this.button.style.display = 'none';
-        } else {
-            this.button.style.display = 'block';
+        this.updateButtonVisibility();
+    }
+
+    updateButtonVisibility() {
+        const hasMoreItems = this.currentVisible < this.totalCards;
+        const display = hasMoreItems ? '' : 'none';
+
+        this.button.style.display = display;
+
+        if (this.buttonContainer) {
+            this.buttonContainer.style.display = display;
         }
     }
     
@@ -84,16 +104,22 @@ class DynamicPagination {
         // Animate new items
         for (let i = previousVisible; i < this.currentVisible; i++) {
             if (this.cards[i]) {
-                this.cards[i].style.display = 'block';
-                this.cards[i].style.animation = 'fadeInUp 0.6s ease forwards';
-                this.cards[i].style.animationDelay = `${(i - previousVisible) * 0.1}s`;
+                this.cards[i].style.display = '';
+                this.cards[i].style.opacity = '0';
+                this.cards[i].style.transform = 'translateY(24px)';
+                this.cards[i].style.transition = 'opacity 0.55s ease, transform 0.55s cubic-bezier(0.22, 0.68, 0, 1.2)';
+
+                const card = this.cards[i];
+                requestAnimationFrame(() => {
+                    card.style.transitionDelay = `${(i - previousVisible) * 0.08}s`;
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                });
             }
         }
         
         // Hide button if no more items
-        if (this.currentVisible >= this.totalCards) {
-            this.button.style.display = 'none';
-        }
+        this.updateButtonVisibility();
     }
     
     bindEvents() {
@@ -131,6 +157,7 @@ function initializePagination(pageType = 'home') {
             cardSelector: '.news-card',
             buttonSelector: '#view-more-btn',
             hasFeaturedItem: true,
+            initialVisibleCount: 3,
             minItemWidth: 290,
             rowsPerClick: 2
         },
@@ -150,7 +177,7 @@ function initializePagination(pageType = 'home') {
         },
         storytime: {
             gridSelector: '.storytime-grid',
-            cardSelector: '.storytime-card',
+            cardSelector: '.story-card',
             buttonSelector: '#view-more-stories-btn',
             hasFeaturedItem: false,
             rowsPerClick: 2

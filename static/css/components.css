@@ -1647,6 +1647,85 @@ h2.section-title::after {
     color: #ffffff;
 }
 
+.news-description,
+.articles-description,
+.knowledge-description,
+.storytime-description {
+    text-align: left;
+    max-width: 760px;
+    margin-inline: auto;
+}
+
+.news-description p,
+.articles-description p,
+.knowledge-description p,
+.storytime-description p {
+    margin: 0 0 1.35rem;
+    line-height: 1.85;
+}
+
+.news-description ul,
+.news-description ol,
+.articles-description ul,
+.articles-description ol,
+.knowledge-description ul,
+.knowledge-description ol,
+.storytime-description ul,
+.storytime-description ol {
+    margin: 0 0 1.5rem 1.25rem;
+    padding-left: 1rem;
+}
+
+.news-description li,
+.articles-description li,
+.knowledge-description li,
+.storytime-description li {
+    margin-bottom: 0.65rem;
+    line-height: 1.75;
+}
+
+.social-share {
+    flex-wrap: wrap;
+}
+
+.share-chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    padding: 0.4rem 0.7rem;
+    border: 1px solid var(--glass-panel-border);
+    border-radius: var(--radius-md);
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: var(--blur-sm) saturate(150%);
+    backdrop-filter: var(--blur-sm) saturate(150%);
+    color: var(--color-text-secondary);
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.share-chip:hover,
+.share-chip:focus-visible,
+.share-chip.is-copied {
+    transform: translateY(-2px);
+    border-color: var(--glass-border-bright);
+    background:
+        var(--reflection-top),
+        rgba(94, 231, 223, 0.16);
+    color: var(--color-text);
+}
+
+.share-chip--button {
+    appearance: none;
+}
+
 .news-card:first-child {
     height: 24rem;
 }

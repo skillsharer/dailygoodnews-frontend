@@ -244,6 +244,17 @@
     color: var(--color-text-secondary);
 }
 
+.news-item-page .news-description {
+    max-width: 760px;
+    margin-inline: auto;
+    text-align: left;
+}
+
+.news-item-page .news-description p,
+.news-item-page .news-description li {
+    line-height: 1.85;
+}
+
 .news-item-page .image-wrapper {
     border: 1px solid var(--glass-panel-border);
     box-shadow: var(--shadow-panel);
