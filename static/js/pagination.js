@@ -42,6 +42,14 @@ function getDetailPageTypeFromPath(pathname) {
     return null;
 }
 
+function removePaginationState(pageType) {
+    try {
+        sessionStorage.removeItem(`dailygoodnews:${pageType}:pagination`);
+    } catch (error) {
+        // Session storage can be unavailable in private modes.
+    }
+}
+
 class DynamicPagination {
     constructor(options = {}) {
         this.gridSelector = options.gridSelector || '.news-grid';
@@ -169,11 +177,7 @@ class DynamicPagination {
             return;
         }
 
-        try {
-            sessionStorage.removeItem(this.storageKey);
-        } catch (error) {
-            // Session storage can be unavailable in private modes.
-        }
+        removePaginationState(this.pageType);
     }
 
     storeState() {
@@ -326,6 +330,32 @@ window.DynamicPagination = DynamicPagination;
 window.initializePagination = initializePagination;
 
 document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('click', (event) => {
+        const link = event.target.closest('a[href]');
+
+        if (!link || link.hasAttribute('data-go-back')) {
+            return;
+        }
+
+        let targetUrl = null;
+
+        try {
+            targetUrl = new URL(link.getAttribute('href'), window.location.href);
+        } catch (error) {
+            targetUrl = null;
+        }
+
+        if (!targetUrl || targetUrl.origin !== window.location.origin) {
+            return;
+        }
+
+        const targetPageType = getPageTypeFromPath(targetUrl.pathname);
+
+        if (targetPageType) {
+            removePaginationState(targetPageType);
+        }
+    });
+
     document.querySelectorAll('[data-go-back]').forEach((link) => {
         link.addEventListener('click', (event) => {
             const fallbackUrl = link.getAttribute('href') || '/';
