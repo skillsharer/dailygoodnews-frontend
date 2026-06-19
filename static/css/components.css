@@ -1736,7 +1736,17 @@ a.article-meta-item:hover {
 .articles-footer,
 .knowledge-footer,
 .storytime-footer {
-    justify-content: space-between;
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+}
+
+.news-item-page .news-footer .social-share-container,
+.articles-item-page .articles-footer .social-share-container,
+.knowledge-item-page .knowledge-footer .social-share-container,
+.storytime-item-page .storytime-footer .social-share-container {
+    margin-left: 0;
 }
 
 .social-share {
