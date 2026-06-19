@@ -1761,6 +1761,22 @@ a.article-meta-item:hover {
     margin: 0;
     align-self: center;
     line-height: 1;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.news-footer .go-back-btn:hover,
+.news-footer .go-back-btn:focus-visible,
+.articles-footer .go-back-btn:hover,
+.articles-footer .go-back-btn:focus-visible,
+.knowledge-footer .go-back-btn:hover,
+.knowledge-footer .go-back-btn:focus-visible,
+.storytime-footer .go-back-btn:hover,
+.storytime-footer .go-back-btn:focus-visible {
+    transform: translateY(-1px);
+    border-color: var(--glass-border-bright);
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.18);
 }
 
 @media (max-width: 520px) {
