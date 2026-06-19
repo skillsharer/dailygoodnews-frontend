@@ -1739,14 +1739,24 @@ a.article-meta-item:hover {
     width: 100%;
     margin-right: auto;
     margin-left: auto;
-    justify-content: center;
+    justify-content: space-between;
 }
 
 .news-item-page .news-footer .social-share-container,
 .articles-item-page .articles-footer .social-share-container,
 .knowledge-item-page .knowledge-footer .social-share-container,
 .storytime-item-page .storytime-footer .social-share-container {
-    margin-left: 0;
+    margin-left: auto;
+}
+
+@media (max-width: 520px) {
+    .news-footer,
+    .articles-footer,
+    .knowledge-footer,
+    .storytime-footer {
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
 }
 
 .social-share {
