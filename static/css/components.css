@@ -1746,7 +1746,21 @@ a.article-meta-item:hover {
 .articles-item-page .articles-footer .social-share-container,
 .knowledge-item-page .knowledge-footer .social-share-container,
 .storytime-item-page .storytime-footer .social-share-container {
+    align-items: center;
     margin-left: auto;
+}
+
+.news-footer .go-back-btn,
+.articles-footer .go-back-btn,
+.knowledge-footer .go-back-btn,
+.storytime-footer .go-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.45rem;
+    margin: 0;
+    align-self: center;
+    line-height: 1;
 }
 
 @media (max-width: 520px) {
