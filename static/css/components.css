@@ -1763,43 +1763,56 @@ h2.section-title::after {
     backdrop-filter: var(--blur-md) saturate(160%);
     box-shadow: var(--shadow-panel);
     transform-origin: bottom right;
+    overflow: hidden;
 }
 
 .share-menu-item {
+    box-sizing: border-box;
     display: grid;
     grid-template-columns: 1.15rem 1fr;
     align-items: center;
     gap: 0.65rem;
     width: 100%;
-    min-height: 2.45rem;
-    padding: 0.55rem 0.65rem;
+    height: 2.55rem;
+    min-height: 2.55rem;
+    margin: 0;
+    padding: 0 0.65rem;
     border: 0;
     border-radius: calc(var(--radius-md) - 2px);
     background: transparent;
     color: var(--color-text);
-    font: inherit;
+    font-family: inherit;
     font-size: 0.88rem;
     font-weight: 750;
     line-height: 1.1;
     text-align: left;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.18s ease, transform 0.18s ease, color 0.18s ease;
+    white-space: nowrap;
+    transition: background 0.18s ease, color 0.18s ease;
 }
 
 .share-menu-item:hover,
 .share-menu-item:focus-visible,
 .share-menu-item.is-copied {
-    transform: translateX(2px);
     background: rgba(255, 255, 255, 0.12);
     color: #ffffff;
 }
 
 .share-menu-button {
     appearance: none;
+    -webkit-appearance: none;
+}
+
+.share-menu-item span {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .social-share .share-menu .social-icon {
+    display: block;
     width: 1.05rem;
     height: 1.05rem;
     opacity: 0.95;
