@@ -26,7 +26,7 @@
     line-height: 1.2;
     margin-bottom: 2.5rem;
     max-width: 800px;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .knowledge-item-page .image-wrapper {
@@ -129,3 +129,51 @@
 
 /* Go Back Button */
 /* Go back button inherits from components.css */
+
+/* Dark glass knowledge pages */
+.knowledge-item-page {
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: var(--blur-md) saturate(150%);
+    backdrop-filter: var(--blur-md) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.knowledge-item-page h1,
+.knowledge-item-page .knowledge-description h2,
+.knowledge-item-page .knowledge-description h3 {
+    color: var(--color-text);
+    letter-spacing: 0;
+}
+
+.knowledge-item-page .knowledge-description,
+.knowledge-item-page .knowledge-description p {
+    color: var(--color-text-secondary);
+}
+
+.knowledge-item-page .knowledge-footer {
+    border-top-color: var(--glass-border-subtle);
+}
+
+.knowledge-item-page .image-wrapper {
+    border: 1px solid var(--glass-border-subtle);
+    box-shadow: var(--shadow-glass);
+}
+
+.knowledge-item-page .knowledge-source {
+    color: var(--accent-aqua);
+}
+
+.knowledge-item-page .knowledge-source:hover {
+    color: var(--accent-violet);
+}
+
+.knowledge-item-page .knowledge-date,
+.knowledge-item-page .share-text {
+    color: var(--color-text-muted);
+}

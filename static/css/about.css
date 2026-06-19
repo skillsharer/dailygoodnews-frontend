@@ -2,7 +2,7 @@
 .about-section {
     padding: 6vw;
     padding-top: 0; /* Let container handle top padding */
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.07);
     margin-top: 0; /* Remove margin-top to prevent header overlap */
     margin-bottom: 2vh;
     border-radius: 0.625em;
@@ -33,4 +33,33 @@
     line-height: 1.7;
     margin-bottom: 0.5em;
     color: #555;
+}
+
+/* Dark glass about panels */
+.about-section {
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: var(--blur-md) saturate(150%);
+    backdrop-filter: var(--blur-md) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    color: var(--color-text-secondary);
+}
+
+.about-section h2 {
+    color: var(--color-text);
+    letter-spacing: 0;
+}
+
+.about-section p,
+.about-section li {
+    color: var(--color-text-secondary);
+}
+
+.address-wrapper {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--glass-border-subtle);
+    color: var(--color-text);
 }

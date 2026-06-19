@@ -1,8 +1,12 @@
 /* Clean Modern Header */
 .site-header {
-    background: white;
+    background:
+        var(--reflection-top),
+        rgba(8, 12, 24, 0.68);
+    -webkit-backdrop-filter: var(--blur-md) saturate(160%);
+    backdrop-filter: var(--blur-md) saturate(160%);
     padding: 1rem 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-glass);
     width: 100% !important;
     position: fixed !important;
     top: 0 !important;
@@ -11,7 +15,7 @@
     right: 0;
     display: flex;
     justify-content: center;
-    border-bottom: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--glass-border);
     min-height: 70px;
     max-height: 70px;
     box-sizing: border-box;
@@ -23,8 +27,9 @@
 
 /* Enhanced header on scroll */
 .site-header.scrolled {
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-    border-bottom-color: var(--gray-300);
+    background: rgba(8, 12, 24, 0.82);
+    box-shadow: var(--shadow-float);
+    border-bottom-color: var(--glass-border-bright);
 }
 
 .site-header .header-content {
@@ -41,16 +46,16 @@
 .logo {
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--primary-600);
+    color: var(--color-text);
     text-decoration: none;
     white-space: nowrap;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     transition: color 0.2s ease;
     position: relative;
 }
 
 .logo:hover {
-    color: var(--primary-700);
+    color: var(--accent-aqua);
 }
 
 .main-nav ul {
@@ -67,7 +72,7 @@
 /* Clean Navigation Links */
 .main-nav a {
     text-decoration: none;
-    color: var(--gray-700);
+    color: var(--color-text-secondary);
     padding: 0.625rem 1rem;
     border-radius: 8px;
     font-weight: 600;
@@ -79,8 +84,9 @@
 }
 
 .main-nav a:hover {
-    background: var(--primary-50);
-    color: var(--primary-700);
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-text);
+    box-shadow: inset 0 0 0 1px var(--glass-border-subtle);
 }
 
 .menu-toggle {
@@ -98,13 +104,13 @@
 }
 
 .menu-toggle:hover {
-    background-color: var(--primary-50);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .bar {
     width: 1.5rem;
     height: 2px;
-    background: var(--gray-700);
+    background: var(--color-text);
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -141,8 +147,13 @@
         right: -100%;
         width: 300px;
         height: 100vh;
-        background: white;
-        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+        background:
+            var(--reflection-top),
+            rgba(8, 12, 24, 0.9);
+        -webkit-backdrop-filter: var(--blur-lg) saturate(160%);
+        backdrop-filter: var(--blur-lg) saturate(160%);
+        box-shadow: var(--shadow-float);
+        border-left: 1px solid var(--glass-border);
         padding: 5rem 1.5rem 2rem;
         transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1000;
@@ -168,19 +179,19 @@
         padding: 1rem 1.25rem;
         font-size: 1rem;
         border-radius: 10px;
-        color: var(--gray-700);
+        color: var(--color-text-secondary);
         font-weight: 600;
     }
     
     .main-nav a:hover {
-        background: var(--primary-50);
-        color: var(--primary-700);
+        background: rgba(255, 255, 255, 0.1);
+        color: var(--color-text);
     }
     
     /* Hamburger menu animation - smooth X transformation */
     .menu-toggle.active .bar:nth-child(1) {
         transform: rotate(45deg) translate(0.5rem, 0.5rem);
-        background: var(--primary-600);
+        background: var(--accent-aqua);
     }
     
     .menu-toggle.active .bar:nth-child(2) {
@@ -190,7 +201,7 @@
     
     .menu-toggle.active .bar:nth-child(3) {
         transform: rotate(-45deg) translate(0.5rem, -0.5rem);
-        background: var(--primary-600);
+        background: var(--accent-aqua);
     }
     
     /* Overlay background with smooth fade */
@@ -201,7 +212,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0, 0, 0, 0.4);
+        background: rgba(0, 0, 0, 0.58);
         z-index: 999;
         animation: fadeIn 0.3s ease;
     }

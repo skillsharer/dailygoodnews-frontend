@@ -8,7 +8,7 @@
 
 .articles-card-description {
     font-size: 0.9rem;
-    color: #000000;
+    color: var(--color-text-muted);
     flex-grow: 1; /* Take up remaining space */
     overflow: hidden;
 }
@@ -31,7 +31,7 @@
     line-height: 1.2;
     margin-bottom: 2.5rem;
     max-width: 800px;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
 }
 
 .articles-item-page .image-wrapper {
@@ -119,4 +119,48 @@
 
 .articles-item-page .social-icon:hover {
     opacity: 1;
+}
+
+/* Dark glass article pages */
+.articles-card-description {
+    color: var(--color-text-muted);
+}
+
+.articles-item-page {
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: var(--blur-md) saturate(150%);
+    backdrop-filter: var(--blur-md) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+}
+
+.articles-item-page h1,
+.articles-item-page .articles-description h2,
+.articles-item-page .articles-description h3 {
+    color: var(--color-text);
+    letter-spacing: 0;
+}
+
+.articles-item-page .articles-description,
+.articles-item-page .articles-description p {
+    color: var(--color-text-secondary);
+}
+
+.articles-item-page .articles-footer {
+    border-top-color: var(--glass-border-subtle);
+}
+
+.articles-item-page .image-wrapper {
+    border: 1px solid var(--glass-border-subtle);
+    box-shadow: var(--shadow-glass);
+}
+
+.articles-item-page .articles-date,
+.articles-item-page .share-text {
+    color: var(--color-text-muted);
 }

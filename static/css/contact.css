@@ -43,7 +43,7 @@
 }
 
 .contact-section {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.07);
     padding: 2.5em 1.25em;
     border-radius: 0.625em;
     margin-top: 4vh;
@@ -90,4 +90,42 @@
 
 .contact-link:hover {
     color: #2980b9;
+}
+
+/* Dark glass contact page */
+.contact-section {
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: var(--blur-md) saturate(150%);
+    backdrop-filter: var(--blur-md) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+    color: var(--color-text-secondary);
+}
+
+.contact-section-title {
+    color: var(--color-text);
+    letter-spacing: 0;
+}
+
+.contact-description,
+.contact-details li,
+.address-block strong {
+    color: var(--color-text-secondary);
+}
+
+.address-wrapper {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--glass-border-subtle);
+    color: var(--color-text);
+}
+
+.contact-link {
+    color: var(--accent-aqua);
+}
+
+.contact-link:hover {
+    color: var(--accent-violet);
 }

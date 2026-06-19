@@ -1,6 +1,6 @@
 /* Privacy Policy Page Styles */
 .privacy-policy-section {
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.07);
     padding: 6vw;
     margin-top: 2vh;
     margin-bottom: 2vh;
@@ -45,4 +45,39 @@
 
 .privacy-policy-section a:hover {
     color: #2980b9;
+}
+
+/* Dark glass privacy page */
+.privacy-policy-section {
+    background:
+        var(--reflection-top),
+        rgba(255, 255, 255, 0.07);
+    -webkit-backdrop-filter: var(--blur-md) saturate(150%);
+    backdrop-filter: var(--blur-md) saturate(150%);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-glass);
+}
+
+.privacy-policy-section h1,
+.privacy-policy-section h2 {
+    color: var(--color-text);
+    letter-spacing: 0;
+}
+
+.privacy-policy-section h2 {
+    border-bottom-color: var(--glass-border-subtle);
+}
+
+.privacy-policy-section p,
+.privacy-policy-section li {
+    color: var(--color-text-secondary);
+}
+
+.privacy-policy-section a {
+    color: var(--accent-aqua);
+}
+
+.privacy-policy-section a:hover {
+    color: var(--accent-violet);
 }
