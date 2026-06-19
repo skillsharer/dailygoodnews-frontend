@@ -46,6 +46,8 @@
 
 /* Modern Clean Logo */
 .logo {
+    display: inline-flex;
+    align-items: center;
     font-size: 1.5rem;
     font-weight: 800;
     color: var(--color-text);
@@ -54,6 +56,26 @@
     letter-spacing: 0;
     transition: color 0.2s ease;
     position: relative;
+}
+
+.logo-text {
+    position: relative;
+    z-index: 2;
+}
+
+.logo-flag {
+    position: absolute;
+    right: -0.95rem;
+    top: 0.5rem;
+    z-index: 1;
+    width: 1.55rem;
+    height: auto;
+    border-radius: 0.16rem;
+    box-shadow: 0 0.25rem 0.65rem rgba(0, 0, 0, 0.28);
+    opacity: 0.9;
+    pointer-events: none;
+    transform: rotate(-13deg);
+    transform-origin: center;
 }
 
 .logo:hover {
@@ -125,6 +147,12 @@
     
     .site-header .header-content {
         padding: 0 1rem;
+    }
+
+    .logo-flag {
+        right: -0.72rem;
+        width: 1.35rem;
+        top: 0.52rem;
     }
     
     /* Keep nav in normal flow but position items differently */
