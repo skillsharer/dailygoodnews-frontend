@@ -638,16 +638,11 @@ h2.section-title::after {
 }
 
 .page-loader {
-    background:
-        linear-gradient(135deg, rgba(94, 231, 223, 0.12), transparent 34%),
-        linear-gradient(225deg, rgba(180, 144, 245, 0.12), transparent 36%),
-        var(--color-bg);
+    background: rgba(246, 255, 251, 0.92);
 }
 
 .page-loader__spinner {
-    border-color: rgba(255, 255, 255, 0.1);
-    border-top-color: var(--accent-aqua);
-    box-shadow: var(--shadow-glow);
+    box-shadow: none;
 }
 
 .card,
@@ -701,7 +696,7 @@ h2.section-title::after {
 .news-card:first-child {
     background:
         var(--reflection-top),
-        linear-gradient(135deg, rgba(94, 231, 223, 0.14), rgba(180, 144, 245, 0.11)),
+        linear-gradient(135deg, rgba(105, 240, 218, 0.16), rgba(255, 224, 138, 0.13)),
         rgba(10, 16, 31, 0.72);
     border: 1px solid var(--glass-border-bright);
     max-width: 860px;
@@ -709,8 +704,8 @@ h2.section-title::after {
 
 .news-card:first-child::before {
     background:
-        linear-gradient(135deg, rgba(94, 231, 223, 0.18), transparent 45%),
-        linear-gradient(225deg, rgba(180, 144, 245, 0.16), transparent 42%);
+        linear-gradient(135deg, rgba(105, 240, 218, 0.2), transparent 45%),
+        linear-gradient(225deg, rgba(255, 224, 138, 0.16), transparent 42%);
     opacity: 1;
 }
 
@@ -773,6 +768,7 @@ h2.section-title::after {
 h2.section-title {
     color: var(--color-text);
     letter-spacing: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .section-title::after,
@@ -789,10 +785,10 @@ h2.section-title::after {
 .card__read-more {
     background:
         var(--reflection-top),
-        rgba(255, 255, 255, 0.1);
+        var(--glass-panel);
     -webkit-backdrop-filter: var(--blur-sm) saturate(150%);
     backdrop-filter: var(--blur-sm) saturate(150%);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-panel-border);
     border-radius: var(--radius-md);
     color: var(--color-text);
     box-shadow: var(--shadow-glass);
@@ -805,7 +801,7 @@ h2.section-title::after {
 .btn:hover,
 .card__read-more:hover {
     background:
-        linear-gradient(135deg, rgba(94, 231, 223, 0.2), rgba(180, 144, 245, 0.16)),
+        linear-gradient(135deg, rgba(105, 240, 218, 0.22), rgba(255, 224, 138, 0.16)),
         rgba(255, 255, 255, 0.12);
     color: var(--color-text);
     border-color: var(--glass-border-bright);
@@ -1285,9 +1281,9 @@ h2.section-title::after {
 .card__read-more {
     background:
         var(--reflection-top),
-        rgba(255, 255, 255, 0.1);
+        var(--glass-panel);
     color: var(--color-text);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-panel-border);
     border-radius: var(--radius-md);
 }
 
@@ -1330,7 +1326,7 @@ h2.section-title::after {
     height: auto;
     background:
         linear-gradient(to bottom, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.74) 82%),
-        linear-gradient(135deg, rgba(94, 231, 223, 0.08), rgba(180, 144, 245, 0.08));
+        linear-gradient(135deg, rgba(105, 240, 218, 0.1), rgba(255, 224, 138, 0.1));
     opacity: 1;
     z-index: 2;
     pointer-events: none;
@@ -1376,7 +1372,7 @@ h2.section-title::after {
     border: 0;
     border-radius: inherit;
     background:
-        linear-gradient(135deg, rgba(94, 231, 223, 0.18), rgba(180, 144, 245, 0.16)),
+        linear-gradient(135deg, rgba(105, 240, 218, 0.2), rgba(255, 224, 138, 0.16)),
         rgba(255, 255, 255, 0.06);
     box-shadow: none;
 }
@@ -1388,7 +1384,7 @@ h2.section-title::after {
     inset: 0;
     background:
         linear-gradient(to bottom, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.78) 84%),
-        linear-gradient(135deg, rgba(94, 231, 223, 0.08), rgba(180, 144, 245, 0.08));
+        linear-gradient(135deg, rgba(105, 240, 218, 0.1), rgba(255, 224, 138, 0.1));
     z-index: 2;
     pointer-events: none;
 }
@@ -1433,7 +1429,7 @@ h2.section-title::after {
     z-index: 5;
     min-height: auto;
     padding: 1rem;
-    color: var(--color-text);
+    color: #ffffff;
     transition: background-color 0.8s ease;
 }
 
@@ -1443,6 +1439,7 @@ h2.section-title::after {
 .story-card-title,
 .knowledge-card-title,
 .card__title {
+    color: #ffffff;
     font-size: clamp(1.25rem, 2vw, 1.65rem);
     line-height: 1.18;
     margin-bottom: 0.5rem;
@@ -1460,10 +1457,21 @@ h2.section-title::after {
     opacity: 0;
     overflow: hidden;
     margin-bottom: 0;
-    color: rgba(255, 255, 255, 0.82);
+    color: rgba(255, 255, 255, 0.96);
     font-size: 0.92rem;
     line-height: 1.55;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.56);
     transition: max-height 0.9s ease, opacity 0.65s ease, margin-bottom 0.45s ease;
+}
+
+.card-description *,
+.news-card-description *,
+.articles-card-description *,
+.story-card-description *,
+.knowledge-card-description *,
+.card__description * {
+    color: inherit;
+    text-shadow: inherit;
 }
 
 .read-more,
@@ -1509,7 +1517,7 @@ h2.section-title::after {
 .story-card:hover .story-card-content,
 .knowledge-card:hover .knowledge-card-content,
 .card:hover .card__content {
-    background-color: rgba(0, 0, 0, 0.58);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 .card:hover .card-title,
@@ -1544,6 +1552,17 @@ h2.section-title::after {
     margin-top: 0.75rem;
     padding-top: 0.45rem;
     padding-bottom: 0.45rem;
+}
+
+.card .read-more,
+.news-card .read-more,
+.article-card .read-more,
+.articles-card .read-more,
+.story-card .read-more,
+.knowledge-card .read-more {
+    background: rgba(0, 0, 0, 0.46);
+    border-color: rgba(255, 255, 255, 0.24);
+    color: #ffffff;
 }
 
 .news-card:first-child {

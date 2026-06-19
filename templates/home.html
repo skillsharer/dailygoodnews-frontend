@@ -34,7 +34,10 @@
     <div id="hero-section" class="parallax">
         <div class="hero-overlay">
             <h1 class="hero-title">Discover the Good in Every Day</h1>
-            <p class="hero-subtitle">Because what you consume really does matter</p>
+            <p class="hero-subtitle hero-subtitle--typing" data-typing-text="Because what you consume really does matter.">
+                <span class="typed-text">Because what you consume really does matter.</span>
+                <span class="typing-cursor" aria-hidden="true"></span>
+            </p>
             <a href="#" class="cta-button" id="explore-now">Explore Now</a>
         </div>
     </div>
@@ -84,4 +87,8 @@
         -->
     </div>
 
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/typing-motto.js') }}" defer></script>
 {% endblock %}

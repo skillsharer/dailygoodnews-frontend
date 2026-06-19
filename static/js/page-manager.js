@@ -121,14 +121,6 @@ class PageManager {
 
     // Refresh page state when returning from background
     refreshPageState() {
-        const footer = document.querySelector('footer');
-        
-        // Ensure footer styling is preserved
-        if (footer) {
-            footer.style.background = 'linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%)';
-            footer.style.color = 'rgba(255, 255, 255, 0.95)';
-        }
-
         // Re-initialize any dynamic elements if needed
         this.initializeDynamicElements();
     }

@@ -4,21 +4,25 @@
 
 :root {
     /* Dark liquid glass tokens */
-    --glass-white: rgba(255, 255, 255, 0.11);
-    --glass-white-md: rgba(255, 255, 255, 0.17);
-    --glass-white-lg: rgba(255, 255, 255, 0.24);
-    --glass-dark: rgba(4, 8, 20, 0.5);
-    --glass-dark-md: rgba(4, 8, 20, 0.68);
-    --glass-border: rgba(255, 255, 255, 0.2);
-    --glass-border-subtle: rgba(255, 255, 255, 0.1);
-    --glass-border-bright: rgba(255, 255, 255, 0.38);
+    --glass-white: rgba(255, 255, 255, 0.42);
+    --glass-white-md: rgba(255, 255, 255, 0.58);
+    --glass-white-lg: rgba(255, 255, 255, 0.72);
+    --glass-dark: rgba(255, 255, 255, 0.34);
+    --glass-dark-md: rgba(255, 255, 255, 0.48);
+    --glass-border: rgba(255, 255, 255, 0.58);
+    --glass-border-subtle: rgba(255, 255, 255, 0.36);
+    --glass-border-bright: rgba(255, 255, 255, 0.82);
+    --glass-panel: rgba(255, 255, 255, 0.74);
+    --glass-panel-strong: rgba(255, 255, 255, 0.86);
+    --glass-panel-border: rgba(28, 111, 119, 0.22);
     --blur-sm: blur(8px);
     --blur-md: blur(18px);
     --blur-lg: blur(32px);
     --blur-xl: blur(60px);
-    --shadow-glass: 0 18px 42px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.18);
-    --shadow-float: 0 26px 70px rgba(0, 0, 0, 0.48), 0 6px 18px rgba(0, 0, 0, 0.22);
-    --shadow-glow: 0 0 36px rgba(94, 231, 223, 0.22);
+    --shadow-glass: 0 18px 42px rgba(49, 112, 118, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.42);
+    --shadow-float: 0 26px 70px rgba(49, 112, 118, 0.24), 0 6px 18px rgba(36, 88, 93, 0.12);
+    --shadow-panel: 0 20px 55px rgba(28, 111, 119, 0.18), 0 6px 18px rgba(36, 88, 93, 0.1);
+    --shadow-glow: 0 0 38px rgba(105, 240, 218, 0.26);
     --reflection-top: linear-gradient(
         135deg,
         rgba(255, 255, 255, 0.22) 0%,
@@ -26,27 +30,27 @@
         rgba(255, 255, 255, 0) 62%
     );
     --reflection-inner: inset 0 1px 1px rgba(255, 255, 255, 0.28), inset 0 -1px 1px rgba(0, 0, 0, 0.22);
-    --accent-aqua: #5ee7df;
-    --accent-violet: #b490f5;
-    --accent-rose: #f7a8c4;
-    --accent-amber: #ffd27f;
-    --accent-lime: #a8f08a;
-    --color-bg: #0b0e1a;
-    --color-bg-gradient: linear-gradient(135deg, #070a13 0%, #0b1020 42%, #12172a 100%);
-    --color-surface: rgba(255, 255, 255, 0.04);
+    --accent-aqua: #69f0da;
+    --accent-violet: #9fd7ff;
+    --accent-rose: #ffb7a1;
+    --accent-amber: #ffe08a;
+    --accent-lime: #b8f59a;
+    --color-bg: #f6fffb;
+    --color-bg-gradient: linear-gradient(135deg, #f6fffb 0%, #d9fff6 36%, #dff3ff 68%, #fff4c7 100%);
+    --color-surface: rgba(255, 255, 255, 0.58);
     --color-primary: var(--accent-aqua);
     --color-secondary: var(--accent-violet);
-    --color-text: #ffffff;
-    --color-text-secondary: rgba(255, 255, 255, 0.78);
-    --color-text-muted: rgba(255, 255, 255, 0.62);
-    --color-text-subtle: rgba(255, 255, 255, 0.42);
-    --primary-50: rgba(94, 231, 223, 0.08);
-    --primary-100: rgba(94, 231, 223, 0.12);
-    --primary-500: #5ee7df;
-    --primary-600: #45c9d9;
-    --primary-700: #91c8ff;
-    --secondary-500: #b490f5;
-    --accent-gold: #ffd27f;
+    --color-text: #153f45;
+    --color-text-secondary: rgba(21, 63, 69, 0.82);
+    --color-text-muted: rgba(21, 63, 69, 0.64);
+    --color-text-subtle: rgba(21, 63, 69, 0.48);
+    --primary-50: rgba(105, 240, 218, 0.1);
+    --primary-100: rgba(105, 240, 218, 0.15);
+    --primary-500: #69f0da;
+    --primary-600: #55d8d3;
+    --primary-700: #9fd7ff;
+    --secondary-500: #9fd7ff;
+    --accent-gold: #ffe08a;
     --gray-100: rgba(255, 255, 255, 0.08);
     --gray-200: rgba(255, 255, 255, 0.12);
     --gray-300: rgba(255, 255, 255, 0.18);
@@ -115,7 +119,7 @@
 /* Enhanced Typography & Layout with Subtle Background Pattern */
 body {
     font-family: 'Inter', 'SF Pro Display', 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--color-bg);
+    background: var(--color-bg-gradient);
     background-attachment: fixed;
     color: var(--color-text);
     line-height: var(--line-height-relaxed);
@@ -172,12 +176,14 @@ body {
 body {
     margin: 0;
     padding-top: 80px;
-    background: var(--color-bg);
+    background:
+        linear-gradient(145deg, rgba(255, 238, 161, 0.36), transparent 42%),
+        var(--color-bg-gradient);
     background-attachment: fixed;
     position: relative;
 }
 
-/* Dark liquid-glass background from the reference kit */
+/* Daylight liquid-glass background */
 body::before {
     content: '';
     position: fixed;
@@ -186,9 +192,9 @@ body::before {
     top: -220px;
     left: -160px;
     background:
-        radial-gradient(circle, rgba(94, 231, 223, 0.55), rgba(59, 130, 246, 0.4) 44%, transparent 70%);
-    filter: blur(80px);
-    opacity: 0.55;
+        radial-gradient(circle, rgba(105, 240, 218, 0.72), rgba(114, 214, 255, 0.42) 46%, transparent 72%);
+    filter: blur(68px);
+    opacity: 0.64;
     pointer-events: none;
     z-index: 0;
     animation: background-drift-a 22s ease-in-out infinite alternate;
@@ -202,9 +208,9 @@ body::after {
     right: -120px;
     bottom: -220px;
     background:
-        radial-gradient(circle, rgba(180, 144, 245, 0.5), rgba(236, 72, 153, 0.34) 46%, transparent 72%);
-    filter: blur(80px);
-    opacity: 0.55;
+        radial-gradient(circle, rgba(255, 230, 126, 0.72), rgba(255, 183, 161, 0.48) 46%, transparent 72%);
+    filter: blur(72px);
+    opacity: 0.62;
     pointer-events: none;
     z-index: 0;
     animation: background-drift-b 17s ease-in-out -8s infinite alternate;

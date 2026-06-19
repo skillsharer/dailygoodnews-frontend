@@ -107,12 +107,6 @@ class SmoothTransitions {
         await this.delay(300);
         heroSection.classList.add("hidden");
         
-        // Ensure footer maintains styling
-        if (footer) {
-            footer.style.background = 'linear-gradient(135deg, #1a202c 0%, #2d3748 50%, #4a5568 100%)';
-            footer.style.color = 'rgba(255, 255, 255, 0.95)';
-        }
-        
         // Phase 4: Calculate scroll after layout stabilizes (50ms)
         await this.delay(50);
         

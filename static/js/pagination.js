@@ -131,6 +131,7 @@ function initializePagination(pageType = 'home') {
             cardSelector: '.news-card',
             buttonSelector: '#view-more-btn',
             hasFeaturedItem: true,
+            minItemWidth: 290,
             rowsPerClick: 2
         },
         articles: {

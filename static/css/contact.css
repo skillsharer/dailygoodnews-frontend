@@ -96,12 +96,12 @@
 .contact-section {
     background:
         var(--reflection-top),
-        rgba(255, 255, 255, 0.07);
+        var(--glass-panel);
     -webkit-backdrop-filter: var(--blur-md) saturate(150%);
     backdrop-filter: var(--blur-md) saturate(150%);
-    border: 1px solid var(--glass-border);
+    border: 1px solid var(--glass-panel-border);
     border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-glass);
+    box-shadow: var(--shadow-panel);
     color: var(--color-text-secondary);
 }
 
@@ -117,8 +117,8 @@
 }
 
 .address-wrapper {
-    background: rgba(255, 255, 255, 0.08);
-    border-color: var(--glass-border-subtle);
+    background: rgba(255, 255, 255, 0.68);
+    border-color: var(--glass-panel-border);
     color: var(--color-text);
 }
 
