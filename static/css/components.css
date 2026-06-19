@@ -1684,10 +1684,20 @@ h2.section-title::after {
     line-height: 1.75;
 }
 
+.news-item-page,
+.articles-item-page,
+.knowledge-item-page,
+.storytime-item-page {
+    overflow: visible;
+    position: relative;
+    z-index: 2;
+}
+
 .social-share {
     position: relative;
     display: flex;
     justify-content: flex-end;
+    z-index: 30;
 }
 
 .share-menu-toggle {
@@ -1737,9 +1747,9 @@ h2.section-title::after {
 
 .share-menu {
     position: absolute;
-    top: calc(100% + 0.55rem);
+    bottom: calc(100% + 0.55rem);
     right: 0;
-    z-index: 20;
+    z-index: 1002;
     display: grid;
     gap: 0.25rem;
     width: min(13.5rem, calc(100vw - 2rem));
@@ -1752,6 +1762,7 @@ h2.section-title::after {
     -webkit-backdrop-filter: var(--blur-md) saturate(160%);
     backdrop-filter: var(--blur-md) saturate(160%);
     box-shadow: var(--shadow-panel);
+    transform-origin: bottom right;
 }
 
 .share-menu-item {
@@ -1799,6 +1810,18 @@ h2.section-title::after {
 
 .social-share .share-menu .social-icon:hover {
     opacity: 0.95;
+}
+
+@media (max-width: 520px) {
+    .social-share-container {
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    .share-menu {
+        right: 0;
+        width: min(12.75rem, calc(100vw - 3rem));
+    }
 }
 
 .share-chip {
