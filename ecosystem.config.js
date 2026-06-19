@@ -9,6 +9,7 @@ module.exports = {
       env: {
         PATH: `/home/ubuntu/git/dailygoodnews-frontend/.venv/bin:${process.env.PATH}`,
         PYTHONPATH: '/home/ubuntu/git/dailygoodnews-frontend',
+        PYTHONUNBUFFERED: '1',
       },
       autorestart: true,
       watch: false,
