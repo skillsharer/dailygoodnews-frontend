@@ -6,6 +6,11 @@
     <main class="container">
         <section class="articles-item-page">
                 <h1>{{ article.heading }}</h1>
+                {% if article.date %}
+                    <div class="article-meta">
+                        <time class="article-meta-item articles-date">{{ article.date }}</time>
+                    </div>
+                {% endif %}
                 {% if article.image_local_path %}
                     <div class="image-wrapper">
                         <img class="articles-image" src="{{ article.image_local_path }}" alt="{{ article.heading }}">
@@ -19,9 +24,6 @@
                   {{ article.article|sanitize_html|safe }}
                 </div>
                 <div class="articles-footer">
-                    <div class="footer-info-wrapper">
-                      <p class="articles-date">Date: {{ article.date }}</p>
-                     </div>
                      <a href="/articles" class="go-back-btn">Go Back</a>
                      <div class="social-share-container">
                         <details class="social-share">

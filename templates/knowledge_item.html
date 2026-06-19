@@ -6,6 +6,14 @@
     <main class="container">
         <section class="knowledge-item-page">
                 <h1>{{ knowledge.heading }}</h1>
+                <div class="article-meta">
+                    {% if knowledge.date %}
+                        <time class="article-meta-item knowledge-date">{{ knowledge.date }}</time>
+                    {% endif %}
+                    {% if knowledge.source %}
+                        <a class="article-meta-item knowledge-source" href="{{ knowledge.source }}" target="_blank" rel="noopener noreferrer">Source</a>
+                    {% endif %}
+                </div>
                 {% if knowledge.image %}
                     <div class="image-wrapper">
                         <img class="knowledge-image" src="{{ url_for('artifacts', filename='knowledge_vault/images/' + knowledge.image) }}">
@@ -15,12 +23,6 @@
                   {{ knowledge.article|sanitize_html|safe }}
                 </div>
                 <div class="knowledge-footer">
-                    <div class="footer-info-wrapper">
-                      <a class="knowledge-source" href="{{ knowledge.source }}" target="_blank" rel="noopener noreferrer">
-                        <p class="knowledge-source">Source</p>
-                      </a>
-                      <p class="knowledge-date">Date: {{ knowledge.date }}</p>
-                     </div>
                      <a href="/knowledge_vault" class="go-back-btn">Go Back</a>
                      <div class="social-share-container">
                         <details class="social-share">

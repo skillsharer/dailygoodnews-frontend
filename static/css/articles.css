@@ -79,13 +79,6 @@
     margin-top: 3rem;
 }
 
-.articles-item-page .footer-info-wrapper {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
 .articles-item-page .articles-date {
     font-size: 0.9375rem;
     color: var(--gray-600);

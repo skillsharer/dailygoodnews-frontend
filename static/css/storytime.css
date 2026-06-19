@@ -90,13 +90,6 @@
     margin-top: 3rem;
 }
 
-.storytime-item-page .footer-info-wrapper {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
 .storytime-item-page .storytime-date {
     font-size: 0.9375rem;
     color: var(--gray-600);

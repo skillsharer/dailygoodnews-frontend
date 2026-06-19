@@ -6,6 +6,14 @@
     <main class="container">
          <section class="news-item-page">
                 <h1>{{ news.heading }}</h1>
+                <div class="article-meta">
+                    {% if news.date %}
+                        <time class="article-meta-item news-date">{{ news.date }}</time>
+                    {% endif %}
+                    {% if news.link %}
+                        <a class="article-meta-item news-source" href="{{ news.link }}" target="_blank" rel="noopener noreferrer">Source</a>
+                    {% endif %}
+                </div>
                 {% if news.image %}
                     <div class="image-wrapper">
                         <img class="news-image" src="{{ news.image }}" alt="{{ news.heading }}">
@@ -15,12 +23,6 @@
                   {{ news.article|sanitize_html|safe }}
                 </div>
                     <div class="news-footer">
-                        <div class="footer-info-wrapper">
-                        <a class="news-source" href="{{ news.link }}" target="_blank" rel="noopener noreferrer">
-                            <p class="news-source">Source</p>
-                        </a>
-                        <p class="news-date">Date: {{ news.date }}</p>
-                        </div>
                         <a href="/" class="go-back-btn">Go Back</a>
                         <div class="social-share-container">
                             <details class="social-share">

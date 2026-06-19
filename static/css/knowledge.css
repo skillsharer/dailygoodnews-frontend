@@ -74,13 +74,6 @@
     margin-top: 3rem;
 }
 
-.knowledge-item-page .footer-info-wrapper {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
 .knowledge-item-page .knowledge-source {
     font-size: 0.9375rem;
     color: var(--primary-600);

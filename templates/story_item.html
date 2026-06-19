@@ -6,13 +6,15 @@
     <main class="container">
         <section class="storytime-item-page">
                 <h1>{{ article.heading }}</h1>
+                {% if article.date %}
+                    <div class="article-meta">
+                        <time class="article-meta-item storytime-date">{{ article.date }}</time>
+                    </div>
+                {% endif %}
                 <div class="storytime-description">
                   {{ article.article|sanitize_html|safe }}
                 </div>
                 <div class="storytime-footer">
-                    <div class="footer-info-wrapper">
-                      <p class="storytime-date">Date: {{ article.date }}</p>
-                     </div>
                      <a href="/story_time" class="go-back-btn">Go Back</a>
                      <div class="social-share-container">
                         <details class="social-share">
