@@ -3,6 +3,45 @@
  * Provides reusable pagination functionality for news grids
  */
 
+const PAGINATION_PAGE_TYPES = {
+    home: { listingPath: '/', detailPrefix: '/news/' },
+    articles: { listingPath: '/articles', detailPrefix: '/article/' },
+    knowledge: { listingPath: '/knowledge_vault', detailPrefix: '/knowledge_vault/' },
+    storytime: { listingPath: '/story_time', detailPrefix: '/story_time/' },
+};
+
+function normalizePath(pathname) {
+    if (pathname !== '/' && pathname.endsWith('/')) {
+        return pathname.slice(0, -1);
+    }
+
+    return pathname;
+}
+
+function getPageTypeFromPath(pathname) {
+    const normalizedPath = normalizePath(pathname);
+
+    for (const [pageType, config] of Object.entries(PAGINATION_PAGE_TYPES)) {
+        if (normalizedPath === config.listingPath) {
+            return pageType;
+        }
+    }
+
+    return null;
+}
+
+function getDetailPageTypeFromPath(pathname) {
+    const normalizedPath = normalizePath(pathname);
+
+    for (const [pageType, config] of Object.entries(PAGINATION_PAGE_TYPES)) {
+        if (normalizedPath.startsWith(config.detailPrefix)) {
+            return pageType;
+        }
+    }
+
+    return null;
+}
+
 class DynamicPagination {
     constructor(options = {}) {
         this.gridSelector = options.gridSelector || '.news-grid';
@@ -34,6 +73,7 @@ class DynamicPagination {
         }
         
         this.totalCards = this.cards.length;
+        this.resetStateForFreshListingVisit();
         this.setupPagination();
         this.bindEvents();
     }
@@ -109,6 +149,30 @@ class DynamicPagination {
             return JSON.parse(sessionStorage.getItem(this.storageKey) || 'null');
         } catch (error) {
             return null;
+        }
+    }
+
+    resetStateForFreshListingVisit() {
+        let referrerUrl = null;
+
+        try {
+            referrerUrl = document.referrer ? new URL(document.referrer) : null;
+        } catch (error) {
+            referrerUrl = null;
+        }
+
+        if (
+            referrerUrl &&
+            referrerUrl.origin === window.location.origin &&
+            getDetailPageTypeFromPath(referrerUrl.pathname) === this.pageType
+        ) {
+            return;
+        }
+
+        try {
+            sessionStorage.removeItem(this.storageKey);
+        } catch (error) {
+            // Session storage can be unavailable in private modes.
         }
     }
 
