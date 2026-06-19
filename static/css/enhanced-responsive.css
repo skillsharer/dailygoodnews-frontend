@@ -110,9 +110,11 @@
     /* Enhanced mobile navigation */
     .site-header {
         padding: var(--space-4) 0;
-        background: rgba(255, 255, 255, 0.95);
+        background:
+            var(--reflection-top),
+            rgba(12, 17, 32, 0.72);
         backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--neutral-200);
+        border-bottom: 1px solid var(--glass-panel-border);
     }
     
     /* Show hamburger menu on mobile */

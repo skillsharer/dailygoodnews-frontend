@@ -102,7 +102,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(129, 199, 212, 0.05), rgba(168, 230, 207, 0.05));
+    background: linear-gradient(135deg, rgba(94, 231, 223, 0.05), rgba(180, 144, 245, 0.05));
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;

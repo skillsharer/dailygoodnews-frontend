@@ -26,8 +26,8 @@
     right: 0;
     bottom: 0;
     background:
-        linear-gradient(115deg, rgba(105, 240, 218, 0.14), transparent 34%),
-        linear-gradient(300deg, rgba(255, 224, 138, 0.12), transparent 34%);
+        linear-gradient(115deg, rgba(94, 231, 223, 0.14), transparent 34%),
+        linear-gradient(300deg, rgba(180, 144, 245, 0.18), transparent 38%);
     pointer-events: none;
 }
 
@@ -99,8 +99,8 @@
 }
 
 .footer-social a:hover {
-    background: rgba(105, 240, 218, 0.18);
-    border-color: rgba(28, 111, 119, 0.34);
+    background: rgba(94, 231, 223, 0.18);
+    border-color: var(--glass-border-bright);
     transform: translateY(-4px);
 }
 
@@ -137,5 +137,5 @@
 
 .footer-links a:hover {
     color: var(--accent-aqua);
-    text-shadow: 0 0 8px rgba(105, 240, 218, 0.32);
+    text-shadow: 0 0 8px rgba(94, 231, 223, 0.28);
 }

@@ -213,14 +213,15 @@
 /* Home news cards should match the readable image-card treatment used elsewhere. */
 #news-grid .news-card:first-child {
     grid-column: 1 / -1;
-    max-width: none;
+    justify-self: center;
+    max-width: 980px;
     width: 100%;
     margin: 0 0 1rem 0;
-    height: 26rem;
+    height: 24rem;
 }
 
 #news-grid .news-card:first-child::after {
-    content: 'Top Story';
+    content: 'Latest News';
     display: block;
     position: absolute;
     top: 1rem;
@@ -239,6 +240,16 @@
     line-height: 1;
 }
 
+.featured-news .section-title {
+    display: none;
+}
+
+#news-grid .news-card:first-child .news-card-content {
+    align-items: flex-start;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82), rgba(0, 0, 0, 0.38) 70%, transparent);
+    padding: clamp(1.25rem, 3vw, 2rem);
+}
+
 #news-grid .news-card:first-child .news-card-title,
 #news-grid .news-card-title {
     color: #ffffff;
@@ -246,6 +257,16 @@
     line-height: 1.18;
     margin-bottom: 0.5rem;
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+}
+
+#news-grid .news-card:first-child .news-card-title {
+    max-width: 760px;
+    font-size: clamp(1.65rem, 3vw, 2.45rem);
+    text-shadow: 0 3px 22px rgba(0, 0, 0, 0.75);
+}
+
+#news-grid .news-card:first-child .news-card-description {
+    max-width: 720px;
 }
 
 #news-grid .news-card-title:hover,

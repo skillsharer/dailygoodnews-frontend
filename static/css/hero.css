@@ -36,7 +36,7 @@
     height: 420px;
     top: 38%;
     left: 50%;
-    background: radial-gradient(circle, rgba(255, 224, 138, 0.5), rgba(184, 245, 154, 0.28) 48%, transparent 72%);
+    background: radial-gradient(circle, rgba(255, 210, 127, 0.42), rgba(247, 168, 196, 0.24) 48%, transparent 72%);
     filter: blur(70px);
     opacity: 0.55;
     transform: translate(-50%, -50%);
@@ -75,7 +75,7 @@
     color: var(--color-text);
     letter-spacing: 0;
     line-height: 1.1;
-    text-shadow: 0 2px 26px rgba(255, 255, 255, 0.65);
+    text-shadow: 0 2px 26px rgba(94, 231, 223, 0.28);
 }
 
 .hero-subtitle {
@@ -120,7 +120,7 @@
 .cta-button {
     background:
         var(--reflection-top),
-        linear-gradient(135deg, rgba(105, 240, 218, 0.24), rgba(255, 224, 138, 0.18));
+        var(--soft-gold-gradient);
     -webkit-backdrop-filter: var(--blur-sm) saturate(150%);
     backdrop-filter: var(--blur-sm) saturate(150%);
     color: var(--color-text);
@@ -162,7 +162,7 @@
     box-shadow: var(--shadow-float), var(--shadow-glow);
     background:
         var(--reflection-top),
-        linear-gradient(135deg, rgba(105, 240, 218, 0.34), rgba(255, 224, 138, 0.28));
+        linear-gradient(135deg, rgba(94, 231, 223, 0.28), rgba(180, 144, 245, 0.26), rgba(255, 255, 255, 0.1));
 }
 
 .cta-button:active {
@@ -172,7 +172,7 @@
 
 @keyframes gentlePulse {
     0%, 100% {
-        box-shadow: var(--shadow-glass), 0 0 24px rgba(105, 240, 218, 0.22);
+        box-shadow: var(--shadow-glass), 0 0 24px rgba(94, 231, 223, 0.22);
     }
     50% {
         box-shadow: var(--shadow-glass), 0 0 36px rgba(255, 224, 138, 0.24);

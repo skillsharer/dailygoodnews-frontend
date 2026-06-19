@@ -60,10 +60,10 @@
 
 @keyframes pulse-glow {
     0%, 100% {
-        box-shadow: 0 0 5px rgba(129, 199, 212, 0.3);
+        box-shadow: 0 0 5px rgba(94, 231, 223, 0.24);
     }
     50% {
-        box-shadow: 0 0 20px rgba(129, 199, 212, 0.6);
+        box-shadow: 0 0 20px rgba(180, 144, 245, 0.38);
     }
 }
 
@@ -266,13 +266,13 @@
 .cta-button {
     position: relative;
     overflow: hidden;
-    box-shadow: 0 8px 32px rgba(129, 199, 212, 0.4);
+    box-shadow: 0 8px 32px rgba(94, 231, 223, 0.28);
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .cta-button:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 60px rgba(129, 199, 212, 0.6);
+    box-shadow: 0 15px 60px rgba(180, 144, 245, 0.38);
 }
 
 .cta-button::after {
@@ -317,7 +317,7 @@
 /* Form Animation Enhancements */
 .input-focused {
     transform: scale(1.02);
-    box-shadow: 0 5px 20px rgba(129, 199, 212, 0.2);
+    box-shadow: 0 5px 20px rgba(94, 231, 223, 0.18);
 }
 
 .input-filled::after {
@@ -350,12 +350,12 @@
     position: relative;
     overflow: hidden;
     background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    box-shadow: 0 8px 32px rgba(129, 199, 212, 0.4);
+    box-shadow: 0 8px 32px rgba(94, 231, 223, 0.28);
 }
 
 .view-more-btn:hover {
     transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 15px 60px rgba(129, 199, 212, 0.6);
+    box-shadow: 0 15px 60px rgba(180, 144, 245, 0.38);
 }
 
 .view-more-icon {
