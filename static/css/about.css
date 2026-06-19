@@ -1,4 +1,8 @@
 /* About Page Styles */
+.about-page {
+    padding-top: 1rem;
+}
+
 .about-section {
     padding: 6vw;
     padding-top: clamp(1.5rem, 4vw, 2.75rem);
