@@ -487,6 +487,14 @@
         justify-content: center;
         margin-bottom: var(--space-4);
     }
+
+    .news-footer .go-back-btn,
+    .articles-footer .go-back-btn,
+    .knowledge-footer .go-back-btn,
+    .storytime-footer .go-back-btn {
+        width: auto;
+        margin-bottom: 0;
+    }
 }
 
 /* ==========================================

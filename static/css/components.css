@@ -1785,7 +1785,19 @@ a.article-meta-item:hover {
     .knowledge-footer,
     .storytime-footer {
         flex-wrap: nowrap;
+        align-items: center;
         gap: 1rem;
+    }
+
+    .news-footer .go-back-btn,
+    .articles-footer .go-back-btn,
+    .knowledge-footer .go-back-btn,
+    .storytime-footer .go-back-btn,
+    .news-item-page .news-footer .social-share-container,
+    .articles-item-page .articles-footer .social-share-container,
+    .knowledge-item-page .knowledge-footer .social-share-container,
+    .storytime-item-page .storytime-footer .social-share-container {
+        flex: 0 0 auto;
     }
 }
 
@@ -1925,6 +1937,13 @@ a.article-meta-item:hover {
     .social-share-container {
         width: 100%;
         justify-content: flex-end;
+    }
+
+    .news-item-page .news-footer .social-share-container,
+    .articles-item-page .articles-footer .social-share-container,
+    .knowledge-item-page .knowledge-footer .social-share-container,
+    .storytime-item-page .storytime-footer .social-share-container {
+        width: auto;
     }
 
     .share-menu {
