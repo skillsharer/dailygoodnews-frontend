@@ -57,6 +57,21 @@ def resolve_story_time_image(image_value):
     if not image_value:
         return None
 
+    objkt_token_match = re.search(r"/tokens/([^/?#]+)/(\d+)", image_value)
+    if objkt_token_match:
+        contract, token_id = objkt_token_match.groups()
+        return f"/artifacts/story_time/images/{contract}{token_id}.webp"
+
+    basename = os.path.basename(image_value)
+
+    if basename.endswith(".webp") and not image_value.startswith(
+        "/artifacts/story_time/images/"
+    ):
+        local_story_image = f"{ROOT}/artifacts/story_time/images/{basename}"
+
+        if os.path.exists(local_story_image):
+            return f"/artifacts/story_time/images/{basename}"
+
     if image_value.startswith(("/", "http://", "https://", "data:")):
         return image_value
 
@@ -74,14 +89,12 @@ def resolve_story_time_article_images(article_html):
     def replace_image_src(match):
         quote = match.group(1)
         image_src = match.group(2)
-        resolved_src = resolve_story_time_image(
-            os.path.basename(image_src) if "objkt.com" in image_src else image_src
-        )
+        resolved_src = resolve_story_time_image(image_src)
 
         return f"src={quote}{resolved_src or image_src}{quote}"
 
     return re.sub(
-        r"src=(['\"])([^'\"]+?\.webp)\1",
+        r"src=(['\"])([^'\"]+)\1",
         replace_image_src,
         article_html or "",
         flags=re.IGNORECASE,
